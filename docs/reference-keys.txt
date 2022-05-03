@@ -1,10 +1,6 @@
 fig:nice-fig
 tab:nice-tab
-eq:binom
-about
-usage
-render-book
-preview-book
+welcome
 hello-bookdown
 a-section
 cross
@@ -14,11 +10,3 @@ parts
 footnotes-and-citations
 footnotes
 citations
-blocks
-equations
-theorems-and-proofs
-callout-blocks
-sharing-your-book
-publishing
-pages
-metadata-for-sharing
