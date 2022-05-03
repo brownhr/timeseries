@@ -1,10 +1,17 @@
-# What is time series data
+# Introduction to time series data
 
-- Sampled at equispaced points in time
+## What is a time series
 
-# Stationary vs Non-Stationary series
+- Sampled at equi-spaced points in time
 
-## Homoscedasticity
+## Stationary vs Non-Stationary series
+
+Non-stationary time series are defined by:
+
+- Time-dependent Mean
+- Time-dependent Variance
+- Time-dependent Autocorrelation/Covariance
+ 
 
 ## Dickey-Fuller Test of Stationarity
 

@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Section 5 Footnotes and citations | Course Outline: Time Series Data in R</title>
+  <title>Chapter 5 Footnotes and citations | Course Outline: Time Series Data in R</title>
   <meta name="description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Section 5 Footnotes and citations | Course Outline: Time Series Data in R" />
+  <meta property="og:title" content="Chapter 5 Footnotes and citations | Course Outline: Time Series Data in R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   <meta name="github-repo" content="brownhr/timeseries" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Section 5 Footnotes and citations | Course Outline: Time Series Data in R" />
+  <meta name="twitter:title" content="Chapter 5 Footnotes and citations | Course Outline: Time Series Data in R" />
   
   <meta name="twitter:description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="parts.html"/>
+<link rel="prev" href="lags-and-autocorrelation.html"/>
 
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -159,19 +159,32 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome<span></span></a></li>
-<li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown<span></span></a>
+<li class="chapter" data-level="2" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to time series data<span></span></a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="hello-bookdown.html"><a href="hello-bookdown.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section<span></span></a>
+<li class="chapter" data-level="2.1" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html#what-is-a-time-series"><i class="fa fa-check"></i><b>2.1</b> What is a time series<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html#stationary-vs-non-stationary-series"><i class="fa fa-check"></i><b>2.2</b> Stationary vs Non-Stationary series<span></span></a></li>
+<li class="chapter" data-level="2.3" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html#dickey-fuller-test-of-stationarity"><i class="fa fa-check"></i><b>2.3</b> Dickey-Fuller Test of Stationarity<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html"><i class="fa fa-check"></i><b>3</b> Creating and Manipulating Time Series<span></span></a>
 <ul>
-<li><a href="hello-bookdown.html#an-unnumbered-section">An unnumbered section<span></span></a></li>
+<li class="chapter" data-level="3.1" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#ts-class"><i class="fa fa-check"></i><b>3.1</b> <code>ts</code> Class<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#creating-a-ts.plot"><i class="fa fa-check"></i><b>3.2</b> Creating a <code>ts.plot()</code><span></span></a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#interpreting-plots"><i class="fa fa-check"></i><b>3.2.1</b> Interpreting Plots<span></span></a></li>
+<li class="chapter" data-level="3.2.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#seasonality-plot"><i class="fa fa-check"></i><b>3.2.2</b> Seasonality Plot<span></span></a></li>
+<li class="chapter" data-level="3.2.3" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#polar-seasonality-plot"><i class="fa fa-check"></i><b>3.2.3</b> Polar Seasonality Plot<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#trends-and-seasons"><i class="fa fa-check"></i><b>3.3</b> Trends and Seasons<span></span></a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#decomposition"><i class="fa fa-check"></i><b>3.3.1</b> Decomposition<span></span></a></li>
+<li class="chapter" data-level="3.3.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#de-trending-data"><i class="fa fa-check"></i><b>3.3.2</b> De-trending Data<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>3</b> Cross-references<span></span></a>
+<li class="chapter" data-level="4" data-path="lags-and-autocorrelation.html"><a href="lags-and-autocorrelation.html"><i class="fa fa-check"></i><b>4</b> Lags and Autocorrelation<span></span></a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>3.1</b> Chapters and sub-chapters<span></span></a></li>
-<li class="chapter" data-level="3.2" data-path="cross.html"><a href="cross.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.2</b> Captioned figures and tables<span></span></a></li>
+<li class="chapter" data-level="4.1" data-path="lags-and-autocorrelation.html"><a href="lags-and-autocorrelation.html#lag"><i class="fa fa-check"></i><b>4.1</b> Lag<span></span></a></li>
+<li class="chapter" data-level="4.2" data-path="lags-and-autocorrelation.html"><a href="lags-and-autocorrelation.html#autocorrelation"><i class="fa fa-check"></i><b>4.2</b> Autocorrelation<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>4</b> Parts<span></span></a></li>
 <li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations<span></span></a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>5.1</b> Footnotes<span></span></a></li>
@@ -198,7 +211,7 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="footnotes-and-citations" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Section 5</span> Footnotes and citations<a href="footnotes-and-citations.html#footnotes-and-citations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Chapter 5</span> Footnotes and citations<a href="footnotes-and-citations.html#footnotes-and-citations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <div id="footnotes" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Footnotes<a href="footnotes-and-citations.html#footnotes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Footnotes are put inside the square brackets after a caret <code>^[]</code>. Like this one <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
@@ -246,7 +259,7 @@ Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd 
           </div>
         </div>
       </div>
-<a href="parts.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lags-and-autocorrelation.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>

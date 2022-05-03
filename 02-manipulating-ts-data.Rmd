@@ -5,14 +5,15 @@ data("AirPassengers")
 
 ```
 
+# Creating and Manipulating Time Series
 
-# `ts` Class
-
-
-# Creating a `ts.plot()`
+## `ts` Class
 
 
-## Interpreting Plots
+## Creating a `ts.plot()`
+
+
+### Interpreting Plots
 
 
 ### Seasonality Plot
@@ -25,11 +26,11 @@ ggseasonplot(x = AirPassengers)
 
 
 
-#### Polar Seasonality Plot
+### Polar Seasonality Plot
 
-# Trends and Seasons
+## Trends and Seasons
 
-## Decomposition
+### Decomposition
 
-## De-trending Data
+### De-trending Data
 

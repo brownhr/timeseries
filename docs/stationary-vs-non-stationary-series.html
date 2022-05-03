@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Course Outline: Time Series Data in R</title>
+  <title>Section 3 Stationary vs Non-Stationary series | Course Outline: Time Series Data in R</title>
   <meta name="description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Course Outline: Time Series Data in R" />
+  <meta property="og:title" content="Section 3 Stationary vs Non-Stationary series | Course Outline: Time Series Data in R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   <meta name="github-repo" content="brownhr/timeseries" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Course Outline: Time Series Data in R" />
+  <meta name="twitter:title" content="Section 3 Stationary vs Non-Stationary series | Course Outline: Time Series Data in R" />
   
   <meta name="twitter:description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="introduction-to-time-series-data.html"/>
+<link rel="prev" href="what-is-time-series-data.html"/>
+<link rel="next" href="ts-class.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -159,36 +159,31 @@ div.csl-indent {
 
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Welcome<span></span></a></li>
-<li class="chapter" data-level="2" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html"><i class="fa fa-check"></i><b>2</b> Introduction to time series data<span></span></a>
+<li class="chapter" data-level="2" data-path="what-is-time-series-data.html"><a href="what-is-time-series-data.html"><i class="fa fa-check"></i><b>2</b> What is time series data<span></span></a></li>
+<li class="chapter" data-level="3" data-path="stationary-vs-non-stationary-series.html"><a href="stationary-vs-non-stationary-series.html"><i class="fa fa-check"></i><b>3</b> Stationary vs Non-Stationary series<span></span></a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html#what-is-a-time-series"><i class="fa fa-check"></i><b>2.1</b> What is a time series<span></span></a></li>
-<li class="chapter" data-level="2.2" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html#stationary-vs-non-stationary-series"><i class="fa fa-check"></i><b>2.2</b> Stationary vs Non-Stationary series<span></span></a></li>
-<li class="chapter" data-level="2.3" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html#dickey-fuller-test-of-stationarity"><i class="fa fa-check"></i><b>2.3</b> Dickey-Fuller Test of Stationarity<span></span></a></li>
+<li class="chapter" data-level="3.1" data-path="stationary-vs-non-stationary-series.html"><a href="stationary-vs-non-stationary-series.html#homoscedasticity"><i class="fa fa-check"></i><b>3.1</b> Homoscedasticity<span></span></a></li>
+<li class="chapter" data-level="3.2" data-path="stationary-vs-non-stationary-series.html"><a href="stationary-vs-non-stationary-series.html#dickey-fuller-test-of-stationarity"><i class="fa fa-check"></i><b>3.2</b> Dickey-Fuller Test of Stationarity<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html"><i class="fa fa-check"></i><b>3</b> Creating and Manipulating Time Series<span></span></a>
+<li class="chapter" data-level="4" data-path="ts-class.html"><a href="ts-class.html"><i class="fa fa-check"></i><b>4</b> <code>ts</code> Class<span></span></a></li>
+<li class="chapter" data-level="5" data-path="creating-a-ts.html"><a href="creating-a-ts.html"><i class="fa fa-check"></i><b>5</b> Creating a <code>ts.plot()</code><span></span></a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#ts-class"><i class="fa fa-check"></i><b>3.1</b> <code>ts</code> Class<span></span></a></li>
-<li class="chapter" data-level="3.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#creating-a-ts.plot"><i class="fa fa-check"></i><b>3.2</b> Creating a <code>ts.plot()</code><span></span></a>
+<li class="chapter" data-level="5.1" data-path="creating-a-ts.html"><a href="creating-a-ts.html#interpreting-plots"><i class="fa fa-check"></i><b>5.1</b> Interpreting Plots<span></span></a>
 <ul>
-<li class="chapter" data-level="3.2.1" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#interpreting-plots"><i class="fa fa-check"></i><b>3.2.1</b> Interpreting Plots<span></span></a></li>
-<li class="chapter" data-level="3.2.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#seasonality-plot"><i class="fa fa-check"></i><b>3.2.2</b> Seasonality Plot<span></span></a></li>
-<li class="chapter" data-level="3.2.3" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#polar-seasonality-plot"><i class="fa fa-check"></i><b>3.2.3</b> Polar Seasonality Plot<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="3.3" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#trends-and-seasons"><i class="fa fa-check"></i><b>3.3</b> Trends and Seasons<span></span></a>
-<ul>
-<li class="chapter" data-level="3.3.1" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#decomposition"><i class="fa fa-check"></i><b>3.3.1</b> Decomposition<span></span></a></li>
-<li class="chapter" data-level="3.3.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#de-trending-data"><i class="fa fa-check"></i><b>3.3.2</b> De-trending Data<span></span></a></li>
+<li class="chapter" data-level="5.1.1" data-path="creating-a-ts.html"><a href="creating-a-ts.html#seasonality-plot"><i class="fa fa-check"></i><b>5.1.1</b> Seasonality Plot<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="lags-and-autocorrelation.html"><a href="lags-and-autocorrelation.html"><i class="fa fa-check"></i><b>4</b> Lags and Autocorrelation<span></span></a>
+<li class="chapter" data-level="6" data-path="trends-and-seasons.html"><a href="trends-and-seasons.html"><i class="fa fa-check"></i><b>6</b> Trends and Seasons<span></span></a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="lags-and-autocorrelation.html"><a href="lags-and-autocorrelation.html#lag"><i class="fa fa-check"></i><b>4.1</b> Lag<span></span></a></li>
-<li class="chapter" data-level="4.2" data-path="lags-and-autocorrelation.html"><a href="lags-and-autocorrelation.html#autocorrelation"><i class="fa fa-check"></i><b>4.2</b> Autocorrelation<span></span></a></li>
+<li class="chapter" data-level="6.1" data-path="trends-and-seasons.html"><a href="trends-and-seasons.html#decomposition"><i class="fa fa-check"></i><b>6.1</b> Decomposition<span></span></a></li>
+<li class="chapter" data-level="6.2" data-path="trends-and-seasons.html"><a href="trends-and-seasons.html#de-trending-data"><i class="fa fa-check"></i><b>6.2</b> De-trending Data<span></span></a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations<span></span></a>
+<li class="chapter" data-level="7" data-path="lags.html"><a href="lags.html"><i class="fa fa-check"></i><b>7</b> Lags<span></span></a></li>
+<li class="chapter" data-level="8" data-path="autocorrelation.html"><a href="autocorrelation.html"><i class="fa fa-check"></i><b>8</b> Autocorrelation<span></span></a></li>
+<li class="chapter" data-level="9" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>9</b> Footnotes and citations<span></span></a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>5.1</b> Footnotes<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>5.2</b> Citations<span></span></a></li>
+<li class="chapter" data-level="9.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>9.1</b> Footnotes<span></span></a></li>
+<li class="chapter" data-level="9.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>9.2</b> Citations<span></span></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -210,31 +205,23 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Course Outline: Time Series Data in R</h1>
-<p class="author"><em>Harrison Brown</em></p>
-<p class="date"><em>2022-05-03</em></p>
+<div id="stationary-vs-non-stationary-series" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Section 3</span> Stationary vs Non-Stationary series<a href="stationary-vs-non-stationary-series.html#stationary-vs-non-stationary-series" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="homoscedasticity" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Homoscedasticity<a href="stationary-vs-non-stationary-series.html#homoscedasticity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="welcome" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Welcome<a href="index.html#welcome" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Welcome to the course outline for <em>Time Series Data in R</em>! This course offers methods and workflows for analyzing and interpreting time series data, an overview of when, why, and how to use time series data, and various utilities and packages in R that are beneficial to analysts.</p>
-<p>By the end of this course, students will have the skills to:</p>
-<ul>
-<li>Interpret and understand time series plots</li>
-<li>Import ts data to create and manipulate <code>ts</code> objects from the <code>stats</code> package</li>
-<li>Understand why time series data is fundamentally different than non-ts data.</li>
-<li>Analyze time series data with plots</li>
-<li>?Intro to Wavelet analysis?</li>
-</ul>
+<div id="dickey-fuller-test-of-stationarity" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Dickey-Fuller Test of Stationarity<a href="stationary-vs-non-stationary-series.html#dickey-fuller-test-of-stationarity" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="introduction-to-time-series-data.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="what-is-time-series-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ts-class.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -265,7 +252,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/index.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro-to-ts-data.Rmd",
 "text": "Edit"
 },
 "history": {

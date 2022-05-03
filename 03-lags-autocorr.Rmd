@@ -1,7 +1,9 @@
-# Lags
+# Lags and Autocorrelation
 
 
-# Autocorrelation
+## Lag
 
+
+## Autocorrelation
 
 
