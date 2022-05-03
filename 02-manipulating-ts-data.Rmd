@@ -1,0 +1,14 @@
+# `ts()` Class
+
+
+# Creating a `ts.plot()`
+
+
+## Interpreting Plots
+
+# Trends and Seasons
+
+## Decomposition
+
+## De-trending Data
+

@@ -1,0 +1,9 @@
+# What is time series data
+
+# Stationary vs Non-Stationary series
+
+## Homoscedasticity
+
+## Dickey-Fuller Test of Stationarity
+
+
