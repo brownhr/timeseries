@@ -1,5 +1,7 @@
 # What is time series data
 
+- Sampled at equispaced points in time
+
 # Stationary vs Non-Stationary series
 
 ## Homoscedasticity

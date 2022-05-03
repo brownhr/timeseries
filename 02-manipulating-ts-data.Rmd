@@ -1,10 +1,31 @@
-# `ts()` Class
+```{r, include = FALSE}
+library(forecast)
+library(ggplot2)
+data("AirPassengers")
+
+```
+
+
+# `ts` Class
 
 
 # Creating a `ts.plot()`
 
 
 ## Interpreting Plots
+
+
+### Seasonality Plot
+
+```{r season-1}
+
+ggseasonplot(x = AirPassengers)
+```
+
+
+
+
+#### Polar Seasonality Plot
 
 # Trends and Seasons
 
