@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Page not found | Course Outline: Time Series Data in R</title>
+  <title>Chapter 3 Rolling and Expanding Windows | Course Outline: Time Series Data in R</title>
   <meta name="description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Page not found | Course Outline: Time Series Data in R" />
+  <meta property="og:title" content="Chapter 3 Rolling and Expanding Windows | Course Outline: Time Series Data in R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   <meta name="github-repo" content="brownhr/timeseries" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Page not found | Course Outline: Time Series Data in R" />
+  <meta name="twitter:title" content="Chapter 3 Rolling and Expanding Windows | Course Outline: Time Series Data in R" />
   
   <meta name="twitter:description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
-
-
+<link rel="prev" href="creating-and-manipulating-time-series.html"/>
+<link rel="next" href="expanding-window.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -194,19 +194,76 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="page-not-found" class="section level1">
-<h1>Page not found</h1>
-<p>The page you requested cannot be found (perhaps it was moved or renamed).</p>
-<p>You may want to try searching to find the page's new location, or use
-the table of contents to find the page you are looking for.</p>
+<div id="rolling-and-expanding-windows" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Rolling and Expanding Windows<a href="rolling-and-expanding-windows.html#rolling-and-expanding-windows" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="rolling-window" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Rolling Window<a href="rolling-and-expanding-windows.html#rolling-window" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ul>
+<li>Moving lower and upper bound</li>
+</ul>
+<div id="data" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Data<a href="rolling-and-expanding-windows.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="rolling-and-expanding-windows.html#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tsbox)</span>
+<span id="cb2-2"><a href="rolling-and-expanding-windows.html#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="rolling-and-expanding-windows.html#cb2-3" aria-hidden="true" tabindex="-1"></a>dl_dplyr <span class="ot">&lt;-</span> cran_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-4"><a href="rolling-and-expanding-windows.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(date <span class="sc">&gt;=</span> <span class="fu">as.Date</span>(<span class="st">&quot;2018-01-01&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="rolling-and-expanding-windows.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>package)</span>
+<span id="cb2-6"><a href="rolling-and-expanding-windows.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="rolling-and-expanding-windows.html#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co"># tsbox::ts_ts() parses the Date column in a much easier way, making the</span></span>
+<span id="cb2-8"><a href="rolling-and-expanding-windows.html#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># conversion process easy to interpret</span></span>
+<span id="cb2-9"><a href="rolling-and-expanding-windows.html#cb2-9" aria-hidden="true" tabindex="-1"></a>dl_ts <span class="ot">&lt;-</span> dl_dplyr <span class="sc">%&gt;%</span></span>
+<span id="cb2-10"><a href="rolling-and-expanding-windows.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  tsbox<span class="sc">::</span><span class="fu">ts_ts</span>()</span></code></pre></div>
+<pre><code>## [time]: &#39;date&#39; [value]: &#39;count&#39;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="rolling-and-expanding-windows.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot</span>(dl_ts)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="calculating-a-rolling-window" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Calculating a Rolling Window<a href="rolling-and-expanding-windows.html#calculating-a-rolling-window" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="rolling-and-expanding-windows.html#cb5-1" aria-hidden="true" tabindex="-1"></a>dl_dplyr_rolling <span class="ot">&lt;-</span> dl_dplyr <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="rolling-and-expanding-windows.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tq_mutate</span>(</span>
+<span id="cb5-3"><a href="rolling-and-expanding-windows.html#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">select =</span> count,</span>
+<span id="cb5-4"><a href="rolling-and-expanding-windows.html#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">mutate_fun =</span> rollapplyr,</span>
+<span id="cb5-5"><a href="rolling-and-expanding-windows.html#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">FUN =</span> mean,</span>
+<span id="cb5-6"><a href="rolling-and-expanding-windows.html#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">7</span>,</span>
+<span id="cb5-7"><a href="rolling-and-expanding-windows.html#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_rename =</span> <span class="st">&quot;weekly_avg&quot;</span></span>
+<span id="cb5-8"><a href="rolling-and-expanding-windows.html#cb5-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-9"><a href="rolling-and-expanding-windows.html#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tq_mutate</span>(</span>
+<span id="cb5-10"><a href="rolling-and-expanding-windows.html#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">select =</span> count,</span>
+<span id="cb5-11"><a href="rolling-and-expanding-windows.html#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">mutate_fun =</span> rollapplyr,</span>
+<span id="cb5-12"><a href="rolling-and-expanding-windows.html#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">FUN =</span> mean,</span>
+<span id="cb5-13"><a href="rolling-and-expanding-windows.html#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="dv">30</span>,</span>
+<span id="cb5-14"><a href="rolling-and-expanding-windows.html#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">col_rename =</span> <span class="st">&quot;monthly_avg&quot;</span></span>
+<span id="cb5-15"><a href="rolling-and-expanding-windows.html#cb5-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-16"><a href="rolling-and-expanding-windows.html#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="rolling-and-expanding-windows.html#cb5-17" aria-hidden="true" tabindex="-1"></a>weekly_ts <span class="ot">&lt;-</span> dl_dplyr_rolling <span class="sc">%&gt;%</span></span>
+<span id="cb5-18"><a href="rolling-and-expanding-windows.html#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(date, weekly_avg) <span class="sc">%&gt;%</span></span>
+<span id="cb5-19"><a href="rolling-and-expanding-windows.html#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_ts</span>()</span></code></pre></div>
+<pre><code>## [time]: &#39;date&#39; [value]: &#39;weekly_avg&#39;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="rolling-and-expanding-windows.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb7-2"><a href="rolling-and-expanding-windows.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> dl_dplyr, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> count), <span class="at">color =</span> <span class="st">&quot;grey50&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="rolling-and-expanding-windows.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> dl_dplyr_rolling, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> weekly_avg), <span class="at">color =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Removed 6 row(s) containing missing values (geom_path).</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="rolling-and-expanding-windows.html#cb9-1" aria-hidden="true" tabindex="-1"></a>dl_rolling_ts <span class="ot">&lt;-</span> dl_dplyr_rolling <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="rolling-and-expanding-windows.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb9-3"><a href="rolling-and-expanding-windows.html#cb9-3" aria-hidden="true" tabindex="-1"></a>    date, weekly_avg</span>
+<span id="cb9-4"><a href="rolling-and-expanding-windows.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-5"><a href="rolling-and-expanding-windows.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ts_ts</span>()</span></code></pre></div>
+<pre><code>## [time]: &#39;date&#39; [value]: &#39;weekly_avg&#39;</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="rolling-and-expanding-windows.html#cb11-1" aria-hidden="true" tabindex="-1"></a>dl_rolling_ts <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="rolling-and-expanding-windows.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">decompose</span>(<span class="at">type =</span> <span class="st">&quot;multiplicative&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="rolling-and-expanding-windows.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">autoplot</span>()</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-
+<a href="creating-and-manipulating-time-series.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="expanding-window.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -237,7 +294,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brownhr/timeseries/edit/gh-pages/%s",
+"link": "https://github.com/brownhr/timeseries/edit/gh-pages/03-windows.Rmd",
 "text": "Edit"
 },
 "history": {

@@ -213,29 +213,175 @@ Non-stationary time series are defined by:
 \hypertarget{de-trending-data}{%
 \subsection{De-trending Data}\label{de-trending-data}}
 
-\hypertarget{lags-and-autocorrelation}{%
-\chapter{Lags and Autocorrelation}\label{lags-and-autocorrelation}}
+\hypertarget{rolling-and-expanding-windows}{%
+\chapter{Rolling and Expanding Windows}\label{rolling-and-expanding-windows}}
 
-\hypertarget{lag}{%
-\section{Lag}\label{lag}}
+\hypertarget{rolling-window}{%
+\section{Rolling Window}\label{rolling-window}}
 
-\hypertarget{autocorrelation}{%
-\section{Autocorrelation}\label{autocorrelation}}
+\begin{itemize}
+\tightlist
+\item
+  Moving lower and upper bound
+\end{itemize}
 
-\hypertarget{forecasting-time-series}{%
-\chapter{Forecasting Time Series}\label{forecasting-time-series}}
+\hypertarget{data}{%
+\subsection{Data}\label{data}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tsbox)}
+
+\NormalTok{dl\_dplyr }\OtherTok{\textless{}{-}}\NormalTok{ cran\_data }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{\textgreater{}=} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2018{-}01{-}01"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{package)}
+
+\CommentTok{\# tsbox::ts\_ts() parses the Date column in a much easier way, making the}
+\CommentTok{\# conversion process easy to interpret}
+\NormalTok{dl\_ts }\OtherTok{\textless{}{-}}\NormalTok{ dl\_dplyr }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  tsbox}\SpecialCharTok{::}\FunctionTok{ts\_ts}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [time]: 'date' [value]: 'count'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{autoplot}\NormalTok{(dl\_ts)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+\hypertarget{calculating-a-rolling-window}{%
+\subsection{Calculating a Rolling Window}\label{calculating-a-rolling-window}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dl\_dplyr\_rolling }\OtherTok{\textless{}{-}}\NormalTok{ dl\_dplyr }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tq\_mutate}\NormalTok{(}
+    \AttributeTok{select =}\NormalTok{ count,}
+    \AttributeTok{mutate\_fun =}\NormalTok{ rollapplyr,}
+    \AttributeTok{FUN =}\NormalTok{ mean,}
+    \AttributeTok{width =} \DecValTok{7}\NormalTok{,}
+    \AttributeTok{col\_rename =} \StringTok{"weekly\_avg"}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{tq\_mutate}\NormalTok{(}
+    \AttributeTok{select =}\NormalTok{ count,}
+    \AttributeTok{mutate\_fun =}\NormalTok{ rollapplyr,}
+    \AttributeTok{FUN =}\NormalTok{ mean,}
+    \AttributeTok{width =} \DecValTok{30}\NormalTok{,}
+    \AttributeTok{col\_rename =} \StringTok{"monthly\_avg"}
+\NormalTok{  )}
+
+\NormalTok{weekly\_ts }\OtherTok{\textless{}{-}}\NormalTok{ dl\_dplyr\_rolling }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(date, weekly\_avg) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ts\_ts}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [time]: 'date' [value]: 'weekly_avg'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_dplyr, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ count), }\AttributeTok{color =} \StringTok{"grey50"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_dplyr\_rolling, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ weekly\_avg), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 6 row(s) containing missing values (geom_path).
+\end{verbatim}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-6-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dl\_rolling\_ts }\OtherTok{\textless{}{-}}\NormalTok{ dl\_dplyr\_rolling }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{select}\NormalTok{(}
+\NormalTok{    date, weekly\_avg}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ts\_ts}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [time]: 'date' [value]: 'weekly_avg'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dl\_rolling\_ts }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{decompose}\NormalTok{(}\AttributeTok{type =} \StringTok{"multiplicative"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{autoplot}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-7-1} \end{center}
+
+\hypertarget{expanding-window}{%
+\chapter{Expanding Window}\label{expanding-window}}
+
+\begin{itemize}
+\tightlist
+\item
+  Fixed lower bound
+\item
+  Moving upper bound
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dl\_expand }\OtherTok{\textless{}{-}}\NormalTok{ dl\_dplyr }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{mean\_expand =} \FunctionTok{cummean}\NormalTok{(count),}
+    \AttributeTok{cum\_sum =} \FunctionTok{cumsum}\NormalTok{(count)}
+\NormalTok{  )}
+
+\NormalTok{expand\_ts }\OtherTok{\textless{}{-}}\NormalTok{ dl\_expand }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{select}\NormalTok{(date, mean\_expand) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{ts\_ts}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [time]: 'date' [value]: 'mean_expand'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_dplyr, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ count), }\AttributeTok{color =} \StringTok{"gray50"}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_expand, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ mean\_expand), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_dplyr\_rolling, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ weekly\_avg), }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_dplyr\_rolling, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ monthly\_avg), }\AttributeTok{color =} \StringTok{"green"}\NormalTok{) }\SpecialCharTok{+} 
+  \FunctionTok{theme\_light}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 6 row(s) containing missing values (geom_path).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 29 row(s) containing missing values (geom_path).
+\end{verbatim}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-9-1} \end{center}
+
+\hypertarget{introduction-to-forecasting-in-r}{%
+\chapter{Introduction to Forecasting in R}\label{introduction-to-forecasting-in-r}}
 
 \hypertarget{methods-for-forecasting}{%
 \section{Methods for Forecasting}\label{methods-for-forecasting}}
 
-\hypertarget{batstbats}{%
-\subsection{BATS/TBATS}\label{batstbats}}
-
-\hypertarget{arimasarima}{%
-\subsection{ARIMA/SARIMA}\label{arimasarima}}
-
-\hypertarget{one-step-ahead}{%
-\subsection{One-Step Ahead}\label{one-step-ahead}}
+\hypertarget{exponential-smoothing}{%
+\subsection{Exponential Smoothing}\label{exponential-smoothing}}
 
   \bibliography{book.bib,packages.bib}
 
