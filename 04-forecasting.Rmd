@@ -1,13 +1,7 @@
-# Forecasting Time Series
+# Introduction to Forecasting in R
 
 
 ## Methods for Forecasting
 
 
-### BATS/TBATS
-
-
-### ARIMA/SARIMA
-
-
-### One-Step Ahead
+### Exponential Smoothing
