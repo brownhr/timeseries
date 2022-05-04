@@ -1,0 +1,13 @@
+# Forecasting Time Series
+
+
+## Methods for Forecasting
+
+
+### BATS/TBATS
+
+
+### ARIMA/SARIMA
+
+
+### One-Step Ahead
