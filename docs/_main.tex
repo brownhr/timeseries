@@ -117,7 +117,7 @@
 
 \title{Course Outline: Time Series Data in R}
 \author{Harrison Brown}
-\date{2022-05-03}
+\date{2022-05-04}
 
 \begin{document}
 \maketitle
@@ -127,7 +127,8 @@
 \tableofcontents
 }
 \hypertarget{welcome}{%
-\chapter{Welcome}\label{welcome}}
+\chapter*{Welcome}\label{welcome}}
+\addcontentsline{toc}{chapter}{Welcome}
 
 Welcome to the course outline for \emph{Time Series Data in R}! This course offers methods and workflows for analyzing and interpreting time series data, an overview of when, why, and how to use time series data, and various utilities and packages in R that are beneficial to analysts.
 
@@ -198,7 +199,7 @@ Non-stationary time series are defined by:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{_main_files/figure-latex/season-1-1.pdf}
+\begin{center}\includegraphics{_main_files/figure-latex/season-1-1} \end{center}
 
 \hypertarget{polar-seasonality-plot}{%
 \subsection{Polar Seasonality Plot}\label{polar-seasonality-plot}}
@@ -221,23 +222,20 @@ Non-stationary time series are defined by:
 \hypertarget{autocorrelation}{%
 \section{Autocorrelation}\label{autocorrelation}}
 
-\hypertarget{footnotes-and-citations}{%
-\chapter{Footnotes and citations}\label{footnotes-and-citations}}
+\hypertarget{forecasting-time-series}{%
+\chapter{Forecasting Time Series}\label{forecasting-time-series}}
 
-\hypertarget{footnotes}{%
-\section{Footnotes}\label{footnotes}}
+\hypertarget{methods-for-forecasting}{%
+\section{Methods for Forecasting}\label{methods-for-forecasting}}
 
-Footnotes are put inside the square brackets after a caret \texttt{\^{}{[}{]}}. Like this one \footnote{This is a footnote.}.
+\hypertarget{batstbats}{%
+\subsection{BATS/TBATS}\label{batstbats}}
 
-\hypertarget{citations}{%
-\section{Citations}\label{citations}}
+\hypertarget{arimasarima}{%
+\subsection{ARIMA/SARIMA}\label{arimasarima}}
 
-Reference items in your bibliography file(s) using \texttt{@key}.
-
-For example, we are using the \textbf{bookdown} package \citep{R-bookdown} (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and \textbf{knitr} \citep{xie2015} (this citation was added manually in an external file book.bib).
-Note that the \texttt{.bib} files need to be listed in the index.Rmd with the YAML \texttt{bibliography} key.
-
-The RStudio Visual Markdown Editor can also make it easier to insert citations: \url{https://rstudio.github.io/visual-markdown-editing/\#/citations}
+\hypertarget{one-step-ahead}{%
+\subsection{One-Step Ahead}\label{one-step-ahead}}
 
   \bibliography{book.bib,packages.bib}
 

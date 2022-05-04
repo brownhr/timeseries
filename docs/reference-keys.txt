@@ -1,4 +1,3 @@
-welcome
 introduction-to-time-series-data
 what-is-a-time-series
 stationary-vs-non-stationary-series
@@ -15,6 +14,8 @@ de-trending-data
 lags-and-autocorrelation
 lag
 autocorrelation
-footnotes-and-citations
-footnotes
-citations
+forecasting-time-series
+methods-for-forecasting
+batstbats
+arimasarima
+one-step-ahead
