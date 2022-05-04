@@ -11,9 +11,19 @@ description: |
   This site represents the course outline for *Time Series Data in R* -- a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data.
 link-citations: yes
 github-repo: brownhr/timeseries
+favicon: "logo.svg"
 ---
 
-# Welcome
+```{r setup, include = FALSE} 
+library(ggplot2)
+knitr::opts_chunk$set(
+  fig.align = "center"
+)
+
+theme_set(theme_light())
+```
+
+# Welcome {.unnumbered}
 
 Welcome to the course outline for *Time Series Data in R*! This course offers methods and workflows for analyzing and interpreting time series data, an overview of when, why, and how to use time series data, and various utilities and packages in R that are beneficial to analysts.
 
