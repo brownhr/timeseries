@@ -1,0 +1,73 @@
+```{r, include = FALSE}
+library(tidyquant)
+library(tidyverse)
+library(cranlogs)
+
+cran_data <- cran_downloads(
+  packages = c("dplyr"),
+  from = "2015-01-01",
+  to = "2021-12-30"
+) %>%
+  tibble::as_tibble()
+write_rds(cran_data, "cran_data.Rds")
+
+cran_data <- read_rds("cran_data.Rds")
+```
+
+# Rolling and Expanding Windows
+
+## Data
+
+
+
+```{r}
+library(tsbox)
+
+dl_dplyr <- cran_data %>%
+  select(-package)
+
+# tsbox::ts_ts() parses the Date column in a much easier way, making the
+# conversion process easy to interpret
+dl_ts <- dl_dplyr %>%
+  tsbox::ts_ts()
+
+autoplot(dl_ts)
+```
+
+
+## Calculating a Rolling Window
+
+```{r}
+dl_dplyr_rolling <- dl_dplyr %>%
+  tq_mutate(
+    select = count,
+    mutate_fun = rollapply,
+    FUN = mean,
+    width = 7,
+    align = "right",
+    col_rename = "weekly_avg"
+  )
+
+weekly_ts <- dl_dplyr_rolling %>%
+  select(date, weekly_avg) %>%
+  ts_ts()
+```
+
+```{r}
+ggplot() +
+  geom_line(data = dl_dplyr, mapping = aes(x = date, y = count), color = "grey50") +
+  geom_line(data = dl_dplyr_rolling, mapping = aes(x = date, y = weekly_avg), color = "red")
+```
+
+
+```{r}
+dl_rolling_ts <- dl_dplyr_rolling %>%
+  select(
+    date, weekly_avg
+  ) %>%
+  ts_ts()
+
+dl_rolling_ts %>%
+  decompose(type = "multiplicative") %>%
+  autoplot()
+```
