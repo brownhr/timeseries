@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 1 Introduction to time series data | Course Outline: Time Series Data in R</title>
+  <title>Chapter 5 Final Exercise | Course Outline: Time Series Data in R</title>
   <meta name="description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 1 Introduction to time series data | Course Outline: Time Series Data in R" />
+  <meta property="og:title" content="Chapter 5 Final Exercise | Course Outline: Time Series Data in R" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   <meta name="github-repo" content="brownhr/timeseries" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 1 Introduction to time series data | Course Outline: Time Series Data in R" />
+  <meta name="twitter:title" content="Chapter 5 Final Exercise | Course Outline: Time Series Data in R" />
   
   <meta name="twitter:description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
-<link rel="prev" href="index.html"/>
-<link rel="next" href="creating-and-manipulating-time-series.html"/>
+<link rel="prev" href="introduction-to-forecasting-in-r.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -201,36 +201,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction-to-time-series-data" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number">Chapter 1</span> Introduction to time series data<a href="introduction-to-time-series-data.html#introduction-to-time-series-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="lesson-what-is-time-series-data" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Lesson: What is Time Series Data<a href="introduction-to-time-series-data.html#lesson-what-is-time-series-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>Learning Objective: Learner will be able to understand why and how TS-data differs from non-temporal data</li>
-<li>LO: What kinds of inferences and results can be obtained from TS-data</li>
-<li>LO: Converting to and from time-based data formats, such as <code>numeric</code>, <code>Date</code>, and <code>POSIXct</code> classes
-<ul>
-<li>Functions: <code>as.Date()</code>, <code>lubridate::</code>, etc.</li>
-</ul></li>
-</ul>
+<div id="final-exercise" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Final Exercise<a href="final-exercise.html#final-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The final exercise for this course involves performing a time series analysis on real-world sales data. You’ll go step-by-step from reading the data and checking attributes like stationarity, to normalizing, decomposing, adjusting, and interpreting the results.</p>
+<div id="importing-the-data" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Importing the Data<a href="final-exercise.html#importing-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="lesson-how-to-interpret-time-series-data" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Lesson: How to Interpret Time Series Data<a href="introduction-to-time-series-data.html#lesson-how-to-interpret-time-series-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<ul>
-<li>LO: Learner will understand how to interpret attributes of a basic time series plot</li>
-<li>LO: “Signal and Noise” in the context of TS data</li>
-<li>Introduction to Stationarity: Most real-world data are not stationary and require additional steps to work with</li>
-</ul>
-</div>
-<div id="lesson-components-of-time-series-data" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Lesson: Components of Time Series Data<a href="introduction-to-time-series-data.html#lesson-components-of-time-series-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p><!-- - LO: Understand the  --></p>
-<!-- Non-stationary time series are defined by: -->
-<!-- - Time-dependent Mean -->
-<!-- - Time-dependent Variance -->
-<!-- - Time-dependent Autocorrelation/Covariance -->
-<!-- ## Dickey-Fuller Test of Stationarity -->
+<div id="visual-checks" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Visual Checks<a href="final-exercise.html#visual-checks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="final-exercise.html#cb2-1" aria-hidden="true" tabindex="-1"></a>sales_ts <span class="ot">&lt;-</span> tsbox<span class="sc">::</span><span class="fu">ts_ts</span>(sales)</span></code></pre></div>
+<pre><code>## [time]: &#39;date&#39; [value]: &#39;sales&#39;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="final-exercise.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">autoplot.zoo</span>(sales_ts)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div id="quarterly-summary" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Quarterly summary<a href="final-exercise.html#quarterly-summary" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 
+</div>
 </div>
 </div>
             </section>
@@ -238,8 +224,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="creating-and-manipulating-time-series.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-to-forecasting-in-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -270,7 +256,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/brownhr/timeseries/edit/gh-pages/01-chapter01.Rmd",
+"link": "https://github.com/brownhr/timeseries/edit/gh-pages/05-final-exercise.Rmd",
 "text": "Edit"
 },
 "history": {

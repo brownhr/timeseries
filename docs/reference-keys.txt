@@ -1,7 +1,7 @@
 introduction-to-time-series-data
-what-is-a-time-series
-stationary-vs-non-stationary-series
-dickey-fuller-test-of-stationarity
+lesson-what-is-time-series-data
+lesson-how-to-interpret-time-series-data
+lesson-components-of-time-series-data
 creating-and-manipulating-time-series
 ts-class
 creating-a-ts.plot
@@ -15,7 +15,10 @@ rolling-and-expanding-windows
 rolling-window
 data
 calculating-a-rolling-window
-expanding-window
 introduction-to-forecasting-in-r
 methods-for-forecasting
 exponential-smoothing
+final-exercise
+importing-the-data
+visual-checks
+quarterly-summary

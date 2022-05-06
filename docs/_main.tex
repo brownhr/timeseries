@@ -117,7 +117,7 @@
 
 \title{Course Outline: Time Series Data in R}
 \author{Harrison Brown}
-\date{2022-05-04}
+\date{2022-05-06}
 
 \begin{document}
 \maketitle
@@ -151,32 +151,40 @@ By the end of this course, students will have the skills to:
 \hypertarget{introduction-to-time-series-data}{%
 \chapter{Introduction to time series data}\label{introduction-to-time-series-data}}
 
-\hypertarget{what-is-a-time-series}{%
-\section{What is a time series}\label{what-is-a-time-series}}
+\hypertarget{lesson-what-is-time-series-data}{%
+\section{Lesson: What is Time Series Data}\label{lesson-what-is-time-series-data}}
 
 \begin{itemize}
 \tightlist
 \item
-  Sampled at equi-spaced points in time
+  Learning Objective: Learner will be able to understand why and how TS-data differs from non-temporal data
+\item
+  LO: What kinds of inferences and results can be obtained from TS-data
+\item
+  LO: Converting to and from time-based data formats, such as \texttt{numeric}, \texttt{Date}, and \texttt{POSIXct} classes
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Functions: \texttt{as.Date()}, \texttt{lubridate::}, etc.
+  \end{itemize}
 \end{itemize}
 
-\hypertarget{stationary-vs-non-stationary-series}{%
-\section{Stationary vs Non-Stationary series}\label{stationary-vs-non-stationary-series}}
-
-Non-stationary time series are defined by:
+\hypertarget{lesson-how-to-interpret-time-series-data}{%
+\section{Lesson: How to Interpret Time Series Data}\label{lesson-how-to-interpret-time-series-data}}
 
 \begin{itemize}
 \tightlist
 \item
-  Time-dependent Mean
+  LO: Learner will understand how to interpret attributes of a basic time series plot
 \item
-  Time-dependent Variance
+  LO: ``Signal and Noise'' in the context of TS data
 \item
-  Time-dependent Autocorrelation/Covariance
+  Introduction to Stationarity: Most real-world data are not stationary and require additional steps to work with
 \end{itemize}
 
-\hypertarget{dickey-fuller-test-of-stationarity}{%
-\section{Dickey-Fuller Test of Stationarity}\label{dickey-fuller-test-of-stationarity}}
+\hypertarget{lesson-components-of-time-series-data}{%
+\section{Lesson: Components of Time Series Data}\label{lesson-components-of-time-series-data}}
 
 \hypertarget{creating-and-manipulating-time-series}{%
 \chapter{Creating and Manipulating Time Series}\label{creating-and-manipulating-time-series}}
@@ -228,151 +236,8 @@ Non-stationary time series are defined by:
 \hypertarget{data}{%
 \subsection{Data}\label{data}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tsbox)}
-
-\NormalTok{dl\_dplyr }\OtherTok{\textless{}{-}}\NormalTok{ cran\_data }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{filter}\NormalTok{(date }\SpecialCharTok{\textgreater{}=} \FunctionTok{as.Date}\NormalTok{(}\StringTok{"2018{-}01{-}01"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{package)}
-
-\CommentTok{\# tsbox::ts\_ts() parses the Date column in a much easier way, making the}
-\CommentTok{\# conversion process easy to interpret}
-\NormalTok{dl\_ts }\OtherTok{\textless{}{-}}\NormalTok{ dl\_dplyr }\SpecialCharTok{\%\textgreater{}\%}
-\NormalTok{  tsbox}\SpecialCharTok{::}\FunctionTok{ts\_ts}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [time]: 'date' [value]: 'count'
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{autoplot}\NormalTok{(dl\_ts)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-4-1} \end{center}
-
 \hypertarget{calculating-a-rolling-window}{%
 \subsection{Calculating a Rolling Window}\label{calculating-a-rolling-window}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dl\_dplyr\_rolling }\OtherTok{\textless{}{-}}\NormalTok{ dl\_dplyr }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{tq\_mutate}\NormalTok{(}
-    \AttributeTok{select =}\NormalTok{ count,}
-    \AttributeTok{mutate\_fun =}\NormalTok{ rollapplyr,}
-    \AttributeTok{FUN =}\NormalTok{ mean,}
-    \AttributeTok{width =} \DecValTok{7}\NormalTok{,}
-    \AttributeTok{col\_rename =} \StringTok{"weekly\_avg"}
-\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{tq\_mutate}\NormalTok{(}
-    \AttributeTok{select =}\NormalTok{ count,}
-    \AttributeTok{mutate\_fun =}\NormalTok{ rollapplyr,}
-    \AttributeTok{FUN =}\NormalTok{ mean,}
-    \AttributeTok{width =} \DecValTok{30}\NormalTok{,}
-    \AttributeTok{col\_rename =} \StringTok{"monthly\_avg"}
-\NormalTok{  )}
-
-\NormalTok{weekly\_ts }\OtherTok{\textless{}{-}}\NormalTok{ dl\_dplyr\_rolling }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{select}\NormalTok{(date, weekly\_avg) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{ts\_ts}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [time]: 'date' [value]: 'weekly_avg'
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_dplyr, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ count), }\AttributeTok{color =} \StringTok{"grey50"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_dplyr\_rolling, }\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ weekly\_avg), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: Removed 6 row(s) containing missing values (geom_path).
-\end{verbatim}
-
-\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-6-1} \end{center}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dl\_rolling\_ts }\OtherTok{\textless{}{-}}\NormalTok{ dl\_dplyr\_rolling }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{select}\NormalTok{(}
-\NormalTok{    date, weekly\_avg}
-\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{ts\_ts}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [time]: 'date' [value]: 'weekly_avg'
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dl\_rolling\_ts }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{decompose}\NormalTok{(}\AttributeTok{type =} \StringTok{"multiplicative"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{autoplot}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-7-1} \end{center}
-
-\hypertarget{expanding-window}{%
-\chapter{Expanding Window}\label{expanding-window}}
-
-\begin{itemize}
-\tightlist
-\item
-  Fixed lower bound
-\item
-  Moving upper bound
-\end{itemize}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{dl\_expand }\OtherTok{\textless{}{-}}\NormalTok{ dl\_dplyr }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}
-    \AttributeTok{mean\_expand =} \FunctionTok{cummean}\NormalTok{(count),}
-    \AttributeTok{cum\_sum =} \FunctionTok{cumsum}\NormalTok{(count)}
-\NormalTok{  )}
-
-\NormalTok{expand\_ts }\OtherTok{\textless{}{-}}\NormalTok{ dl\_expand }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{(date, mean\_expand) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ts\_ts}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [time]: 'date' [value]: 'mean_expand'
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_dplyr, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ count), }\AttributeTok{color =} \StringTok{"gray50"}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_expand, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ mean\_expand), }\AttributeTok{color =} \StringTok{"red"}\NormalTok{) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_dplyr\_rolling, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ weekly\_avg), }\AttributeTok{color =} \StringTok{"blue"}\NormalTok{) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{data =}\NormalTok{ dl\_dplyr\_rolling, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ date, }\AttributeTok{y =}\NormalTok{ monthly\_avg), }\AttributeTok{color =} \StringTok{"green"}\NormalTok{) }\SpecialCharTok{+} 
-  \FunctionTok{theme\_light}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: Removed 6 row(s) containing missing values (geom_path).
-\end{verbatim}
-
-\begin{verbatim}
-## Warning: Removed 29 row(s) containing missing values (geom_path).
-\end{verbatim}
-
-\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-9-1} \end{center}
 
 \hypertarget{introduction-to-forecasting-in-r}{%
 \chapter{Introduction to Forecasting in R}\label{introduction-to-forecasting-in-r}}
@@ -382,6 +247,38 @@ Non-stationary time series are defined by:
 
 \hypertarget{exponential-smoothing}{%
 \subsection{Exponential Smoothing}\label{exponential-smoothing}}
+
+\hypertarget{final-exercise}{%
+\chapter{Final Exercise}\label{final-exercise}}
+
+The final exercise for this course involves performing a time series analysis on real-world sales data. You'll go step-by-step from reading the data and checking attributes like stationarity, to normalizing, decomposing, adjusting, and interpreting the results.
+
+\hypertarget{importing-the-data}{%
+\section{Importing the Data}\label{importing-the-data}}
+
+\hypertarget{visual-checks}{%
+\section{Visual Checks}\label{visual-checks}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sales\_ts }\OtherTok{\textless{}{-}}\NormalTok{ tsbox}\SpecialCharTok{::}\FunctionTok{ts\_ts}\NormalTok{(sales)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [time]: 'date' [value]: 'sales'
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{autoplot.zoo}\NormalTok{(sales\_ts)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-4-1} \end{center}
+
+\hypertarget{quarterly-summary}{%
+\subsection{Quarterly summary}\label{quarterly-summary}}
 
   \bibliography{book.bib,packages.bib}
 

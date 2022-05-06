@@ -1,19 +1,4 @@
-```{r, include = FALSE}
-library(tidyquant)
-library(tidyverse)
-library(cranlogs)
-library(forecast)
 
-# cran_data <- cran_downloads(
-#   packages = c("dplyr"),
-#   from = "2015-01-01",
-#   to = "2021-12-30"
-# ) %>%
-#   tibble::as_tibble()
-# write_rds(cran_data, "cran_data.Rds")
-
-cran_data <- read_rds("cran_data.Rds")
-```
 
 # Rolling and Expanding Windows
 
@@ -26,90 +11,90 @@ cran_data <- read_rds("cran_data.Rds")
 
 
 
-```{r}
-library(tsbox)
+<!-- ```{r} -->
+<!-- library(tsbox) -->
 
-dl_dplyr <- cran_data %>%
-  # filter(date >= as.Date("2018-01-01")) %>% 
-  select(-package)
+<!-- dl_dplyr <- cran_data %>% -->
+<!--   # filter(date >= as.Date("2018-01-01")) %>%  -->
+<!--   select(-package) -->
 
-# tsbox::ts_ts() parses the Date column in a much easier way, making the
-# conversion process easy to interpret
-dl_ts <- dl_dplyr %>%
-  tsbox::ts_ts()
+<!-- # tsbox::ts_ts() parses the Date column in a much easier way, making the -->
+<!-- # conversion process easy to interpret -->
+<!-- dl_ts <- dl_dplyr %>% -->
+<!--   tsbox::ts_ts() -->
 
-autoplot(dl_ts)
-```
+<!-- autoplot(dl_ts) -->
+<!-- ``` -->
 
 
 ### Calculating a Rolling Window
 
-```{r}
-dl_dplyr_rolling <- dl_dplyr %>%
-  tq_mutate(
-    select = count,
-    mutate_fun = rollapplyr,
-    FUN = mean,
-    width = 7,
-    col_rename = "weekly_avg"
-  ) %>%
-  tq_mutate(
-    select = count,
-    mutate_fun = rollapplyr,
-    FUN = mean,
-    width = 30,
-    col_rename = "monthly_avg"
-  )
+<!-- ```{r} -->
+<!-- dl_dplyr_rolling <- dl_dplyr %>% -->
+<!--   tq_mutate( -->
+<!--     select = count, -->
+<!--     mutate_fun = rollapplyr, -->
+<!--     FUN = mean, -->
+<!--     width = 7, -->
+<!--     col_rename = "weekly_avg" -->
+<!--   ) %>% -->
+<!--   tq_mutate( -->
+<!--     select = count, -->
+<!--     mutate_fun = rollapplyr, -->
+<!--     FUN = mean, -->
+<!--     width = 30, -->
+<!--     col_rename = "monthly_avg" -->
+<!--   ) -->
 
-weekly_ts <- dl_dplyr_rolling %>%
-  select(date, weekly_avg) %>%
-  ts_ts()
-```
+<!-- weekly_ts <- dl_dplyr_rolling %>% -->
+<!--   select(date, weekly_avg) %>% -->
+<!--   ts_ts() -->
+<!-- ``` -->
 
-```{r}
-ggplot() +
-  geom_line(data = dl_dplyr, mapping = aes(x = date, y = count), color = "grey50") +
-  geom_line(data = dl_dplyr_rolling, mapping = aes(x = date, y = weekly_avg), color = "red")
-```
-
-
-```{r}
-dl_rolling_ts <- dl_dplyr_rolling %>%
-  select(
-    date, weekly_avg
-  ) %>%
-  ts_ts()
-
-dl_rolling_ts %>%
-  decompose(type = "multiplicative") %>%
-  autoplot()
-```
+<!-- ```{r} -->
+<!-- ggplot() + -->
+<!--   geom_line(data = dl_dplyr, mapping = aes(x = date, y = count), color = "grey50") + -->
+<!--   geom_line(data = dl_dplyr_rolling, mapping = aes(x = date, y = weekly_avg), color = "red") -->
+<!-- ``` -->
 
 
-# Expanding Window
+<!-- ```{r} -->
+<!-- dl_rolling_ts <- dl_dplyr_rolling %>% -->
+<!--   select( -->
+<!--     date, weekly_avg -->
+<!--   ) %>% -->
+<!--   ts_ts() -->
 
-- Fixed lower bound
-- Moving upper bound
+<!-- dl_rolling_ts %>% -->
+<!--   decompose(type = "multiplicative") %>% -->
+<!--   autoplot() -->
+<!-- ``` -->
 
-```{r}
 
-dl_expand <- dl_dplyr %>% 
-  mutate(
-    mean_expand = cummean(count),
-    cum_sum = cumsum(count)
-  )
+<!-- # Expanding Window -->
 
-expand_ts <- dl_expand %>% 
-  select(date, mean_expand) %>% 
-  ts_ts()
-```
+<!-- - Fixed lower bound -->
+<!-- - Moving upper bound -->
 
-```{r}
-ggplot() +
-  geom_line(data = dl_dplyr, aes(x = date, y = count), color = "gray50") +
-  geom_line(data = dl_expand, aes(x = date, y = mean_expand), color = "red") + 
-  geom_line(data = dl_dplyr_rolling, aes(x = date, y = weekly_avg), color = "blue") + 
-  geom_line(data = dl_dplyr_rolling, aes(x = date, y = monthly_avg), color = "green") + 
-  theme_light()
-```
+<!-- ```{r} -->
+
+<!-- dl_expand <- dl_dplyr %>%  -->
+<!--   mutate( -->
+<!--     mean_expand = cummean(count), -->
+<!--     cum_sum = cumsum(count) -->
+<!--   ) -->
+
+<!-- expand_ts <- dl_expand %>%  -->
+<!--   select(date, mean_expand) %>%  -->
+<!--   ts_ts() -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- ggplot() + -->
+<!--   geom_line(data = dl_dplyr, aes(x = date, y = count), color = "gray50") + -->
+<!--   geom_line(data = dl_expand, aes(x = date, y = mean_expand), color = "red") +  -->
+<!--   geom_line(data = dl_dplyr_rolling, aes(x = date, y = weekly_avg), color = "blue") +  -->
+<!--   geom_line(data = dl_dplyr_rolling, aes(x = date, y = monthly_avg), color = "green") +  -->
+<!--   theme_light() -->
+<!-- ``` -->
 
