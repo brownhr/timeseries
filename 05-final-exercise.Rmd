@@ -1,0 +1,45 @@
+# Final Exercise
+
+The final exercise for this course involves performing a time series analysis on real-world sales data. You'll go step-by-step from reading the data and checking attributes like stationarity, to normalizing, decomposing, adjusting, and interpreting the results.
+
+## Importing the Data
+
+```{r, echo = TRUE, include = FALSE}
+library(tidyverse)
+library(tidyquant)
+library(forecast)
+library(tseries)
+# Sample data stored as "sales_data_sample.csv"
+
+sales_data <- read_csv("sales_data_sample.csv") %>% 
+  mutate(
+    ORDERDATE = parse_datetime(ORDERDATE, format = "%m/%d/%Y %H:%M"),
+    PRODUCTLINE = as.factor(PRODUCTLINE)
+  )
+
+sales <- sales_data %>% 
+  select(
+    SALES, ORDERDATE, PRODUCTLINE
+  ) %>% 
+  rename(
+    date = ORDERDATE
+  ) %>% 
+  select(
+    -PRODUCTLINE
+  ) %>%
+  group_by(date) %>%
+  summarize(
+    sales = sum(SALES)
+  )
+```
+
+
+## Visual Checks
+
+```{r}
+sales_ts <- tsbox::ts_ts(sales)
+
+autoplot.zoo(sales_ts)
+```
+
+### Quarterly summary

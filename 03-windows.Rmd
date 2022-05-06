@@ -2,6 +2,7 @@
 library(tidyquant)
 library(tidyverse)
 library(cranlogs)
+library(forecast)
 
 # cran_data <- cran_downloads(
 #   packages = c("dplyr"),
@@ -29,7 +30,7 @@ cran_data <- read_rds("cran_data.Rds")
 library(tsbox)
 
 dl_dplyr <- cran_data %>%
-  filter(date >= as.Date("2018-01-01")) %>% 
+  # filter(date >= as.Date("2018-01-01")) %>% 
   select(-package)
 
 # tsbox::ts_ts() parses the Date column in a much easier way, making the
