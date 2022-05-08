@@ -117,7 +117,7 @@
 
 \title{Course Outline: Time Series Data in R}
 \author{Harrison Brown}
-\date{2022-05-06}
+\date{2022-05-08}
 
 \begin{document}
 \maketitle
@@ -192,34 +192,21 @@ By the end of this course, students will have the skills to:
 \hypertarget{ts-class}{%
 \section{\texorpdfstring{\texttt{ts} Class}{ts Class}}\label{ts-class}}
 
-\hypertarget{creating-a-ts.plot}{%
-\section{\texorpdfstring{Creating a \texttt{ts.plot()}}{Creating a ts.plot()}}\label{creating-a-ts.plot}}
-
-\hypertarget{interpreting-plots}{%
-\subsection{Interpreting Plots}\label{interpreting-plots}}
-
-\hypertarget{seasonality-plot}{%
-\subsection{Seasonality Plot}\label{seasonality-plot}}
+\hypertarget{missing-values}{%
+\section{Missing Values}\label{missing-values}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggseasonplot}\NormalTok{(}\AttributeTok{x =}\NormalTok{ AirPassengers)}
+\NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}2001{-}01{-}01\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2001{-}01{-}02\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2001{-}01{-}04\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2001{-}01{-}05\textquotesingle{}}\NormalTok{)}
+\NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(d)}
+\NormalTok{date\_range }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FunctionTok{min}\NormalTok{(d), }\FunctionTok{max}\NormalTok{(d), }\AttributeTok{by =} \DecValTok{1}\NormalTok{) }
+\NormalTok{date\_range[}\SpecialCharTok{!}\NormalTok{date\_range }\SpecialCharTok{\%in\%}\NormalTok{ d] }
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{_main_files/figure-latex/season-1-1} \end{center}
-
-\hypertarget{polar-seasonality-plot}{%
-\subsection{Polar Seasonality Plot}\label{polar-seasonality-plot}}
-
-\hypertarget{trends-and-seasons}{%
-\section{Trends and Seasons}\label{trends-and-seasons}}
-
-\hypertarget{decomposition}{%
-\subsection{Decomposition}\label{decomposition}}
-
-\hypertarget{de-trending-data}{%
-\subsection{De-trending Data}\label{de-trending-data}}
+\begin{verbatim}
+## [1] "2001-01-03"
+\end{verbatim}
 
 \hypertarget{rolling-and-expanding-windows}{%
 \chapter{Rolling and Expanding Windows}\label{rolling-and-expanding-windows}}
@@ -248,37 +235,189 @@ By the end of this course, students will have the skills to:
 \hypertarget{exponential-smoothing}{%
 \subsection{Exponential Smoothing}\label{exponential-smoothing}}
 
-\hypertarget{final-exercise}{%
-\chapter{Final Exercise}\label{final-exercise}}
+\hypertarget{capstone-exercise}{%
+\chapter{Capstone Exercise}\label{capstone-exercise}}
 
-The final exercise for this course involves performing a time series analysis on real-world sales data. You'll go step-by-step from reading the data and checking attributes like stationarity, to normalizing, decomposing, adjusting, and interpreting the results.
+The final exercise for this course involves performing a time series analysis on real-world data: Carbon Dioxide concentration at the Mauna Loa Observatory, from early 1959 to Present. You'll go through the process of imputing missing values, testing for stationarity, decomposing the time series, and adjusting for seasonality. The goal for this exercise is a plot showing the seasonal-adjusted time series, which shows the ``overall trend'' in the data over the last few decades.
 
 \hypertarget{importing-the-data}{%
 \section{Importing the Data}\label{importing-the-data}}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# The following libraries are included for you}
+
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(zoo)}
+\FunctionTok{library}\NormalTok{(forecast)}
+\FunctionTok{library}\NormalTok{(tseries)}
+\CommentTok{\# Sample data from the Mauna Loa Observatory}
+\CommentTok{\# https://gml.noaa.gov/webdata/ccgg/trends/co2/co2\_mm\_mlo.csv}
+
+\CommentTok{\# Data is already pre{-}processed as a \textasciigrave{}ts\textasciigrave{} object. It contains missing values, so}
+\CommentTok{\# we\textquotesingle{}ll need to impute those!}
+\NormalTok{co2 }\OtherTok{\textless{}{-}} \FunctionTok{readRDS}\NormalTok{(}\StringTok{"data/missing.Rds"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{visual-checks}{%
 \section{Visual Checks}\label{visual-checks}}
 
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Plot your co2 data and see if the data is stationary, non-stationary (time-dependent), and seasonal or non-seasonal. Use the Augmented Dickey-Fuller test to determine stationarity.
+\end{enumerate}
+
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{sales\_ts }\OtherTok{\textless{}{-}}\NormalTok{ tsbox}\SpecialCharTok{::}\FunctionTok{ts\_ts}\NormalTok{(sales)}
+\FunctionTok{plot.ts}\NormalTok{(co2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/visual-1} \end{center}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{adf.test}\NormalTok{(co2)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## [time]: 'date' [value]: 'sales'
+## Error in adf.test(co2): NAs in x
 \end{verbatim}
+
+Looks like we have some missing values! Let's try and impute those to fill in the gaps:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Impute missing values with the \texttt{na.approx()} function from \texttt{zoo}:
+\end{enumerate}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{autoplot.zoo}\NormalTok{(sales\_ts)}
+\NormalTok{co2 }\OtherTok{\textless{}{-}}\NormalTok{ co2 }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  zoo}\SpecialCharTok{::}\FunctionTok{na.approx}\NormalTok{()}
+
+\FunctionTok{adf.test}\NormalTok{(co2)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-4-1} \end{center}
+\begin{verbatim}
+## Warning in adf.test(co2): p-value greater than printed p-value
+\end{verbatim}
 
-\hypertarget{quarterly-summary}{%
-\subsection{Quarterly summary}\label{quarterly-summary}}
+\begin{verbatim}
+## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  co2
+## Dickey-Fuller = -0.12404, Lag order = 9, p-value = 0.99
+## alternative hypothesis: stationary
+\end{verbatim}
+
+Based on the statistic and p-value, the data is non-stationary.
+
+\hypertarget{decomposing-the-time-series}{%
+\section{Decomposing the Time Series}\label{decomposing-the-time-series}}
+
+We're interested in the seasonal, remainder, and specifically, trend components. We want to know what the data looks like when adjusted for seasonality. To do this, we need to decompose our time series into its ETS components. Then, we can remove the seasonal component.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Decompose the time series and plot the resulting \texttt{decomposed.ts} object:
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{co2\_decomp }\OtherTok{\textless{}{-}}\NormalTok{ co2 }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{decompose}\NormalTok{()}
+
+\FunctionTok{plot}\NormalTok{(co2\_decomp)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/decomp-1} \end{center}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Then, adjust for seasonality, and plot the results. Label the y-axis as ``CO2 Concentration'', and title the plot ``Seasonally-adjusted CO2 Concentration'':
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{co2\_decomp }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{seasadj}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  
+  \CommentTok{\# If we want to include a rolling window, it\textquotesingle{}s really easy to do with}
+  \CommentTok{\# zoo::rollapplyr()}
+  
+  \CommentTok{\#rollapplyr(FUN = mean, width = 12) \%\textgreater{}\%}
+  \FunctionTok{plot}\NormalTok{(}\AttributeTok{ylab =} \StringTok{"CO2 Concentration"}\NormalTok{, }\AttributeTok{main =} \StringTok{"Seasonally{-}adjusted CO2 Concentration"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\includegraphics{_main_files/figure-latex/unnamed-chunk-7-1} \end{center}
+
+Voila! We now have the overall trend, plus remainder component, of CO2 concentrations. By removing the seasonality of data, we can better assess the year-to-year differences in our data, and can reduce the effect of intra- and inter-year cycles present in the data.
+
+\hypertarget{example-code}{%
+\section{Example Code}\label{example-code}}
+
+This is the code given in the exercise itself
+
+Step 1:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(\_\_\_)}
+
+\FunctionTok{\_\_\_.test}\NormalTok{(co2)}
+\end{Highlighting}
+\end{Shaded}
+
+Step 2:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{co2\_impute }\OtherTok{\textless{}{-}}\NormalTok{ co2 }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{\_\_.\_\_\_}\NormalTok{()}
+
+\FunctionTok{adf.test}\NormalTok{(co2\_impute)}
+\end{Highlighting}
+\end{Shaded}
+
+Step 3:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{co2\_decomp }\OtherTok{\textless{}{-}}\NormalTok{ co2\_impute }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{\_\_\_}\NormalTok{()}
+
+\FunctionTok{plot}\NormalTok{(\_\_\_)}
+\end{Highlighting}
+\end{Shaded}
+
+Step 4:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{co2\_decomp }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{\_\_\_\_}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{plot}\NormalTok{(}\AttributeTok{ylab =} \StringTok{"\_\_\_"}\NormalTok{, }\AttributeTok{main =} \StringTok{"\_\_\_"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
 
   \bibliography{book.bib,packages.bib}
 

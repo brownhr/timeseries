@@ -1,3 +1,10 @@
+library(tidyverse)
+library(zoo)
+library(lubridate)
+library(tsbox)
+library(tseries)
+library(forecast)
+
 co2 <- read_csv("data/co2_mm_mlo.csv")[c(-(1:10), -(767:770)),] %>% 
   rowwise() %>% 
   mutate(
@@ -5,10 +12,6 @@ co2 <- read_csv("data/co2_mm_mlo.csv")[c(-(1:10), -(767:770)),] %>%
   ) %>% 
   select(
     time, average
-  ) %>% tsbox::ts_ts()
+  ) %>% ts_ts()
 
-
-log_co2 <- log(co2)
-
-laglog <- stats::lag(log_co2, -1)
-dlaglog <- diff(laglog, 1)
+write_rds(co2, "data/co2_data.Rds")

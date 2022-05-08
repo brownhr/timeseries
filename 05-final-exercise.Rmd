@@ -1,45 +1,120 @@
-# Final Exercise
+# Capstone Exercise
 
-The final exercise for this course involves performing a time series analysis on real-world sales data. You'll go step-by-step from reading the data and checking attributes like stationarity, to normalizing, decomposing, adjusting, and interpreting the results.
+The final exercise for this course involves performing a time series analysis on real-world data: Carbon Dioxide concentration at the Mauna Loa Observatory, from early 1959 to Present. You'll go through the process of imputing missing values, testing for stationarity, decomposing the time series, and adjusting for seasonality. The goal for this exercise is a plot showing the seasonal-adjusted time series, which shows the "overall trend" in the data over the last few decades.
 
 ## Importing the Data
 
-```{r, echo = TRUE, include = FALSE}
+```{r, echo = TRUE, message=F, warning=F}
+# The following libraries are included for you
+
 library(tidyverse)
-library(tidyquant)
+library(zoo)
 library(forecast)
 library(tseries)
-# Sample data stored as "sales_data_sample.csv"
+# Sample data from the Mauna Loa Observatory
+# https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv
 
-sales_data <- read_csv("sales_data_sample.csv") %>% 
-  mutate(
-    ORDERDATE = parse_datetime(ORDERDATE, format = "%m/%d/%Y %H:%M"),
-    PRODUCTLINE = as.factor(PRODUCTLINE)
-  )
+# Data is already pre-processed as a `ts` object. It contains missing values, so
+# we'll need to impute those!
+co2 <- readRDS("data/missing.Rds")
 
-sales <- sales_data %>% 
-  select(
-    SALES, ORDERDATE, PRODUCTLINE
-  ) %>% 
-  rename(
-    date = ORDERDATE
-  ) %>% 
-  select(
-    -PRODUCTLINE
-  ) %>%
-  group_by(date) %>%
-  summarize(
-    sales = sum(SALES)
-  )
 ```
 
 
 ## Visual Checks
 
-```{r}
-sales_ts <- tsbox::ts_ts(sales)
+1. Plot your co2 data and see if the data is stationary, non-stationary (time-dependent), and seasonal or non-seasonal. Use the Augmented Dickey-Fuller test to determine stationarity.
 
-autoplot.zoo(sales_ts)
+```{r visual}
+plot.ts(co2)
 ```
 
-### Quarterly summary
+```{r, error=T}
+adf.test(co2)
+```
+
+Looks like we have some missing values! Let's try and impute those to fill in the gaps:
+
+
+2. Impute missing values with the `na.approx()` function from `zoo`:
+
+```{r}
+co2 <- co2 %>% 
+  zoo::na.approx()
+
+adf.test(co2)
+```
+
+Based on the statistic and p-value, the data is non-stationary.
+
+
+## Decomposing the Time Series
+
+We're interested in the seasonal, remainder, and specifically, trend components. We want to know what the data looks like when adjusted for seasonality. To do this, we need to decompose our time series into its ETS components. Then, we can remove the seasonal component.
+
+3. Decompose the time series and plot the resulting `decomposed.ts` object:
+
+```{r decomp}
+co2_decomp <- co2 %>%
+  decompose()
+
+plot(co2_decomp)
+```
+
+
+4. Then, adjust for seasonality, and plot the results. Label the y-axis as "CO2 Concentration", and title the plot "Seasonally-adjusted CO2 Concentration":
+
+```{r}
+co2_decomp %>% 
+  seasadj() %>% 
+  
+  # If we want to include a rolling window, it's really easy to do with
+  # zoo::rollapplyr()
+  
+  #rollapplyr(FUN = mean, width = 12) %>%
+  plot(ylab = "CO2 Concentration", main = "Seasonally-adjusted CO2 Concentration")
+```
+
+Voila! We now have the overall trend, plus remainder component, of CO2 concentrations. By removing the seasonality of data, we can better assess the year-to-year differences in our data, and can reduce the effect of intra- and inter-year cycles present in the data.
+
+## Example Code
+
+This is the code given in the exercise itself
+
+Step 1:
+
+```{r, eval = FALSE}
+plot(___)
+
+___.test(co2)
+```
+
+
+Step 2:  
+
+```{r, eval = FALSE}
+co2_impute <- co2 %>% 
+  __.___()
+
+adf.test(co2_impute)
+
+
+```
+
+Step 3:
+
+```{r, eval = FALSE}
+co2_decomp <- co2_impute %>% 
+  ___()
+
+plot(___)
+```
+
+Step 4:
+
+```{r, eval = FALSE}
+co2_decomp %>% 
+  ____() %>% 
+  plot(ylab = "___", main = "___")
+```
+

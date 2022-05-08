@@ -4,13 +4,7 @@ lesson-how-to-interpret-time-series-data
 lesson-components-of-time-series-data
 creating-and-manipulating-time-series
 ts-class
-creating-a-ts.plot
-interpreting-plots
-seasonality-plot
-polar-seasonality-plot
-trends-and-seasons
-decomposition
-de-trending-data
+missing-values
 rolling-and-expanding-windows
 rolling-window
 data
@@ -18,7 +12,8 @@ calculating-a-rolling-window
 introduction-to-forecasting-in-r
 methods-for-forecasting
 exponential-smoothing
-final-exercise
+capstone-exercise
 importing-the-data
 visual-checks
-quarterly-summary
+decomposing-the-time-series
+example-code

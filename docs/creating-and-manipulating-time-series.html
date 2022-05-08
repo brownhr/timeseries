@@ -23,7 +23,7 @@
 <meta name="author" content="Harrison Brown" />
 
 
-<meta name="date" content="2022-05-06" />
+<meta name="date" content="2022-05-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -146,17 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html"><i class="fa fa-check"></i><b>2</b> Creating and Manipulating Time Series<span></span></a>
 <ul>
 <li class="chapter" data-level="2.1" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#ts-class"><i class="fa fa-check"></i><b>2.1</b> <code>ts</code> Class<span></span></a></li>
-<li class="chapter" data-level="2.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#creating-a-ts.plot"><i class="fa fa-check"></i><b>2.2</b> Creating a <code>ts.plot()</code><span></span></a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#interpreting-plots"><i class="fa fa-check"></i><b>2.2.1</b> Interpreting Plots<span></span></a></li>
-<li class="chapter" data-level="2.2.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#seasonality-plot"><i class="fa fa-check"></i><b>2.2.2</b> Seasonality Plot<span></span></a></li>
-<li class="chapter" data-level="2.2.3" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#polar-seasonality-plot"><i class="fa fa-check"></i><b>2.2.3</b> Polar Seasonality Plot<span></span></a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#trends-and-seasons"><i class="fa fa-check"></i><b>2.3</b> Trends and Seasons<span></span></a>
-<ul>
-<li class="chapter" data-level="2.3.1" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#decomposition"><i class="fa fa-check"></i><b>2.3.1</b> Decomposition<span></span></a></li>
-<li class="chapter" data-level="2.3.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#de-trending-data"><i class="fa fa-check"></i><b>2.3.2</b> De-trending Data<span></span></a></li>
-</ul></li>
+<li class="chapter" data-level="2.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#missing-values"><i class="fa fa-check"></i><b>2.2</b> Missing Values<span></span></a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="rolling-and-expanding-windows.html"><a href="rolling-and-expanding-windows.html"><i class="fa fa-check"></i><b>3</b> Rolling and Expanding Windows<span></span></a>
 <ul>
@@ -173,13 +163,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.1.1" data-path="introduction-to-forecasting-in-r.html"><a href="introduction-to-forecasting-in-r.html#exponential-smoothing"><i class="fa fa-check"></i><b>4.1.1</b> Exponential Smoothing<span></span></a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="final-exercise.html"><a href="final-exercise.html"><i class="fa fa-check"></i><b>5</b> Final Exercise<span></span></a>
+<li class="chapter" data-level="5" data-path="capstone-exercise.html"><a href="capstone-exercise.html"><i class="fa fa-check"></i><b>5</b> Capstone Exercise<span></span></a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="final-exercise.html"><a href="final-exercise.html#importing-the-data"><i class="fa fa-check"></i><b>5.1</b> Importing the Data<span></span></a></li>
-<li class="chapter" data-level="5.2" data-path="final-exercise.html"><a href="final-exercise.html#visual-checks"><i class="fa fa-check"></i><b>5.2</b> Visual Checks<span></span></a>
-<ul>
-<li class="chapter" data-level="5.2.1" data-path="final-exercise.html"><a href="final-exercise.html#quarterly-summary"><i class="fa fa-check"></i><b>5.2.1</b> Quarterly summary<span></span></a></li>
-</ul></li>
+<li class="chapter" data-level="5.1" data-path="capstone-exercise.html"><a href="capstone-exercise.html#importing-the-data"><i class="fa fa-check"></i><b>5.1</b> Importing the Data<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="capstone-exercise.html"><a href="capstone-exercise.html#visual-checks"><i class="fa fa-check"></i><b>5.2</b> Visual Checks<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="capstone-exercise.html"><a href="capstone-exercise.html#decomposing-the-time-series"><i class="fa fa-check"></i><b>5.3</b> Decomposing the Time Series<span></span></a></li>
+<li class="chapter" data-level="5.4" data-path="capstone-exercise.html"><a href="capstone-exercise.html#example-code"><i class="fa fa-check"></i><b>5.4</b> Example Code<span></span></a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -206,29 +195,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="ts-class" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> <code>ts</code> Class<a href="creating-and-manipulating-time-series.html#ts-class" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="creating-a-ts.plot" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Creating a <code>ts.plot()</code><a href="creating-and-manipulating-time-series.html#creating-a-ts.plot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="interpreting-plots" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Interpreting Plots<a href="creating-and-manipulating-time-series.html#interpreting-plots" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="seasonality-plot" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Seasonality Plot<a href="creating-and-manipulating-time-series.html#seasonality-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="creating-and-manipulating-time-series.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggseasonplot</span>(<span class="at">x =</span> AirPassengers)</span></code></pre></div>
-<p><img src="_main_files/figure-html/season-1-1.png" width="672" style="display: block; margin: auto;" /></p>
-</div>
-<div id="polar-seasonality-plot" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Polar Seasonality Plot<a href="creating-and-manipulating-time-series.html#polar-seasonality-plot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-</div>
-<div id="trends-and-seasons" class="section level2 hasAnchor" number="2.3">
-<h2><span class="header-section-number">2.3</span> Trends and Seasons<a href="creating-and-manipulating-time-series.html#trends-and-seasons" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="decomposition" class="section level3 hasAnchor" number="2.3.1">
-<h3><span class="header-section-number">2.3.1</span> Decomposition<a href="creating-and-manipulating-time-series.html#decomposition" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-</div>
-<div id="de-trending-data" class="section level3 hasAnchor" number="2.3.2">
-<h3><span class="header-section-number">2.3.2</span> De-trending Data<a href="creating-and-manipulating-time-series.html#de-trending-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="missing-values" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> Missing Values<a href="creating-and-manipulating-time-series.html#missing-values" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="creating-and-manipulating-time-series.html#cb1-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&#39;2001-01-01&#39;</span>, <span class="st">&#39;2001-01-02&#39;</span>, <span class="st">&#39;2001-01-04&#39;</span>, <span class="st">&#39;2001-01-05&#39;</span>)</span>
+<span id="cb1-2"><a href="creating-and-manipulating-time-series.html#cb1-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(d)</span>
+<span id="cb1-3"><a href="creating-and-manipulating-time-series.html#cb1-3" aria-hidden="true" tabindex="-1"></a>date_range <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">min</span>(d), <span class="fu">max</span>(d), <span class="at">by =</span> <span class="dv">1</span>) </span>
+<span id="cb1-4"><a href="creating-and-manipulating-time-series.html#cb1-4" aria-hidden="true" tabindex="-1"></a>date_range[<span class="sc">!</span>date_range <span class="sc">%in%</span> d] </span></code></pre></div>
+<pre><code>## [1] &quot;2001-01-03&quot;</code></pre>
 
-</div>
 </div>
 </div>
             </section>
@@ -279,7 +253,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub"],
+"download": ["_main.pdf", "_main.epub", "_main.docx"],
 "search": {
 "engine": "fuse",
 "options": null

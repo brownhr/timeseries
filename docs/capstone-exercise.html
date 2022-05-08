@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Capstone Exercise | Course Outline: Time Series Data in R</title>
+  <meta name="description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
+  <meta name="generator" content="bookdown 0.25 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Capstone Exercise | Course Outline: Time Series Data in R" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
+  <meta name="github-repo" content="brownhr/timeseries" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Capstone Exercise | Course Outline: Time Series Data in R" />
+  
+  <meta name="twitter:description" content="This site represents the course outline for Time Series Data in R – a potential Datacamp course. This course is designed to enable students to work with time series data, and understand how this kind of data fundamentally differs from time-independent data." />
+  
+
+<meta name="author" content="Harrison Brown" />
+
+
+<meta name="date" content="2022-05-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  <link rel="shortcut icon" href="logo.svg" type="image/x-icon" />
+<link rel="prev" href="introduction-to-forecasting-in-r.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="bootstrap.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Time Series Data in R</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#welcome">Welcome<span></span></a></li>
+<li class="chapter" data-level="1" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html"><i class="fa fa-check"></i><b>1</b> Introduction to time series data<span></span></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html#lesson-what-is-time-series-data"><i class="fa fa-check"></i><b>1.1</b> Lesson: What is Time Series Data<span></span></a></li>
+<li class="chapter" data-level="1.2" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html#lesson-how-to-interpret-time-series-data"><i class="fa fa-check"></i><b>1.2</b> Lesson: How to Interpret Time Series Data<span></span></a></li>
+<li class="chapter" data-level="1.3" data-path="introduction-to-time-series-data.html"><a href="introduction-to-time-series-data.html#lesson-components-of-time-series-data"><i class="fa fa-check"></i><b>1.3</b> Lesson: Components of Time Series Data<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html"><i class="fa fa-check"></i><b>2</b> Creating and Manipulating Time Series<span></span></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#ts-class"><i class="fa fa-check"></i><b>2.1</b> <code>ts</code> Class<span></span></a></li>
+<li class="chapter" data-level="2.2" data-path="creating-and-manipulating-time-series.html"><a href="creating-and-manipulating-time-series.html#missing-values"><i class="fa fa-check"></i><b>2.2</b> Missing Values<span></span></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="rolling-and-expanding-windows.html"><a href="rolling-and-expanding-windows.html"><i class="fa fa-check"></i><b>3</b> Rolling and Expanding Windows<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="rolling-and-expanding-windows.html"><a href="rolling-and-expanding-windows.html#rolling-window"><i class="fa fa-check"></i><b>3.1</b> Rolling Window<span></span></a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="rolling-and-expanding-windows.html"><a href="rolling-and-expanding-windows.html#data"><i class="fa fa-check"></i><b>3.1.1</b> Data<span></span></a></li>
+<li class="chapter" data-level="3.1.2" data-path="rolling-and-expanding-windows.html"><a href="rolling-and-expanding-windows.html#calculating-a-rolling-window"><i class="fa fa-check"></i><b>3.1.2</b> Calculating a Rolling Window<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="introduction-to-forecasting-in-r.html"><a href="introduction-to-forecasting-in-r.html"><i class="fa fa-check"></i><b>4</b> Introduction to Forecasting in R<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="introduction-to-forecasting-in-r.html"><a href="introduction-to-forecasting-in-r.html#methods-for-forecasting"><i class="fa fa-check"></i><b>4.1</b> Methods for Forecasting<span></span></a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="introduction-to-forecasting-in-r.html"><a href="introduction-to-forecasting-in-r.html#exponential-smoothing"><i class="fa fa-check"></i><b>4.1.1</b> Exponential Smoothing<span></span></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="capstone-exercise.html"><a href="capstone-exercise.html"><i class="fa fa-check"></i><b>5</b> Capstone Exercise<span></span></a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="capstone-exercise.html"><a href="capstone-exercise.html#importing-the-data"><i class="fa fa-check"></i><b>5.1</b> Importing the Data<span></span></a></li>
+<li class="chapter" data-level="5.2" data-path="capstone-exercise.html"><a href="capstone-exercise.html#visual-checks"><i class="fa fa-check"></i><b>5.2</b> Visual Checks<span></span></a></li>
+<li class="chapter" data-level="5.3" data-path="capstone-exercise.html"><a href="capstone-exercise.html#decomposing-the-time-series"><i class="fa fa-check"></i><b>5.3</b> Decomposing the Time Series<span></span></a></li>
+<li class="chapter" data-level="5.4" data-path="capstone-exercise.html"><a href="capstone-exercise.html#example-code"><i class="fa fa-check"></i><b>5.4</b> Example Code<span></span></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Course Outline: Time Series Data in R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="capstone-exercise" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Capstone Exercise<a href="capstone-exercise.html#capstone-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The final exercise for this course involves performing a time series analysis on real-world data: Carbon Dioxide concentration at the Mauna Loa Observatory, from early 1959 to Present. You’ll go through the process of imputing missing values, testing for stationarity, decomposing the time series, and adjusting for seasonality. The goal for this exercise is a plot showing the seasonal-adjusted time series, which shows the “overall trend” in the data over the last few decades.</p>
+<div id="importing-the-data" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Importing the Data<a href="capstone-exercise.html#importing-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="capstone-exercise.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The following libraries are included for you</span></span>
+<span id="cb3-2"><a href="capstone-exercise.html#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="capstone-exercise.html#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-4"><a href="capstone-exercise.html#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(zoo)</span>
+<span id="cb3-5"><a href="capstone-exercise.html#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb3-6"><a href="capstone-exercise.html#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tseries)</span>
+<span id="cb3-7"><a href="capstone-exercise.html#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample data from the Mauna Loa Observatory</span></span>
+<span id="cb3-8"><a href="capstone-exercise.html#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv</span></span>
+<span id="cb3-9"><a href="capstone-exercise.html#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="capstone-exercise.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Data is already pre-processed as a `ts` object. It contains missing values, so</span></span>
+<span id="cb3-11"><a href="capstone-exercise.html#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># we&#39;ll need to impute those!</span></span>
+<span id="cb3-12"><a href="capstone-exercise.html#cb3-12" aria-hidden="true" tabindex="-1"></a>co2 <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&quot;data/missing.Rds&quot;</span>)</span></code></pre></div>
+</div>
+<div id="visual-checks" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Visual Checks<a href="capstone-exercise.html#visual-checks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Plot your co2 data and see if the data is stationary, non-stationary (time-dependent), and seasonal or non-seasonal. Use the Augmented Dickey-Fuller test to determine stationarity.</li>
+</ol>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="capstone-exercise.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.ts</span>(co2)</span></code></pre></div>
+<p><img src="_main_files/figure-html/visual-1.png" width="672" style="display: block; margin: auto;" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="capstone-exercise.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(co2)</span></code></pre></div>
+<pre><code>## Error in adf.test(co2): NAs in x</code></pre>
+<p>Looks like we have some missing values! Let’s try and impute those to fill in the gaps:</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Impute missing values with the <code>na.approx()</code> function from <code>zoo</code>:</li>
+</ol>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="capstone-exercise.html#cb7-1" aria-hidden="true" tabindex="-1"></a>co2 <span class="ot">&lt;-</span> co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="capstone-exercise.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  zoo<span class="sc">::</span><span class="fu">na.approx</span>()</span>
+<span id="cb7-3"><a href="capstone-exercise.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="capstone-exercise.html#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(co2)</span></code></pre></div>
+<pre><code>## Warning in adf.test(co2): p-value greater than printed p-value</code></pre>
+<pre><code>## 
+##  Augmented Dickey-Fuller Test
+## 
+## data:  co2
+## Dickey-Fuller = -0.12404, Lag order = 9, p-value = 0.99
+## alternative hypothesis: stationary</code></pre>
+<p>Based on the statistic and p-value, the data is non-stationary.</p>
+</div>
+<div id="decomposing-the-time-series" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Decomposing the Time Series<a href="capstone-exercise.html#decomposing-the-time-series" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We’re interested in the seasonal, remainder, and specifically, trend components. We want to know what the data looks like when adjusted for seasonality. To do this, we need to decompose our time series into its ETS components. Then, we can remove the seasonal component.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Decompose the time series and plot the resulting <code>decomposed.ts</code> object:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="capstone-exercise.html#cb10-1" aria-hidden="true" tabindex="-1"></a>co2_decomp <span class="ot">&lt;-</span> co2 <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="capstone-exercise.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">decompose</span>()</span>
+<span id="cb10-3"><a href="capstone-exercise.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="capstone-exercise.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(co2_decomp)</span></code></pre></div>
+<p><img src="_main_files/figure-html/decomp-1.png" width="672" style="display: block; margin: auto;" /></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Then, adjust for seasonality, and plot the results. Label the y-axis as “CO2 Concentration”, and title the plot “Seasonally-adjusted CO2 Concentration”:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="capstone-exercise.html#cb11-1" aria-hidden="true" tabindex="-1"></a>co2_decomp <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="capstone-exercise.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">seasadj</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="capstone-exercise.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-4"><a href="capstone-exercise.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># If we want to include a rolling window, it&#39;s really easy to do with</span></span>
+<span id="cb11-5"><a href="capstone-exercise.html#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># zoo::rollapplyr()</span></span>
+<span id="cb11-6"><a href="capstone-exercise.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-7"><a href="capstone-exercise.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rollapplyr(FUN = mean, width = 12) %&gt;%</span></span>
+<span id="cb11-8"><a href="capstone-exercise.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">ylab =</span> <span class="st">&quot;CO2 Concentration&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Seasonally-adjusted CO2 Concentration&quot;</span>)</span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Voila! We now have the overall trend, plus remainder component, of CO2 concentrations. By removing the seasonality of data, we can better assess the year-to-year differences in our data, and can reduce the effect of intra- and inter-year cycles present in the data.</p>
+</div>
+<div id="example-code" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Example Code<a href="capstone-exercise.html#example-code" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This is the code given in the exercise itself</p>
+<p>Step 1:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="capstone-exercise.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(___)</span>
+<span id="cb12-2"><a href="capstone-exercise.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="capstone-exercise.html#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">___.test</span>(co2)</span></code></pre></div>
+<p>Step 2:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="capstone-exercise.html#cb13-1" aria-hidden="true" tabindex="-1"></a>co2_impute <span class="ot">&lt;-</span> co2 <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="capstone-exercise.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">__.___</span>()</span>
+<span id="cb13-3"><a href="capstone-exercise.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="capstone-exercise.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(co2_impute)</span></code></pre></div>
+<p>Step 3:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="capstone-exercise.html#cb14-1" aria-hidden="true" tabindex="-1"></a>co2_decomp <span class="ot">&lt;-</span> co2_impute <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="capstone-exercise.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">___</span>()</span>
+<span id="cb14-3"><a href="capstone-exercise.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="capstone-exercise.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(___)</span></code></pre></div>
+<p>Step 4:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="capstone-exercise.html#cb15-1" aria-hidden="true" tabindex="-1"></a>co2_decomp <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="capstone-exercise.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">____</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="capstone-exercise.html#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">ylab =</span> <span class="st">&quot;___&quot;</span>, <span class="at">main =</span> <span class="st">&quot;___&quot;</span>)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-forecasting-in-r.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/brownhr/timeseries/edit/gh-pages/05-final-exercise.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub", "_main.docx"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
