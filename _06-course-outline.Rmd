@@ -8,6 +8,8 @@ knit: (function(input, ...) {
       output_format = 'word_document'
     )
   })
+header-includes:
+  \usepackage{setspace}\onehalfspacing
 ---
 
 *This course will introduce learners to working with time series data in R. Learners will explore how to store and format data in date and time objects as well as how to manipulate time series datasets through subsetting, indexing, and extraction. Examples of time series data across a variety of fields in business and science should be discussed. The course will cover summarization, frequency, missing data, resampling, and comparison techniques as well as window functions for both rolling and expanding windows.*
@@ -19,7 +21,7 @@ Packages Used:
 
 <!-- https://github.com/brownhr/timeseries/issues/2 -->
 
-**Course Outline:**
+***
 
 # Chapter 1: Introduction to Time Series Data
 
@@ -37,7 +39,9 @@ Packages Used:
 
 - Lesson 1.4: *Converting between data classes*
   - LO: Learners will be able to convert between classes in R, such as converting a `character` vector to a `Date` vector
-    - `as.Date()`, `as.numeric()`, `as.character()`
+    - `as.Date()`
+    - `as.numeric()`
+    - `as.character()`
     
 <!-- Should we use the more complete `zoo` package, which has better compatibility when coercing df, etc.? Supports irregular time series and already exists within the course.   -->
 
@@ -48,7 +52,9 @@ Packages Used:
 - Lesson 2.1: *How does R store Time Series Data?*
   - LO: Learners will be introduced to `ts` objects in R, and how they differ from objects like vectors or data frames
   - LO: Retrieve the temporal attributes (start, end, and frequency) of a time series object.
-    - `start()`, `end()`, and `frequency()`
+    - `start()`
+    - `end()`
+    - `frequency()`
   
 - Lesson 2.2: *Create a Time Series object*
   - LO: Convert a vector of observations into a `ts` object, specifying start time and frequency
@@ -58,10 +64,12 @@ Packages Used:
   - LO: What is `zoo` and why is it different from base `ts`?
     - Zoo can use irregular time intervals
   - LO: Create and coerce time series objects with the `zoo` package:
-    - `zoo::zoo()` and `zoo::as.zoo()`
+    - `zoo::zoo()`
+    - `zoo::as.zoo()`
 - Lesson 2.4: *Using Zoo to extract time and data vectors*
   - LO: Extract "core data" and time data from a `ts` or `zoo` object:
-    - `time()` and `zoo::coredata()`
+    - `time()`
+    - `zoo::coredata()`
 
 
 ***
@@ -70,13 +78,18 @@ Packages Used:
 
 - Lesson 3.1: *Subsetting a window of observations*
   - LO: Learner will be able to extract a window of observations between a set of time intervals
-    - `window()`, `as.Date()`, `zoo::as.yearmon()`
-  - LO: Use the `[` operator with `as.Date()` to extract a specific date's observation
-    - `[`, `as.Date()`, `zoo::as.yearmon()`
+    - `window()`
+    - `as.Date()`
+    - `zoo::as.yearmon()`
+  - LO: Use the `'['` operator with `as.Date()` to extract a specific date's observation
+    - `'['`
+    - `as.Date()`
+    - `zoo::as.yearmon()`
 
 - Lesson 3.2: *Retrieving observations by index*
-  - LO: Use standard R `[` operator to extract one or more observations by numerical index
-    - `[`
+  - LO: Use standard R `'['` operator to extract one or more observations by numerical index
+    - `'['`
+    - e.g.: `data[1:20]` retrieves observations 1 through 20
 
 - Lesson 3.3: *Resampling observations*
   - LO: Learner will be able to resample observations to any interval of time (yearly, monthly, quarterly, etc.)
@@ -96,12 +109,17 @@ Packages Used:
 
 - Lesson 4.2: *Calculating a Rolling Window*
   - LO: Learner will be able to perform a rolling window operation on a time series, creating a moving average (or moving sum) of any length
-    - `zoo::rollapply()` and `zoo::rollapplyr()` (convenience wrapper for `zoo::rollapply(align = "right")`)
+    - `zoo::rollapply()`
+    - `zoo::rollapplyr()` (convenience wrapper for `zoo::rollapply(align = "right")`)
     - e.g.: `zoo::rollapplyr(daily_data, FUN = mean, width = 7)` to create a 7-day rolling average from `daily_data`
 
 - Lesson 4.3: *Calculating an Expanding Window*
   - LO: Learner will be able to create an expanding window: a rolling window where the "start" is fixed and the "end" moves
-    - `cumsum()` and `seq_along()`
+    - `cumsum()`
+    - `seq_along()`
+    - e.g.: `cumsum(x) / seq_along(x)` calculates a cumulative mean 
+    - *this function exists in `dplyr::cummean()`, but I didn't want an entire package dependency for something so simple*
 - Lesson 4.4: *Plotting windows alongside Data*
   - LO: Learner will be able to plot the rolling/expanding window alongside the original data, in order to visually assess how these operations affect the data
-    - `plot()`, `lines()`
+    - `plot()`
+    - `lines()`
