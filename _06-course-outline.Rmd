@@ -36,12 +36,14 @@ Packages Used:
   - LO: Learners will be able to convert between classes in R, such as converting a `character` vector to a `Date` vector
     - `as.Date()`, `as.numeric()`, `as.character()`
     
+> Should we use the more complete `zoo` package, which has better compatibility when coercing df, etc.? Supports irregular time series and already exists within the course.  
+  
     
 # Chapter 2: Time Series objects in R
 
 - Lesson 2.1: *How does R store Time Series Data?*
   - LO: Learners will be introduced to `ts` objects in R, and how they differ from objects like vectors or data frames
-  - LO: Retrieve the `tsp` attributes (start, end, and frequeny) of a time series object with:
+  - LO: Retrieve the `tsp` attributes (start, end, and frequency) of a time series object with:
     - `tsp()`
 - Lesson 2.2: *Create a Time Series object*
   - LO: Convert a vector of observations into a `ts` object, specifying start time and frequency
