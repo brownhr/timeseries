@@ -47,15 +47,24 @@ Packages Used:
 
 - Lesson 2.1: *How does R store Time Series Data?*
   - LO: Learners will be introduced to `ts` objects in R, and how they differ from objects like vectors or data frames
-  - LO: Retrieve the `tsp` attributes (start, end, and frequency) of a time series object with:
-    - `tsp()`
+  - LO: Retrieve the temporal attributes (start, end, and frequency) of a time series object.
+    - `start()`, `end()`, and `frequency()`
+  
 - Lesson 2.2: *Create a Time Series object*
   - LO: Convert a vector of observations into a `ts` object, specifying start time and frequency
     - `ts()`
-- Lesson 2.3: **
+    
+- Lesson 2.3: *Using the Zoo Package to store time series data*
+  - LO: What is `zoo` and why is it different from base `ts`?
+    - Zoo can use irregular time intervals
+  - LO: Create and coerce time series objects with the `zoo` package:
+    - `zoo::zoo()` and `zoo::as.zoo()`
+- Lesson 2.4: *Using Zoo to extract time and data vectors*
+  - LO: Extract "core data" and time data from a `ts` or `zoo` object:
+    - `time()` and `zoo::coredata()`
 
-- Lesson 2.4: **
 
+***
 
 # Chapter 3: Subsetting, Indexing, and Extraction
 
