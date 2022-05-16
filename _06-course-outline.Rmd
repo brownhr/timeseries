@@ -71,14 +71,17 @@ Packages Used:
 - Lesson 3.1: *Subsetting a window of observations*
   - LO: Learner will be able to extract a window of observations between a set of time intervals
     - `window()`, `as.Date()`, `zoo::as.yearmon()`
-
-- Lesson 3.2: *Extracting an observation from a specific date*
   - LO: Use the `[` operator with `as.Date()` to extract a specific date's observation
     - `[`, `as.Date()`, `zoo::as.yearmon()`
 
-- Lesson 3.3: *Retrieving observations by index*
+- Lesson 3.2: *Retrieving observations by index*
   - LO: Use standard R `[` operator to extract one or more observations by numerical index
     - `[`
+
+- Lesson 3.3: *Resampling observations*
+  - LO: Learner will be able to resample observations to any interval of time (yearly, monthly, quarterly, etc.)
+    - `aggregate()`
+    - e.g.: `aggregate(data, nfrequency = 12, FUN = sum)` finds sums of observations within each month.
 
 - Lesson 3.4: *Imputing Missing Values*
   - LO: Use the `zoo` package to impute missing values with either linear interpolation or cubic spline interpolation
