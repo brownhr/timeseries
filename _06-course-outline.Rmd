@@ -2,9 +2,12 @@
 title: |
   Manipulating Time Series Data in R
 date: "`r Sys.Date()`"
-output:
-  bookdown::word_document2: default
-  word_document: default
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_format = 'word_document'
+    )
+  })
 ---
 
 *This course will introduce learners to working with time series data in R. Learners will explore how to store and format data in date and time objects as well as how to manipulate time series datasets through subsetting, indexing, and extraction. Examples of time series data across a variety of fields in business and science should be discussed. The course will cover summarization, frequency, missing data, resampling, and comparison techniques as well as window functions for both rolling and expanding windows.*
@@ -36,8 +39,9 @@ Packages Used:
   - LO: Learners will be able to convert between classes in R, such as converting a `character` vector to a `Date` vector
     - `as.Date()`, `as.numeric()`, `as.character()`
     
-> Should we use the more complete `zoo` package, which has better compatibility when coercing df, etc.? Supports irregular time series and already exists within the course.  
-  
+<!-- Should we use the more complete `zoo` package, which has better compatibility when coercing df, etc.? Supports irregular time series and already exists within the course.   -->
+
+***
     
 # Chapter 2: Time Series objects in R
 
