@@ -12,6 +12,8 @@ header-includes:
   \usepackage{setspace}\onehalfspacing
 ---
 
+# Course Outline: Manipulating Time Series Data in R
+
 *This course will introduce learners to working with time series data in R. Learners will explore how to store and format data in date and time objects as well as how to manipulate time series datasets through subsetting, indexing, and extraction. Examples of time series data across a variety of fields in business and science should be discussed. The course will cover summarization, frequency, missing data, resampling, and comparison techniques as well as window functions for both rolling and expanding windows.*
 
 Packages Used:
@@ -23,7 +25,7 @@ Packages Used:
 
 ------------------------------------------------------------------------
 
-# Chapter 1: Introduction to Time Series Data
+## Chapter 1: Introduction to Time Series Data
 
 -   Lesson 1.1: *What is Time Series Data*
     -   LO: Learner will be able to understand the foundations of time series data: rather than just analyzing a variable at different points in time, ts analysis studies *how* that variable changes with time.
@@ -44,7 +46,7 @@ Packages Used:
 
 ------------------------------------------------------------------------
 
-# Chapter 2: Time Series objects in R
+## Chapter 2: Time Series objects in R
 
 -   Lesson 2.1: *How does R store Time Series Data?*
     -   LO: Learners will be introduced to `ts` objects in R, and how they differ from objects like vectors or data frames
@@ -68,7 +70,7 @@ Packages Used:
 
 ------------------------------------------------------------------------
 
-# Chapter 3: Subsetting, Extracting, and Resampling
+## Chapter 3: Subsetting, Extracting, and Resampling
 
 -   Lesson 3.1: *Subsetting a window of observations*
     -   LO: Learner will be able to extract a window of observations between a set of time intervals
@@ -93,7 +95,7 @@ Packages Used:
 
 ------------------------------------------------------------------------
 
-# Chapter 4: Rolling and Expanding Windows
+## Chapter 4: Rolling and Expanding Windows
 
 -   Lesson 4.1: *What are windows?*
     -   LO: Learner will understand the utility of rolling and expanding windows: finding moving averages, cumulative sums, etc.
