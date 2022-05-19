@@ -17,3 +17,8 @@ importing-the-data
 visual-checks
 decomposing-the-time-series
 example-code
+course-outline-manipulating-time-series-data-in-r
+chapter-1-introduction-to-time-series-data
+chapter-2-time-series-objects-in-r
+chapter-3-subsetting-extracting-and-resampling
+chapter-4-rolling-and-expanding-windows

@@ -36,7 +36,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdftitle={Course Outline: Time Series Data in R},
+  pdftitle={Manipulating Time Series Data in R},
   pdfauthor={Harrison Brown},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
@@ -115,9 +115,9 @@
 \usepackage[]{natbib}
 \bibliographystyle{plainnat}
 
-\title{Course Outline: Time Series Data in R}
+\title{Manipulating Time Series Data in R}
 \author{Harrison Brown}
-\date{2022-05-16}
+\date{2022-05-19}
 
 \begin{document}
 \maketitle
@@ -418,6 +418,324 @@ Step 4:
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{course-outline-manipulating-time-series-data-in-r}{%
+\chapter{Course Outline: Manipulating Time Series Data in R}\label{course-outline-manipulating-time-series-data-in-r}}
+
+\emph{This course will introduce learners to working with time series data in R. Learners will explore how to store and format data in date and time objects as well as how to manipulate time series datasets through subsetting, indexing, and extraction. Examples of time series data across a variety of fields in business and science should be discussed. The course will cover summarization, frequency, missing data, resampling, and comparison techniques as well as window functions for both rolling and expanding windows.}
+
+Packages Used:
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{base} and \texttt{stats} (default libraries, but I wanted to name them explicitly)
+\item
+  \texttt{zoo}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{chapter-1-introduction-to-time-series-data}{%
+\section{Chapter 1: Introduction to Time Series Data}\label{chapter-1-introduction-to-time-series-data}}
+
+\begin{itemize}
+\tightlist
+\item
+  Lesson 1.1: \emph{What is Time Series Data}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Learner will be able to understand the foundations of time series data: rather than just analyzing a variable at different points in time, ts analysis studies \emph{how} that variable changes with time.
+  \end{itemize}
+\item
+  Lesson 1.2: \emph{Interpreting a Time Series}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Learner will be able to interpret a time series graph, understanding the x- and y-axes, trend, identifying periods, etc. at an introductory level.
+  \end{itemize}
+\item
+  Lesson 1.3: \emph{Temporal data classes in R}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Introduction to different formats for temporal data in R, such as the \texttt{Date}, \texttt{numeric}, and \texttt{character} formats:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      e.g.: 2022-01-30, \texttt{19022}, and ``2022-01-30'' share the same information, but in different formats
+    \end{itemize}
+  \item
+    LO: Learners will be able to check classes of data stored as vectors or as columns in a dataframe or tibble.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{class()}
+    \end{itemize}
+  \end{itemize}
+\item
+  Lesson 1.4: \emph{Converting between data classes}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Learners will be able to convert between classes in R, such as converting a \texttt{character} vector to a \texttt{Date} vector
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{as.Date()}
+    \item
+      \texttt{as.numeric()}
+    \item
+      \texttt{as.character()}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{chapter-2-time-series-objects-in-r}{%
+\section{Chapter 2: Time Series objects in R}\label{chapter-2-time-series-objects-in-r}}
+
+\begin{itemize}
+\tightlist
+\item
+  Lesson 2.1: \emph{How does R store Time Series Data?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Learners will be introduced to \texttt{ts} objects in R, and how they differ from objects like vectors or data frames
+  \item
+    LO: Retrieve the temporal attributes (start, end, and frequency) of a time series object.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{start()}
+    \item
+      \texttt{end()}
+    \item
+      \texttt{frequency()}
+    \end{itemize}
+  \end{itemize}
+\item
+  Lesson 2.2: \emph{Create a Time Series object in Base R}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Convert a vector of observations into a \texttt{ts} object, specifying start time and frequency
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{ts()}
+    \end{itemize}
+  \end{itemize}
+\item
+  Lesson 2.3: \emph{Using the Zoo Package to store time series data}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: What is \texttt{zoo} and why is it different from base \texttt{ts}?
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Zoo can use irregular time intervals
+    \end{itemize}
+  \item
+    LO: Create and coerce time series objects with the \texttt{zoo} package:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{zoo::zoo()}
+    \item
+      \texttt{zoo::as.zoo()}
+    \end{itemize}
+  \end{itemize}
+\item
+  Lesson 2.4: \emph{Using Zoo to extract time and data vectors}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Extract ``core data'' and time data from a \texttt{ts} or \texttt{zoo} object:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{time()}
+    \item
+      \texttt{zoo::coredata()}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{chapter-3-subsetting-extracting-and-resampling}{%
+\section{Chapter 3: Subsetting, Extracting, and Resampling}\label{chapter-3-subsetting-extracting-and-resampling}}
+
+\begin{itemize}
+\tightlist
+\item
+  Lesson 3.1: \emph{Subsetting a window of observations}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Learner will be able to extract a window of observations between a set of time intervals
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{window()}
+    \item
+      \texttt{as.Date()}
+    \item
+      \texttt{zoo::as.yearmon()}
+    \end{itemize}
+  \item
+    LO: Use the \texttt{\textquotesingle{}{[}\textquotesingle{}} operator with \texttt{as.Date()} to extract a specific date's observation
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{\textquotesingle{}{[}\textquotesingle{}}
+    \item
+      \texttt{as.Date()}
+    \item
+      \texttt{zoo::as.yearmon()}
+    \end{itemize}
+  \end{itemize}
+\item
+  Lesson 3.2: \emph{Retrieving observations by index}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Use standard R \texttt{\textquotesingle{}{[}\textquotesingle{}} operator to extract one or more observations by numerical index
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{\textquotesingle{}{[}\textquotesingle{}}
+    \item
+      e.g.: \texttt{data{[}1:20{]}} retrieves observations 1 through 20
+    \end{itemize}
+  \end{itemize}
+\item
+  Lesson 3.3: \emph{Resampling observations}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Learner will be able to resample observations to any interval of time (yearly, monthly, quarterly, etc.)
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{aggregate()}
+    \item
+      e.g.: \texttt{aggregate(data,\ nfrequency\ =\ 12,\ FUN\ =\ sum)} finds sums of observations within each month.
+    \end{itemize}
+  \end{itemize}
+\item
+  Lesson 3.4: \emph{Imputing Missing Values}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Use the \texttt{zoo} package to impute missing values with either linear interpolation or cubic spline interpolation
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{zoo::na.approx()} and \texttt{zoo::na.spline()}, respectively
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{chapter-4-rolling-and-expanding-windows}{%
+\section{Chapter 4: Rolling and Expanding Windows}\label{chapter-4-rolling-and-expanding-windows}}
+
+\begin{itemize}
+\tightlist
+\item
+  Lesson 4.1: \emph{What are windows?}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Learner will understand the utility of rolling and expanding windows: finding moving averages, cumulative sums, etc.
+  \end{itemize}
+\item
+  Lesson 4.2: \emph{Calculating a Rolling Window}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Learner will be able to perform a rolling window operation on a time series, creating a moving average (or moving sum) of any length
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{zoo::rollapply()}
+    \item
+      \texttt{zoo::rollapplyr()} (convenience wrapper for \texttt{zoo::rollapply(align\ =\ "right")})
+    \item
+      e.g.: \texttt{zoo::rollapplyr(daily\_data,\ FUN\ =\ mean,\ width\ =\ 7)} to create a 7-day rolling average from \texttt{daily\_data}
+    \end{itemize}
+  \end{itemize}
+\item
+  Lesson 4.3: \emph{Calculating an Expanding Window}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Learner will be able to create an expanding window: a rolling window where the ``start'' is fixed and the ``end'' moves
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{cumsum()}
+    \item
+      \texttt{seq\_along()}
+    \item
+      e.g.: \texttt{cumsum(x)\ /\ seq\_along(x)} calculates a cumulative mean
+    \item
+      \emph{this function exists in \texttt{dplyr::cummean()}, but I didn't want an entire package dependency for something so simple}
+    \end{itemize}
+  \end{itemize}
+\item
+  Lesson 4.4: \emph{Plotting windows alongside Data}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    LO: Learner will be able to plot the rolling/expanding window alongside the original data, in order to visually assess how these operations affect the data
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{plot()}
+    \item
+      \texttt{lines()}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
 
   \bibliography{book.bib,packages.bib}
 
