@@ -221,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Plot your co2 data and see if the data is stationary, non-stationary (time-dependent), and seasonal or non-seasonal. Use the Augmented Dickey-Fuller test to determine stationarity.</li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="capstone-exercise.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot.ts</span>(co2)</span></code></pre></div>
-<p><img src="_main_files/figure-html/visual-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="timeseries_files/figure-html/visual-1.png" width="672" style="display: block; margin: auto;" /></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="capstone-exercise.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">adf.test</span>(co2)</span></code></pre></div>
 <pre><code>## Error in adf.test(co2): NAs in x</code></pre>
 <p>Looks like we have some missing values! Let’s try and impute those to fill in the gaps:</p>
@@ -251,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-2"><a href="capstone-exercise.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">decompose</span>()</span>
 <span id="cb10-3"><a href="capstone-exercise.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-4"><a href="capstone-exercise.html#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(co2_decomp)</span></code></pre></div>
-<p><img src="_main_files/figure-html/decomp-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="timeseries_files/figure-html/decomp-1.png" width="672" style="display: block; margin: auto;" /></p>
 <ol start="4" style="list-style-type: decimal">
 <li>Then, adjust for seasonality, and plot the results. Label the y-axis as “CO2 Concentration”, and title the plot “Seasonally-adjusted CO2 Concentration”:</li>
 </ol>
@@ -263,7 +263,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-6"><a href="capstone-exercise.html#cb11-6" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb11-7"><a href="capstone-exercise.html#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#rollapplyr(FUN = mean, width = 12) %&gt;%</span></span>
 <span id="cb11-8"><a href="capstone-exercise.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">ylab =</span> <span class="st">&quot;CO2 Concentration&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Seasonally-adjusted CO2 Concentration&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><img src="timeseries_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>Voila! We now have the overall trend, plus remainder component, of CO2 concentrations. By removing the seasonality of data, we can better assess the year-to-year differences in our data, and can reduce the effect of intra- and inter-year cycles present in the data.</p>
 </div>
 <div id="example-code" class="section level2 hasAnchor" number="5.4">
@@ -338,7 +338,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["_main.pdf", "_main.epub", "_main.docx"],
+"download": ["timeseries.pdf", "timeseries.epub", "timeseries.docx"],
 "search": {
 "engine": "fuse",
 "options": null
