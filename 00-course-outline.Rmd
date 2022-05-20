@@ -28,7 +28,7 @@ Packages Used:
 
 <!-- https://github.com/brownhr/timeseries/issues/2 -->
 
-------------------------------------------------------------------------
+
 
 ## Chapter 1: Introduction to Time Series Data {-}
 
@@ -55,7 +55,6 @@ Packages Used:
     -   `as.character()`
 
 
-------------------------------------------------------------------------
 
 ## Chapter 2: Time Series objects in R {-}
 
@@ -90,7 +89,7 @@ Packages Used:
     -   `time()`
     -   `zoo::coredata()`
 
-------------------------------------------------------------------------
+
 
 ## Chapter 3: Subsetting, Extracting, and Resampling {-}
 
@@ -125,32 +124,33 @@ Packages Used:
     
 ###   Lesson 3.4: *Imputing Missing Values*
 
--   **Learning Objective:** Use the `zoo` package to impute missing values with either linear interpolation or cubic spline interpolation
+-   **Learning Objective:** Learners will use the `zoo` package to impute missing values with either linear interpolation or cubic spline interpolation:
     -   `zoo::na.approx()` and `zoo::na.spline()`, respectively
 
-------------------------------------------------------------------------
+
 
 ## Chapter 4: Rolling and Expanding Windows {-}
 
 ###   Lesson 4.1: *What are windows?*
 
--   **Learning Objective:** Learner will understand the utility of rolling and expanding windows: finding moving averages, cumulative sums, etc.
+-   **Learning Objective:** Learners will understand the utility of rolling and expanding windows: finding moving averages, cumulative sums, etc.
 
 ###   Lesson 4.2: *Calculating a Rolling Window*
 
--   **Learning Objective:** Learner will be able to perform a rolling window operation on a time series, creating a moving average (or moving sum) of any length
+-   **Learning Objective:** Learners will be able to perform a rolling window operation on a time series, creating a moving average (or moving sum) of an arbitrary length:
     -   `zoo::rollapply()`
     -   `zoo::rollapplyr()` (convenience wrapper for `zoo::rollapply(align = "right")`)
     -   e.g.: `zoo::rollapplyr(daily_data, FUN = mean, width = 7)` to create a 7-day rolling average from `daily_data`
   
 ###   Lesson 4.3: *Calculating an Expanding Window*
 
--   **Learning Objective:** Learner will be able to create an expanding window: a rolling window where the "start" is fixed and the "end" moves
+-   **Learning Objective:** Learners will be able to create an expanding window -- a rolling window where the "start" is fixed and the "end" moves:
     -   `cumsum()`
     -   `seq_along()`
+    -   `cumsum(data) / seq_along(data)` gives a rolling mean, which exists in `dplyr::cummean()` but not base R.
   
 ###   Lesson 4.4: *Plotting windows alongside Data*
 
--   **Learning Objective:** Learner will be able to plot the rolling/expanding window alongside the original data, in order to visually assess how these operations affect the data
+-   **Learning Objective:** Learners will be able to plot the rolling/expanding window alongside the original data, in order to visually assess how these operations affect the data:
     -   `plot()`
     -   `lines()`
