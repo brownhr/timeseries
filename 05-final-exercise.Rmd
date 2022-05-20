@@ -1,120 +1,101 @@
+---
+title: "Capstone Exercise"
+
+
+knit: (function(input, ...){
+  rmarkdown::render(input, output_format = "bookdown::word_document2", output_options = list(number_sections = FALSE))
+  })
+---
+
+
 # Capstone Exercise
 
-The final exercise for this course involves performing a time series analysis on real-world data: Carbon Dioxide concentration at the Mauna Loa Observatory, from early 1959 to Present. You'll go through the process of imputing missing values, testing for stationarity, decomposing the time series, and adjusting for seasonality. The goal for this exercise is a plot showing the seasonal-adjusted time series, which shows the "overall trend" in the data over the last few decades.
+The final exercise for this course involves performing a time series analysis on real-world data: Carbon Dioxide concentration at the Mauna Loa Observatory, from early 1959 to Present. You'll go through the process of importing the data, converting to a time series object (with `zoo`), imputing missing values, and plotting the resulting data. Additionally, you will create an aggregate of the data, as well as a rolling window average of the data. 
 
 ## Importing the Data
 
 ```{r, echo = TRUE, message=F, warning=F}
 # The following libraries are included for you
 
-library(tidyverse)
 library(zoo)
-library(forecast)
-library(tseries)
 # Sample data from the Mauna Loa Observatory
 # https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv
 
-# Data is already pre-processed as a `ts` object. It contains missing values, so
+# Data is already pre-processed as a `zoo` object. It contains missing values, so
 # we'll need to impute those!
-co2 <- readRDS("data/missing.Rds")
 
+# This will be hidden from the users, of course.
+missing_co2 <- readRDS("data/missing.Rds")
 ```
 
 
-## Visual Checks
 
-1. Plot your co2 data and see if the data is stationary, non-stationary (time-dependent), and seasonal or non-seasonal. Use the Augmented Dickey-Fuller test to determine stationarity.
+## Visualizing the Data
 
-```{r visual}
-plot.ts(co2)
-```
-
-```{r, error=T}
-adf.test(co2)
-```
-
-Looks like we have some missing values! Let's try and impute those to fill in the gaps:
-
-
-2. Impute missing values with the `na.approx()` function from `zoo`:
-
-```{r}
-co2 <- co2 %>% 
-  zoo::na.approx()
-
-adf.test(co2)
-```
-
-Based on the statistic and p-value, the data is non-stationary.
-
-
-## Decomposing the Time Series
-
-We're interested in the seasonal, remainder, and specifically, trend components. We want to know what the data looks like when adjusted for seasonality. To do this, we need to decompose our time series into its ETS components. Then, we can remove the seasonal component.
-
-3. Decompose the time series and plot the resulting `decomposed.ts` object:
-
-```{r decomp}
-co2_decomp <- co2 %>%
-  decompose()
-
-plot(co2_decomp)
-```
-
-
-4. Then, adjust for seasonality, and plot the results. Label the y-axis as "CO2 Concentration", and title the plot "Seasonally-adjusted CO2 Concentration":
-
-```{r}
-co2_decomp %>% 
-  seasadj() %>% 
+Perform basic data exploration by:
+  1. Printing the first 20 observations with `head()`, and,
+  2. Creating a plot of the data with `plot()`
   
-  # If we want to include a rolling window, it's really easy to do with
-  # zoo::rollapplyr()
-  
-  #rollapplyr(FUN = mean, width = 12) %>%
-  plot(ylab = "CO2 Concentration", main = "Seasonally-adjusted CO2 Concentration")
+```{r q1-1}
+head(missing_co2, n = 20)
 ```
 
-Voila! We now have the overall trend, plus remainder component, of CO2 concentrations. By removing the seasonality of data, we can better assess the year-to-year differences in our data, and can reduce the effect of intra- and inter-year cycles present in the data.
-
-## Example Code
-
-This is the code given in the exercise itself
-
-Step 1:
-
-```{r, eval = FALSE}
-plot(___)
-
-___.test(co2)
+```{r q2-2}
+plot(missing_co2)
 ```
 
+Notice that there are "holes" in the data? this suggests that we've got NA values, which is apparent when we view the first few observations with `head()`.
 
-Step 2:  
+## Imputing the Missing Values
 
-```{r, eval = FALSE}
-co2_impute <- co2 %>% 
-  __.___()
+Impute the missing values with a *cubic spline* interpolation, then plot the results
 
-adf.test(co2_impute)
-
-
+```{r q2}
+filled_co2 <- na.spline(missing_co2)
 ```
 
-Step 3:
-
-```{r, eval = FALSE}
-co2_decomp <- co2_impute %>% 
-  ___()
-
-plot(___)
+```{r q2-2}
+plot(filled_co2)
 ```
 
-Step 4:
+## Yearly Aggregate
 
-```{r, eval = FALSE}
-co2_decomp %>% 
-  ____() %>% 
-  plot(ylab = "___", main = "___")
+Using `aggregate()`, create a yearly mean of the data, then plot the data
+
+*Hint: use `lubridate::year()`
+
+```{r q3-1}
+yearly_co2 <- aggregate(filled_co2,
+  by = lubridate::year,
+  FUN = mean
+)
+
+
+plot(yearly_co2)
+```
+
+## Rolling Window
+
+Calculate a 12-month rolling window average of the data, then overlay the results (in blue) on top of the original data. Label the x-axis as "Time" and the y-axis as "CO2 Concentration", and give your graph the title "Monthly CO2 Concentration at Mauna Loa Observatory"
+
+```{r q4}
+roll <- rollapplyr(filled_co2,
+  FUN = mean,
+  width = 12
+)
+
+plot(filled_co2,
+     xlab = "Time",
+     ylab = "CO2 Concentration",
+     main = "CO2 Concentration at Mauna Loa Observatory")
+lines(roll, col = "blue")
+```
+
+## Given Code
+
+The following code is given to the learners at the beginning of the exercise:
+
+```{r eval = FALSE}
+
 ```
 
