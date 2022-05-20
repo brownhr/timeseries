@@ -27,14 +27,6 @@ theme_set(theme_light())
 
 Welcome to the course outline for *Time Series Data in R*! This course offers methods and workflows for analyzing and interpreting time series data, an overview of when, why, and how to use time series data, and various utilities and packages in R that are beneficial to analysts.
 
-By the end of this course, students will have the skills to:
-
-
-- Interpret and understand time series plots
-- Import ts data to create and manipulate `ts` objects from the `stats` package
-- Understand why time series data is fundamentally different than non-ts data. 
-- Analyze time series data with plots
-- ?Intro to Wavelet analysis?
 
 
 ```{r include=FALSE}
