@@ -3,10 +3,9 @@ title: "Capstone Exercise"
 
 
 knit: (function(input, ...){
-  rmarkdown::render(input, output_format = "bookdown::word_document2", output_options = list(number_sections = FALSE))
+  rmarkdown::render(input, output_format = "bookdown::word_document2", output_options = list(number_sections = FALSE), output_file = "Capstone.docx"); doconv::docx2pdf("Capstone.docx")
   })
 ---
-
 
 # Capstone Exercise
 
@@ -21,18 +20,19 @@ library(zoo)
 # Sample data from the Mauna Loa Observatory
 # https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv
 
-# Data is already pre-processed as a `zoo` object. It contains missing values, so
-# we'll need to impute those!
+# Data is already pre-processed as a `zoo` object. It contains missing values,
+# so we'll need to impute those!
 
 # This will be hidden from the users, of course.
 missing_co2 <- readRDS("data/missing.Rds")
 ```
 
-
+\newpage
 
 ## Visualizing the Data
 
 Perform basic data exploration by:
+
   1. Printing the first 20 observations with `head()`, and,
   2. Creating a plot of the data with `plot()`
   
@@ -40,11 +40,13 @@ Perform basic data exploration by:
 head(missing_co2, n = 20)
 ```
 
-```{r q2-2}
+```{r q1-2}
 plot(missing_co2)
 ```
 
 Notice that there are "holes" in the data? this suggests that we've got NA values, which is apparent when we view the first few observations with `head()`.
+
+\newpage
 
 ## Imputing the Missing Values
 
@@ -57,6 +59,8 @@ filled_co2 <- na.spline(missing_co2)
 ```{r q2-2}
 plot(filled_co2)
 ```
+
+\newpage
 
 ## Yearly Aggregate
 
@@ -73,6 +77,8 @@ yearly_co2 <- aggregate(filled_co2,
 
 plot(yearly_co2)
 ```
+
+\newpage
 
 ## Rolling Window
 
@@ -92,6 +98,8 @@ plot(filled_co2,
 lines(roll, col = "blue")
 
 ```
+
+\newpage
 
 ## Given Code
 
