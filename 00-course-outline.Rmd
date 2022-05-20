@@ -24,6 +24,7 @@ Packages Used:
 
 -   `base` and `stats` (default libraries, but I wanted to name them explicitly)
 -   `zoo`
+-   `lubridate`   (so far, only for the `lubridate::year()` function (Lesson 3.3))
 
 <!-- https://github.com/brownhr/timeseries/issues/2 -->
 
@@ -37,18 +38,18 @@ Packages Used:
 
 ###   Lesson 1.2: *Interpreting a Time Series*
 
--   **Learning Objective:** Learner will be able to interpret a time series graph, understanding the x- and y-axes and identify trends and periods at an introductory level.
+-   **Learning Objective:** Learner will be able to interpret a time series graph, understanding the x- and y-axes and identifying trends and periods at an introductory level.
 
 ###   Lesson 1.3: *Temporal data classes in R*
 
--   **Learning Objective:** Introduction to different formats for temporal data in R, such as the `Date`, `numeric`, and `character` formats:
+-   **Learning Objective:** Learner will be introduced to different formats for temporal data in R, such as the `Date`, `numeric`, and `character` classes:
   -   e.g.: 2022-01-30, `19022`, and "2022-01-30" share the same information, but in different formats
--   **Learning Objective:** Learners will be able to check classes of data stored as vectors or as columns in a dataframe or tibble.
+-   **Learning Objective:** Learners will be able to check classes of data stored as vectors or as columns in a dataframe or tibble; as some formats appear identical, it's important to understand the class of the data you're working with:
     -   `class()`
         
 ###   Lesson 1.4: *Converting between data classes*
 
--   **Learning Objective:** Learners will be able to convert between classes in R, such as converting a `character` vector to a `Date` vector
+-   **Learning Objective:** Learners will be able to convert between classes in R, such as converting a `character` vector/column to a `Date` vector/column:
     -   `as.Date()`
     -   `as.numeric()`
     -   `as.character()`
@@ -60,28 +61,32 @@ Packages Used:
 
 ###   Lesson 2.1: *How does R store Time Series Data?*
 
--   **Learning Objective:** Learners will be introduced to `ts` objects in R, and how they differ from objects like vectors or data frames
--   **Learning Objective:** Retrieve the temporal attributes (start, end, and frequency) of a time series object.
+-   **Learning Objective:** Learners will be introduced to `ts` objects in R, and how they differ from objects like vectors or data frames in how they store data, and in how that data is displayed by R:
+    - `print()`   (specifically, `print.ts()`)
+    - `plot()`    (specifically, `plot.ts()`)
+    
+-   **Learning Objective:** Learners will be able to retrieve the temporal attributes (start and end points, as well as frequency) of a time series object:
     -   `start()`
     -   `end()`
     -   `frequency()`
     
 ###   Lesson 2.2: *Create a Time Series object in Base R*
 
--   **Learning Objective:** Convert a vector of observations into a `ts` object, specifying start time and frequency
+-   **Learning Objective:** Learners will convert a vector of observations with a known start time and frequency (e.g., monthly data starting in the year 2004) into a `ts` object:
     -   `ts()`
+    -   `as.ts()`
   
 ###   Lesson 2.3: *Using the Zoo Package to store time series data*
 
--   **Learning Objective:** What is `zoo` and why is it different from base `ts`?
-  -   Zoo can use irregular time intervals
--   **Learning Objective:** Create and coerce time series objects with the `zoo` package:
+-   **Learning Objective:** Learners will be introduced to the `zoo` object from the `zoo` package, and why is it different from base `ts`:
+    -   Zoo can  use irregular time intervals, more robust, etc.
+-   **Learning Objective:** Learners will be able to convert and coerce time series objects with the `zoo` package:
     -   `zoo::zoo()`
     -   `zoo::as.zoo()`
   
 ###   Lesson 2.4: *Using Zoo to extract time and data vectors*
 
--   **Learning Objective:** Extract "core data" and time data from a `ts` or `zoo` object:
+-   **Learning Objective:** Learners can extract "core data" and time data from a `ts` or `zoo` object:
     -   `time()`
     -   `zoo::coredata()`
 
@@ -91,27 +96,32 @@ Packages Used:
 
 ###   Lesson 3.1: *Subsetting a window of observations*
 
--   **Learning Objective:** Learner will be able to extract a window of observations between a set of time intervals
+-   **Learning Objective:** Learners will be able to extract a window of observations between a set of given points in time:
     -   `window()`
     -   `as.Date()`
     -   `zoo::as.yearmon()`
   
--   **Learning Objective:** Use the `'['` operator with `as.Date()` to extract a specific date's observation
+-   **Learning Objective:** Learners will use the `'['` operator with `as.Date()` to extract an observation from a specific time:
     -   `'['`
     -   `as.Date()`
     -   `zoo::as.yearmon()`
   
 ###   Lesson 3.2: *Retrieving observations by index*
 
--   **Learning Objective:** Use standard R `'['` operator to extract one or more observations by numerical index
+-   **Learning Objective:** Learners will use the standard R functions to extract one or more observations by numerical index:
     -   `'['`
-    -   e.g.: `data[1:20]` retrieves observations 1 through 20
+    -   `head()`
+    -   `tail()`
+    -   e.g.: `data[1:20]` retrieves observations 1 through 20, as does `head(data, n = 20)`
   
 ###   Lesson 3.3: *Resampling observations*
 
--   **Learning Objective:** Learner will be able to resample observations to any interval of time (yearly, monthly, quarterly, etc.)
-    -   `aggregate()`
-    -   e.g.: `aggregate(data, nfrequency = 12, FUN = sum)` finds sums of observations within each month.
+-   **Learning Objective:** Learner will be able to re-sample observations to any interval of time (yearly, monthly, quarterly, etc.):
+    -   `aggregate()`   (specifically, `aggregate.zoo()` for `zoo` objects)
+    -   `lubridate::year()`
+    -   `zoo::yearqtr()`
+    -   `zoo::yearmon()`
+    -   e.g.: `aggregate(data, by = lubridate::year, FUN = sum)` finds sums of observations within each year.
     
 ###   Lesson 3.4: *Imputing Missing Values*
 
