@@ -1,9 +1,13 @@
 ---
 title: "Capstone Exercise"
 
-
 knit: (function(input, ...){
-  rmarkdown::render(input, output_format = "bookdown::word_document2", output_options = list(number_sections = FALSE), output_file = "Capstone.docx"); doconv::docx2pdf("Capstone.docx")
+  rmarkdown::render(
+    input,
+    output_format = "bookdown::word_document2",
+    output_options = list(number_sections = FALSE),
+    output_file = "Capstone.docx"
+  ); doconv::docx2pdf("Capstone.docx")
   })
 ---
 
