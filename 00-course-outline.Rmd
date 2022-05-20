@@ -12,7 +12,7 @@ header-includes:
   \usepackage{setspace}\onehalfspacing
 ---
 
-# Course Outline: Manipulating Time Series Data in R
+# Course Outline: Manipulating Time Series Data in R {.unnumbered}
 
 *This course will introduce learners to working with time series data in R. Learners will explore how to store and format data in date and time objects as well as how to manipulate time series datasets through subsetting, indexing, and extraction. Examples of time series data across a variety of fields in business and science should be discussed. The course will cover summarization, frequency, missing data, resampling, and comparison techniques as well as window functions for both rolling and expanding windows.*
 
