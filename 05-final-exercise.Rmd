@@ -88,7 +88,9 @@ plot(filled_co2,
      xlab = "Time",
      ylab = "CO2 Concentration",
      main = "CO2 Concentration at Mauna Loa Observatory")
+
 lines(roll, col = "blue")
+
 ```
 
 ## Given Code
@@ -96,6 +98,43 @@ lines(roll, col = "blue")
 The following code is given to the learners at the beginning of the exercise:
 
 ```{r eval = FALSE}
+
+# Question 1: Explore the Data
+___(missing_co2, ___ = ___)
+
+___(missing_co2)
+
+```
+
+```{r eval = FALSE}
+# Question 2: Impute Missing Values
+
+filled_co2 <- ___(___)
+
+___(filled_co2)
+```
+
+```{r eval = FALSE}
+# Question 3: Find Yearly Mean Aggregate
+yearly_co2 = aggregate(___,
+                       by = ___,
+                       FUN = ___)
+
+___(___)
+```
+
+```{r eval = FALSE}
+# Question 4: Calculate a Rolling Window
+roll <- rollapplyr(filled_co2,
+                   FUN = ___,
+                   width = 12)
+
+plot(___,
+     xlab = ___,
+     ylab = ___,
+     main = "CO2 Concentration at Mauna Loa Observatory")
+
+lines(___, col = ___)
 
 ```
 
