@@ -2,15 +2,13 @@
 title: |
   Manipulating Time Series Data in R
 date: "`r Sys.Date()`"
-output: 
-  bookdown::word_document2:
-    number_sections: false
-knit: (function(input, ...) {
-    rmarkdown::render(
-      input,
-      output_format = 'bookdown::word_document2'
-    )
-    
+knit: (function(input, ...){
+  out <- rmarkdown::render(
+    input,
+    output_format = "bookdown::word_document2",
+    output_options = list(number_sections = FALSE),
+    output_file = "Course_Outline.docx"
+  ); doconv::docx2pdf(out)
   })
 header-includes:
   \usepackage{setspace}\onehalfspacing
@@ -26,8 +24,7 @@ Packages Used:
 -   `zoo`
 -   `lubridate`   (so far, only for the `lubridate::year()` function (Lesson 3.3))
 
-<!-- https://github.com/brownhr/timeseries/issues/2 -->
-
+Functions are written in `code text` below each **Learning Objective**
 
 
 ## Chapter 1: Introduction to Time Series Data {-}
