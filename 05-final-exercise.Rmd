@@ -126,18 +126,14 @@ ___(filled_co2)
 
 ```{r eval = FALSE}
 # Question 3: Find Yearly Mean Aggregate
-yearly_co2 = aggregate(___,
-                       by = ___,
-                       FUN = ___)
+yearly_co2 = aggregate(___, by = ___, FUN = ___)
 
 ___(___)
 ```
 
 ```{r eval = FALSE}
 # Question 4: Calculate a Rolling Window
-roll <- rollapplyr(filled_co2,
-                   FUN = ___,
-                   width = 12)
+roll <- rollapplyr(filled_co2, FUN = ___, width = 12)
 
 plot(___,
      xlab = ___,
