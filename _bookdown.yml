@@ -1,6 +1,6 @@
 delete_merged_file: true
 language:
   ui:
-    chapter_name: "Chapter "
+    chapter_name: !expr function(i) paste0("Chapter ", i, " -")
 output_dir: "docs"
 book_filename: "timeseries"
