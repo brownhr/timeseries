@@ -5498,6 +5498,7 @@ fieldset:disabled .btn {
 .list-group-numbered > li::before {
   content: counters(section, ".") ". ";
   counter-increment: section;
+
 }
 
 .list-group-item-action {
@@ -5521,6 +5522,7 @@ fieldset:disabled .btn {
 .list-group-item {
   position: relative;
   display: block;
+  margin: 10px 10 ;
   padding: 0.5rem 1rem;
   color: #212529;
   text-decoration: none;
