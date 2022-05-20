@@ -1,7 +1,4 @@
 ---
-title: |
-  Manipulating Time Series Data in R
-date: "`r Sys.Date()`"
 knit: (function(input, ...){
   out <- rmarkdown::render(
     input,
