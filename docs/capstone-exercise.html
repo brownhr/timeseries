@@ -281,22 +281,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-4"><a href="capstone-exercise.html#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="capstone-exercise.html#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">___</span>(filled_co2)</span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="capstone-exercise.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 3: Find Yearly Mean Aggregate</span></span>
-<span id="cb13-2"><a href="capstone-exercise.html#cb13-2" aria-hidden="true" tabindex="-1"></a>yearly_co2 <span class="ot">=</span> <span class="fu">aggregate</span>(___,</span>
-<span id="cb13-3"><a href="capstone-exercise.html#cb13-3" aria-hidden="true" tabindex="-1"></a>                       <span class="at">by =</span> ___,</span>
-<span id="cb13-4"><a href="capstone-exercise.html#cb13-4" aria-hidden="true" tabindex="-1"></a>                       <span class="at">FUN =</span> ___)</span>
-<span id="cb13-5"><a href="capstone-exercise.html#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="capstone-exercise.html#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">___</span>(___)</span></code></pre></div>
+<span id="cb13-2"><a href="capstone-exercise.html#cb13-2" aria-hidden="true" tabindex="-1"></a>yearly_co2 <span class="ot">=</span> <span class="fu">aggregate</span>(___, <span class="at">by =</span> ___, <span class="at">FUN =</span> ___)</span>
+<span id="cb13-3"><a href="capstone-exercise.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="capstone-exercise.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">___</span>(___)</span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="capstone-exercise.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 4: Calculate a Rolling Window</span></span>
-<span id="cb14-2"><a href="capstone-exercise.html#cb14-2" aria-hidden="true" tabindex="-1"></a>roll <span class="ot">&lt;-</span> <span class="fu">rollapplyr</span>(filled_co2,</span>
-<span id="cb14-3"><a href="capstone-exercise.html#cb14-3" aria-hidden="true" tabindex="-1"></a>                   <span class="at">FUN =</span> ___,</span>
-<span id="cb14-4"><a href="capstone-exercise.html#cb14-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">width =</span> <span class="dv">12</span>)</span>
-<span id="cb14-5"><a href="capstone-exercise.html#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="capstone-exercise.html#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(___,</span>
-<span id="cb14-7"><a href="capstone-exercise.html#cb14-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> ___,</span>
-<span id="cb14-8"><a href="capstone-exercise.html#cb14-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> ___,</span>
-<span id="cb14-9"><a href="capstone-exercise.html#cb14-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;CO2 Concentration at Mauna Loa Observatory&quot;</span>)</span>
-<span id="cb14-10"><a href="capstone-exercise.html#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="capstone-exercise.html#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(___, <span class="at">col =</span> ___)</span></code></pre></div>
+<span id="cb14-2"><a href="capstone-exercise.html#cb14-2" aria-hidden="true" tabindex="-1"></a>roll <span class="ot">&lt;-</span> <span class="fu">rollapplyr</span>(filled_co2, <span class="at">FUN =</span> ___, <span class="at">width =</span> <span class="dv">12</span>)</span>
+<span id="cb14-3"><a href="capstone-exercise.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="capstone-exercise.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(___,</span>
+<span id="cb14-5"><a href="capstone-exercise.html#cb14-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> ___,</span>
+<span id="cb14-6"><a href="capstone-exercise.html#cb14-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> ___,</span>
+<span id="cb14-7"><a href="capstone-exercise.html#cb14-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">&quot;CO2 Concentration at Mauna Loa Observatory&quot;</span>)</span>
+<span id="cb14-8"><a href="capstone-exercise.html#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="capstone-exercise.html#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(___, <span class="at">col =</span> ___)</span></code></pre></div>
 
 </div>
 </div>
