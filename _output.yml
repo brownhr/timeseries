@@ -1,5 +1,5 @@
-bookdown::gitbook:
-  number_sections: true
+bookdown::bs4_book:
+  # number_sections: true
   css: bootstrap.css
   toc_depth: 2
   config:
