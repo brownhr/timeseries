@@ -1,17 +1,17 @@
 ---
 knit: (function(input, ...){
-  rmarkdown::render(
+  out <- rmarkdown::render(
     input,
     output_format = "bookdown::word_document2",
     output_options = list(number_sections = FALSE),
     output_file = "Capstone.docx"
-  ); doconv::docx2pdf("Capstone.docx")
+  ); doconv::docx2pdf(out)
   })
 ---
 
 # Capstone Exercise
 
-The final exercise for this course involves performing a time series analysis on real-world data: Carbon Dioxide concentration at the Mauna Loa Observatory, from early 1959 to Present. You'll go through the process of importing the data, converting to a time series object (with `zoo`), imputing missing values, and plotting the resulting data. Additionally, you will create an aggregate of the data, as well as a rolling window average of the data. 
+The final exercise for this course involves performing a time series analysis on real-world data: Carbon Dioxide concentration at the Mauna Loa Observatory, from early 1959 to Present. You'll go through the process of importing the data, converting to a time series object (with `zoo`), imputing missing values, and plotting the resulting data. Additionally, you will create an aggregate of the data, as well as a rolling window average of the data.
 
 ## Importing the Data
 
@@ -35,9 +35,9 @@ missing_co2 <- readRDS("data/missing.Rds")
 
 Perform basic data exploration by:
 
-  1. Printing the first 20 observations with `head()`, and,
-  2. Creating a plot of the data with `plot()`
-  
+1.  Printing the first 20 observations with `head()`, and,
+2.  Creating a plot of the data with `plot()`
+
 ```{r q1-1}
 head(missing_co2, n = 20)
 ```
@@ -68,7 +68,7 @@ plot(filled_co2)
 
 Using `aggregate()`, create a yearly mean of the data, then plot the data
 
-*Hint: use `lubridate::year()`
+\*Hint: use `lubridate::year()`
 
 ```{r q3-1}
 yearly_co2 <- aggregate(filled_co2,
@@ -143,4 +143,3 @@ plot(___,
 lines(___, col = ___)
 
 ```
-
