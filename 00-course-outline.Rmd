@@ -131,7 +131,7 @@ Functions are written in `code text` below each **Learning Objective**
 
 ### Lesson 4.3: *zoo's roll functions* {.unnumbered}
 
--   **Learning Objective:** Learners will be introduced to the other `roll*` functions within `zoo`, allowing for more compact and legible code:
+-   **Learning Objective:** Learners will be introduced to the other `roll*` functions within `zoo`, allowing for more compact and legible code when performing rolling window calculations:
 
     -   `zoo::rollmean()`
 
