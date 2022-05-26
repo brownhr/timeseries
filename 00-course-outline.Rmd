@@ -46,7 +46,7 @@ Functions are written in `code text` below each **Learning Objective**
 
 -   **Learning Objective:** Learners will be introduced to formatting Dates in R, such as with the `yyyy-mm-dd`, `dd/mm/yy`, `mm-dd-yyyy` formats, etc.:
     -   `format()` (specifically, `format.Date()`)
-        -   e.g.: `format(x, "%b %d, %Y")` gives "May 12, 1987"
+        -   e.g.: `format(x, "%b %d, %Y")` gives `"May 12, 1987"`
 
 ## Chapter 2: Time Series objects in R {.unnumbered}
 
@@ -87,7 +87,7 @@ Functions are written in `code text` below each **Learning Objective**
     -   `as.Date()`
         -   The `window` function can usually coerce the `start` and `end` arguments correctly, but it's good practice to tell the function exactly the date and format we want to use.
 
-### Lesson 3.2: *Subsetting specific observations*  {.unnumbered}
+### Lesson 3.2: *Subsetting specific observations* {.unnumbered}
 
 -   **Learning Objective:** Learners will use the `'['` operator with `as.Date()` to extract an observation from a specific time or a specific index:
     -   `'['`
@@ -128,9 +128,9 @@ Functions are written in `code text` below each **Learning Objective**
     -   `seq_along()`
         -   `cumsum(data) / seq_along(data)` gives a rolling mean, which exists in `dplyr::cummean()` but not base R.
 
-### Lesson 4.3: *zoo's roll functions*  {.unnumbered}
+### Lesson 4.3: *zoo's roll functions* {.unnumbered}
 
--   **Learning Objective:** Learners will be introduced to the other `roll*` functions within `zoo`, for more convenient applications of rolling functions:
+-   **Learning Objective:** Learners will be introduced to the other `roll*` functions within `zoo`, allowing for more compact and legible code:
 
     -   `zoo::rollmean()`
 
@@ -140,7 +140,7 @@ Functions are written in `code text` below each **Learning Objective**
 
     -   `zoo::rollmax()`
 
-### Lesson 4.3: *Plotting windows alongside Data* {.unnumbered}
+### Lesson 4.4: *Plotting windows alongside Data* {.unnumbered}
 
 -   **Learning Objective:** Learners will be able to plot the rolling/expanding window alongside the original data, in order to visually assess how these operations affect the data:
     -   `plot()`
