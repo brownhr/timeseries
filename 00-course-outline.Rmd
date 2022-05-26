@@ -19,7 +19,7 @@ Packages Used:
 
 -   `base` and `stats` (default libraries, but I wanted to name them explicitly)
 -   `zoo`
--   `lubridate` (so far, only for the `lubridate::year()` function (Lesson 3.3))
+-   `lubridate` (so far, only for the `lubridate::year()` function (Lesson 3.3). I wanted to keep the package dependencies to just `zoo`, but `lubridate::year()` makes the conversion in Lesson 3.3 much easier for the learner).
 
 Functions are written in `code text` below each **Learning Objective**
 
@@ -27,7 +27,7 @@ Functions are written in `code text` below each **Learning Objective**
 
 ### Lesson 1.1: *What is Time Series Data* {.unnumbered}
 
--   **Learning Objective:** Learner will be able to understand the foundations of time series data: rather than just analyzing a variable at different points in time, time series analysis studies *how* that variable changes with time.
+-   **Learning Objective:** Learner will be able to understand the foundations of time series data -- rather than just analyzing a variable at different points in time, time series analysis studies *how* that variable changes with time.
 -   **Learning Objective:** Learners will be introduced to basic exploratory functions to examine and visualize time series objects in R:
     -   `print()` (specifically, `print.ts()`)
     -   `plot()` (specifically, `plot.ts()`)
@@ -110,6 +110,7 @@ Functions are written in `code text` below each **Learning Objective**
 
 -   **Learning Objective:** Learners will use the `zoo` package to impute missing values with either linear interpolation or cubic spline interpolation:
     -   `zoo::na.approx()` and `zoo::na.spline()`, respectively
+    -   `zoo::fill()` can be used to fill all `NA` values with a given value, e.g. 0.
 
 ## Chapter 4: Rolling and Expanding Windows {.unnumbered}
 
