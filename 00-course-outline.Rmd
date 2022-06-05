@@ -21,13 +21,20 @@ Packages Used:
 -   `zoo`
 -   `lubridate` (so far, only for the `lubridate::year()` function (Lesson 3.3). I wanted to keep the package dependencies to just `zoo`, but `lubridate::year()` makes the conversion in Lesson 3.3 much easier for the learner).
 
+Terms Defined:
+
+-   *Temporal Data*: Data that describe a measurement of a variable at a specific point in time, such as the chance of rain on June 20, 2009, or the price of a particular stock market at 2:00 p.m. on January 9, 1987.
+-   *Temporal Attributes*: The characteristics and attributes that define the sampling frequency (*monthly*, *weekly*, etc.) and the start- and end-points of *Temporal Data*.
+-   *Core Data*: Within R, *Core Data* is the "measured" data without any temporal information; i.e., the set of values that do not have any temporal attributes.
+-   *Imputing*: The statistical process of substituting missing values through a certain process, e.g. replacing missing values with 0 or the average of adjacent values.
+
 Functions are written in `code text` below each **Learning Objective**
 
 ## Chapter 1: Introduction to Time Series Data {.unnumbered}
 
 ### Lesson 1.1: *What is Time Series Data* {.unnumbered}
 
--   **Learning Objective:** Learner will be able to understand the foundations of time series data -- rather than just analyzing a variable at different points in time, time series analysis studies *how* that variable changes with time.
+-   **Learning Objective:** Learner will be able to understand the core principal of time series data: time series analysis studies *how* a variable changes with time, rather than just analyzing the variable at different points in time. 
 -   **Learning Objective:** Learners will be introduced to basic exploratory functions to examine and visualize time series objects in R:
     -   `print()` (specifically, `print.ts()`)
     -   `plot()` (specifically, `plot.ts()`)
@@ -44,9 +51,9 @@ Functions are written in `code text` below each **Learning Objective**
 
 ### Lesson 1.3: *Formatting `Date`s in R* {.unnumbered}
 
--   **Learning Objective:** Learners will be introduced to formatting Dates in R, such as with the `yyyy-mm-dd`, `dd/mm/yy`, `mm-dd-yyyy` formats, etc.:
+-   **Learning Objective:** Learners will be introduced to formatting Dates in R by manipulating character and Date vectors, in order to both improve legibility of and standardize the format of temporal data.
     -   `format()` (specifically, `format.Date()`)
-        -   e.g.: `format(x, "%b %d, %Y")` gives `"May 12, 1987"`
+        -   e.g.: `format(as.Date("1987-04-12"), "%b %d, %Y")` gives `"May 12, 1987"`
 
 ## Chapter 2: Time Series objects in R {.unnumbered}
 
@@ -59,9 +66,10 @@ Functions are written in `code text` below each **Learning Objective**
 
 ### Lesson 2.2: *Create a Time Series object in Base R* {.unnumbered}
 
--   **Learning Objective:** Learners will convert a vector of observations with a known start time and frequency (e.g., monthly data starting in the year 2004) into a `ts` object:
+-   **Learning Objective:** Learners will convert a vector of observations with a known start time and frequency (e.g., monthly data starting in the year 2004) into a `ts` object. By adding temporal attributes to the data, such as start time, frequency, and end time, learners will be able to properly manipulate data with the methods outlined in the remainder of the course. 
     -   `ts()`
     -   `as.ts()`
+      - e.g.: assume `data` is a numeric vector of observations; `ts(data, start = zoo::as.yearmon("Jan 2004"), frequency = 12)`
 
 ### Lesson 2.3: *Using the Zoo Package to store time series data* {.unnumbered}
 
