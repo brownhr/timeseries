@@ -1,7 +1,0 @@
-# Introduction to Forecasting in R
-
-
-## Methods for Forecasting
-
-
-### Exponential Smoothing
