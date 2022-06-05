@@ -23,10 +23,10 @@ Packages Used:
 
 Terms Defined:
 
--   *Temporal Data*: Data that describe a measurement of a variable at a specific point in time, such as the chance of rain on June 20, 2009, or the price of a particular stock market at 2:00 p.m. on January 9, 1987.
--   *Temporal Attributes*: The characteristics and attributes that define the sampling frequency (*monthly*, *weekly*, etc.) and the start- and end-points of *Temporal Data*.
--   *Core Data*: Within R, *Core Data* is the "measured" data without any temporal information; i.e., the set of values that do not have any temporal attributes.
--   *Imputing*: The statistical process of substituting missing values through a certain process, e.g. replacing missing values with 0 or the average of adjacent values.
+-   **Temporal Data**: Data that describe a measurement of a variable at a specific point in time, such as the chance of rain on June 20, 2009, or the price of a particular stock market at 2:00 p.m. on January 9, 1987.
+-   **Temporal Attributes**: The characteristics and attributes that define the sampling frequency (*monthly*, *weekly*, etc.) and the start- and end-points of *Temporal Data*.
+-   **Core Data**: Within R, *Core Data* is the "measured" data without any temporal information; i.e., the set of values that do not have any temporal attributes.
+-   **Imputing**: The statistical process of substituting missing values through a certain process, e.g. replacing missing values with 0 or the average of adjacent values.
 
 Functions are written in `code text` below each **Learning Objective**
 
