@@ -117,7 +117,7 @@
 
 \title{Course Outline: Time Series Data in R}
 \author{Harrison Brown}
-\date{2022-05-23}
+\date{2022-06-05}
 
 \begin{document}
 \maketitle
@@ -147,7 +147,21 @@ Packages Used:
 \item
   \texttt{zoo}
 \item
-  \texttt{lubridate} (so far, only for the \texttt{lubridate::year()} function (Lesson 3.3))
+  \texttt{lubridate} (so far, only for the \texttt{lubridate::year()} function (Lesson 3.3). I wanted to keep the package dependencies to just \texttt{zoo}, but \texttt{lubridate::year()} makes the conversion in Lesson 3.3 much easier for the learner).
+\end{itemize}
+
+Terms Defined:
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{Temporal Data}: Data that describe a measurement of a variable at a specific point in time, such as the chance of rain on June 20, 2009, or the price of a particular stock market at 2:00 p.m. on January 9, 1987.
+\item
+  \emph{Temporal Attributes}: The characteristics and attributes that define the sampling frequency (\emph{monthly}, \emph{weekly}, etc.) and the start- and end-points of \emph{Temporal Data}.
+\item
+  \emph{Core Data}: Within R, \emph{Core Data} is the ``measured'' data without any temporal information; i.e., the set of values that do not have any temporal attributes.
+\item
+  \emph{Imputing}: The statistical process of substituting missing values through a certain process, e.g.~replacing missing values with 0 or the average of adjacent values.
 \end{itemize}
 
 Functions are written in \texttt{code\ text} below each \textbf{Learning Objective}
@@ -163,22 +177,22 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Learning Objective:} Learner will be able to understand the foundations of time series data: rather than just analyzing a variable at different points in time, time series analysis studies \emph{how} that variable changes with time.
-\end{itemize}
-
-\hypertarget{lesson-1.2-interpreting-a-time-series}{%
-\subsection*{\texorpdfstring{Lesson 1.2: \emph{Interpreting a Time Series}}{Lesson 1.2: Interpreting a Time Series}}\label{lesson-1.2-interpreting-a-time-series}}
-\addcontentsline{toc}{subsection}{Lesson 1.2: \emph{Interpreting a Time Series}}
-
-\begin{itemize}
-\tightlist
+  \textbf{Learning Objective:} Learner will be able to understand the core principal of time series data: time series analysis studies \emph{how} a variable changes with time, rather than just analyzing the variable at different points in time.
 \item
-  \textbf{Learning Objective:} Learner will be able to interpret a time series graph, understanding the x- and y-axes and identifying trends and periods at an introductory level.
+  \textbf{Learning Objective:} Learners will be introduced to basic exploratory functions to examine and visualize time series objects in R:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{print()} (specifically, \texttt{print.ts()})
+  \item
+    \texttt{plot()} (specifically, \texttt{plot.ts()})
+  \end{itemize}
 \end{itemize}
 
-\hypertarget{lesson-1.3-temporal-data-classes-in-r}{%
-\subsection*{\texorpdfstring{Lesson 1.3: \emph{Temporal data classes in R}}{Lesson 1.3: Temporal data classes in R}}\label{lesson-1.3-temporal-data-classes-in-r}}
-\addcontentsline{toc}{subsection}{Lesson 1.3: \emph{Temporal data classes in R}}
+\hypertarget{lesson-1.2-temporal-data-classes-in-r}{%
+\subsection*{\texorpdfstring{Lesson 1.2: \emph{Temporal data classes in R}}{Lesson 1.2: Temporal data classes in R}}\label{lesson-1.2-temporal-data-classes-in-r}}
+\addcontentsline{toc}{subsection}{Lesson 1.2: \emph{Temporal data classes in R}}
 
 \begin{itemize}
 \tightlist
@@ -187,26 +201,12 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
 \item
   e.g.: 2022-01-30, \texttt{19022}, and ``2022-01-30'' share the same information, but in different formats
 \item
-  \textbf{Learning Objective:} Learners will be able to check classes of data stored as vectors or as columns in a dataframe or tibble; as some formats appear identical, it's important to understand the class of the data you're working with:
+  \textbf{Learning Objective:} Learners will be able to coerce objects of different classes to the desired class, and check the classes of objects:
 
   \begin{itemize}
   \tightlist
   \item
     \texttt{class()}
-  \end{itemize}
-\end{itemize}
-
-\hypertarget{lesson-1.4-converting-between-data-classes}{%
-\subsection*{\texorpdfstring{Lesson 1.4: \emph{Converting between data classes}}{Lesson 1.4: Converting between data classes}}\label{lesson-1.4-converting-between-data-classes}}
-\addcontentsline{toc}{subsection}{Lesson 1.4: \emph{Converting between data classes}}
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Learning Objective:} Learners will be able to convert between classes in R, such as converting a \texttt{character} vector/column to a \texttt{Date} vector/column:
-
-  \begin{itemize}
-  \tightlist
   \item
     \texttt{as.Date()}
   \item
@@ -216,26 +216,37 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
   \end{itemize}
 \end{itemize}
 
-\hypertarget{chapter-2-time-series-objects-in-r}{%
-\section*{Chapter 2: Time Series objects in R}\label{chapter-2-time-series-objects-in-r}}
-\addcontentsline{toc}{section}{Chapter 2: Time Series objects in R}
-
-\hypertarget{lesson-2.1-how-does-r-store-time-series-data}{%
-\subsection*{\texorpdfstring{Lesson 2.1: \emph{How does R store Time Series Data?}}{Lesson 2.1: How does R store Time Series Data?}}\label{lesson-2.1-how-does-r-store-time-series-data}}
-\addcontentsline{toc}{subsection}{Lesson 2.1: \emph{How does R store Time Series Data?}}
+\hypertarget{lesson-1.3-formatting-dates-in-r}{%
+\subsection*{\texorpdfstring{Lesson 1.3: \emph{Formatting \texttt{Date}s in R}}{Lesson 1.3: Formatting Dates in R}}\label{lesson-1.3-formatting-dates-in-r}}
+\addcontentsline{toc}{subsection}{Lesson 1.3: \emph{Formatting \texttt{Date}s in R}}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Learning Objective:} Learners will be introduced to \texttt{ts} objects in R, and how they differ from objects like vectors or data frames in how they store data, and in how that data is displayed by R:
+  \textbf{Learning Objective:} Learners will be introduced to formatting Dates in R by manipulating character and Date vectors, in order to both improve legibility of and standardize the format of temporal data.
 
   \begin{itemize}
   \tightlist
   \item
-    \texttt{print()} (specifically, \texttt{print.ts()})
-  \item
-    \texttt{plot()} (specifically, \texttt{plot.ts()})
+    \texttt{format()} (specifically, \texttt{format.Date()})
+
+    \begin{itemize}
+    \tightlist
+    \item
+      e.g.: \texttt{format(as.Date("1987-04-12"),\ "\%b\ \%d,\ \%Y")} gives \texttt{"May\ 12,\ 1987"}
+    \end{itemize}
   \end{itemize}
+\end{itemize}
+
+\hypertarget{chapter-2-time-series-objects-in-r}{%
+\section*{Chapter 2: Time Series objects in R}\label{chapter-2-time-series-objects-in-r}}
+\addcontentsline{toc}{section}{Chapter 2: Time Series objects in R}
+
+\hypertarget{lesson-2.1-time-series-attributes}{%
+\subsection{\texorpdfstring{Lesson 2.1: \emph{Time Series Attributes}}{Lesson 2.1: Time Series Attributes}}\label{lesson-2.1-time-series-attributes}}
+
+\begin{itemize}
+\tightlist
 \item
   \textbf{Learning Objective:} Learners will be able to retrieve the temporal attributes (start and end points, as well as frequency) of a time series object:
 
@@ -257,7 +268,7 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Learning Objective:} Learners will convert a vector of observations with a known start time and frequency (e.g., monthly data starting in the year 2004) into a \texttt{ts} object:
+  \textbf{Learning Objective:} Learners will convert a vector of observations with a known start time and frequency (e.g., monthly data starting in the year 2004) into a \texttt{ts} object. By adding temporal attributes to the data, such as start time, frequency, and end time, learners will be able to properly manipulate data with the methods outlined in the remainder of the course.
 
   \begin{itemize}
   \tightlist
@@ -265,6 +276,8 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
     \texttt{ts()}
   \item
     \texttt{as.ts()}
+  \item
+    e.g.: assume \texttt{data} is a numeric vector of observations; \texttt{ts(data,\ start\ =\ zoo::as.yearmon("Jan\ 2004"),\ frequency\ =\ 12)}
   \end{itemize}
 \end{itemize}
 
@@ -329,44 +342,58 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
   \tightlist
   \item
     \texttt{window()}
-  \item
-    \texttt{as.Date()}
-  \item
-    \texttt{zoo::as.yearmon()}
-  \end{itemize}
-\item
-  \textbf{Learning Objective:} Learners will use the \texttt{\textquotesingle{}{[}\textquotesingle{}} operator with \texttt{as.Date()} to extract an observation from a specific time:
 
-  \begin{itemize}
-  \tightlist
-  \item
-    \texttt{\textquotesingle{}{[}\textquotesingle{}}
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{window(data,\ start\ =\ "2020-01-01",\ end\ =\ "2020-12-31")} retrieves observations between (inclusive) Jan 1, 2020 and Dec 31, 2020.
+    \end{itemize}
   \item
     \texttt{as.Date()}
-  \item
-    \texttt{zoo::as.yearmon()}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      The \texttt{window} function can usually coerce the \texttt{start} and \texttt{end} arguments correctly, but it's good practice to tell the function exactly the date and format we want to use.
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
-\hypertarget{lesson-3.2-retrieving-observations-by-index}{%
-\subsection*{\texorpdfstring{Lesson 3.2: \emph{Retrieving observations by index}}{Lesson 3.2: Retrieving observations by index}}\label{lesson-3.2-retrieving-observations-by-index}}
-\addcontentsline{toc}{subsection}{Lesson 3.2: \emph{Retrieving observations by index}}
+\hypertarget{lesson-3.2-subsetting-specific-observations}{%
+\subsection*{\texorpdfstring{Lesson 3.2: \emph{Subsetting specific observations}}{Lesson 3.2: Subsetting specific observations}}\label{lesson-3.2-subsetting-specific-observations}}
+\addcontentsline{toc}{subsection}{Lesson 3.2: \emph{Subsetting specific observations}}
 
 \begin{itemize}
 \tightlist
 \item
-  \textbf{Learning Objective:} Learners will use the standard R functions to extract one or more observations by numerical index:
+  \textbf{Learning Objective:} Learners will use the \texttt{\textquotesingle{}{[}\textquotesingle{}} operator with \texttt{as.Date()} to extract an observation from a specific time or a specific index:
 
   \begin{itemize}
   \tightlist
   \item
     \texttt{\textquotesingle{}{[}\textquotesingle{}}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{data{[}1:20{]}} retrieves observations 1 through 20; \texttt{data{[}12{]}} retrieves the 12\textsuperscript{th} observation, etc.
+    \end{itemize}
   \item
-    \texttt{head()}
+    \texttt{as.Date()}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{data{[}as.Date("2020-03-01"){]}} retrieves the observation for March 1, 2020.
+    \end{itemize}
   \item
-    \texttt{tail()}
-  \item
-    e.g.: \texttt{data{[}1:20{]}} retrieves observations 1 through 20, as does \texttt{head(data,\ n\ =\ 20)}
+    \texttt{zoo::as.yearmon()}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      If data are stored in year-month format, \texttt{data{[}as.yearmon("Jul\ 2019"){]}} retrieves the observation for the month of July, 2019.
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
@@ -389,8 +416,12 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
     \texttt{zoo::yearqtr()}
   \item
     \texttt{zoo::yearmon()}
-  \item
-    e.g.: \texttt{aggregate(data,\ by\ =\ lubridate::year,\ FUN\ =\ sum)} finds sums of observations within each year.
+
+    \begin{itemize}
+    \tightlist
+    \item
+      e.g.: \texttt{aggregate(data,\ by\ =\ lubridate::year,\ FUN\ =\ sum)} finds sums of observations within each year.
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
@@ -407,6 +438,8 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
   \tightlist
   \item
     \texttt{zoo::na.approx()} and \texttt{zoo::na.spline()}, respectively
+  \item
+    \texttt{zoo::fill()} can be used to fill all \texttt{NA} values with a given value, e.g.~0.
   \end{itemize}
 \end{itemize}
 
@@ -422,14 +455,6 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
 \tightlist
 \item
   \textbf{Learning Objective:} Learners will understand the utility of rolling and expanding windows: finding moving averages, cumulative sums, etc.
-\end{itemize}
-
-\hypertarget{lesson-4.2-calculating-a-rolling-window}{%
-\subsection*{\texorpdfstring{Lesson 4.2: \emph{Calculating a Rolling Window}}{Lesson 4.2: Calculating a Rolling Window}}\label{lesson-4.2-calculating-a-rolling-window}}
-\addcontentsline{toc}{subsection}{Lesson 4.2: \emph{Calculating a Rolling Window}}
-
-\begin{itemize}
-\tightlist
 \item
   \textbf{Learning Objective:} Learners will be able to perform a rolling window operation on a time series, creating a moving average (or moving sum) of an arbitrary length:
 
@@ -439,14 +464,18 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
     \texttt{zoo::rollapply()}
   \item
     \texttt{zoo::rollapplyr()} (convenience wrapper for \texttt{zoo::rollapply(align\ =\ "right")})
-  \item
-    e.g.: \texttt{zoo::rollapplyr(daily\_data,\ FUN\ =\ mean,\ width\ =\ 7)} to create a 7-day rolling average from \texttt{daily\_data}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      e.g.: \texttt{zoo::rollapplyr(daily\_data,\ FUN\ =\ mean,\ width\ =\ 7)} to create a 7-day rolling average from \texttt{daily\_data}
+    \end{itemize}
   \end{itemize}
 \end{itemize}
 
-\hypertarget{lesson-4.3-calculating-an-expanding-window}{%
-\subsection*{\texorpdfstring{Lesson 4.3: \emph{Calculating an Expanding Window}}{Lesson 4.3: Calculating an Expanding Window}}\label{lesson-4.3-calculating-an-expanding-window}}
-\addcontentsline{toc}{subsection}{Lesson 4.3: \emph{Calculating an Expanding Window}}
+\hypertarget{lesson-4.2-calculating-an-expanding-window}{%
+\subsection*{\texorpdfstring{Lesson 4.2: \emph{Calculating an Expanding Window}}{Lesson 4.2: Calculating an Expanding Window}}\label{lesson-4.2-calculating-an-expanding-window}}
+\addcontentsline{toc}{subsection}{Lesson 4.2: \emph{Calculating an Expanding Window}}
 
 \begin{itemize}
 \tightlist
@@ -459,8 +488,32 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
     \texttt{cumsum()}
   \item
     \texttt{seq\_along()}
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \texttt{cumsum(data)\ /\ seq\_along(data)} gives a rolling mean, which exists in \texttt{dplyr::cummean()} but not base R.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{lesson-4.3-zoos-roll-functions}{%
+\subsection*{\texorpdfstring{Lesson 4.3: \emph{zoo's roll functions}}{Lesson 4.3: zoo's roll functions}}\label{lesson-4.3-zoos-roll-functions}}
+\addcontentsline{toc}{subsection}{Lesson 4.3: \emph{zoo's roll functions}}
+
+\begin{itemize}
+\item
+  \textbf{Learning Objective:} Learners will be introduced to the other \texttt{roll*} functions within \texttt{zoo}, allowing for more compact and legible code when performing rolling window calculations:
+
+  \begin{itemize}
   \item
-    \texttt{cumsum(data)\ /\ seq\_along(data)} gives a rolling mean, which exists in \texttt{dplyr::cummean()} but not base R.
+    \texttt{zoo::rollmean()}
+  \item
+    \texttt{zoo::rollmedian()}
+  \item
+    \texttt{zoo::rollsum()}
+  \item
+    \texttt{zoo::rollmax()}
   \end{itemize}
 \end{itemize}
 
@@ -481,93 +534,6 @@ Functions are written in \texttt{code\ text} below each \textbf{Learning Objecti
     \texttt{lines()}
   \end{itemize}
 \end{itemize}
-
-\hypertarget{introduction-to-time-series-data}{%
-\chapter{Introduction to time series data}\label{introduction-to-time-series-data}}
-
-\hypertarget{lesson-what-is-time-series-data}{%
-\section{Lesson: What is Time Series Data}\label{lesson-what-is-time-series-data}}
-
-\begin{itemize}
-\tightlist
-\item
-  Learning Objective: Learner will be able to understand why and how TS-data differs from non-temporal data
-\item
-  LO: What kinds of inferences and results can be obtained from TS-data
-\item
-  LO: Converting to and from time-based data formats, such as \texttt{numeric}, \texttt{Date}, and \texttt{POSIXct} classes
-
-  \begin{itemize}
-  \tightlist
-  \item
-    Functions: \texttt{as.Date()}, \texttt{lubridate::}, etc.
-  \end{itemize}
-\end{itemize}
-
-\hypertarget{lesson-how-to-interpret-time-series-data}{%
-\section{Lesson: How to Interpret Time Series Data}\label{lesson-how-to-interpret-time-series-data}}
-
-\begin{itemize}
-\tightlist
-\item
-  LO: Learner will understand how to interpret attributes of a basic time series plot
-\item
-  LO: ``Signal and Noise'' in the context of TS data
-\item
-  Introduction to Stationarity: Most real-world data are not stationary and require additional steps to work with
-\end{itemize}
-
-\hypertarget{lesson-components-of-time-series-data}{%
-\section{Lesson: Components of Time Series Data}\label{lesson-components-of-time-series-data}}
-
-\hypertarget{creating-and-manipulating-time-series}{%
-\chapter{Creating and Manipulating Time Series}\label{creating-and-manipulating-time-series}}
-
-\hypertarget{ts-class}{%
-\section{\texorpdfstring{\texttt{ts} Class}{ts Class}}\label{ts-class}}
-
-\hypertarget{missing-values}{%
-\section{Missing Values}\label{missing-values}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}2001{-}01{-}01\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2001{-}01{-}02\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2001{-}01{-}04\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}2001{-}01{-}05\textquotesingle{}}\NormalTok{)}
-\NormalTok{d }\OtherTok{\textless{}{-}} \FunctionTok{as.Date}\NormalTok{(d)}
-\NormalTok{date\_range }\OtherTok{\textless{}{-}} \FunctionTok{seq}\NormalTok{(}\FunctionTok{min}\NormalTok{(d), }\FunctionTok{max}\NormalTok{(d), }\AttributeTok{by =} \DecValTok{1}\NormalTok{) }
-\NormalTok{date\_range[}\SpecialCharTok{!}\NormalTok{date\_range }\SpecialCharTok{\%in\%}\NormalTok{ d] }
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "2001-01-03"
-\end{verbatim}
-
-\hypertarget{rolling-and-expanding-windows}{%
-\chapter{Rolling and Expanding Windows}\label{rolling-and-expanding-windows}}
-
-\hypertarget{rolling-window}{%
-\section{Rolling Window}\label{rolling-window}}
-
-\begin{itemize}
-\tightlist
-\item
-  Moving lower and upper bound
-\end{itemize}
-
-\hypertarget{data}{%
-\subsection{Data}\label{data}}
-
-\hypertarget{calculating-a-rolling-window}{%
-\subsection{Calculating a Rolling Window}\label{calculating-a-rolling-window}}
-
-\hypertarget{introduction-to-forecasting-in-r}{%
-\chapter{Introduction to Forecasting in R}\label{introduction-to-forecasting-in-r}}
-
-\hypertarget{methods-for-forecasting}{%
-\section{Methods for Forecasting}\label{methods-for-forecasting}}
-
-\hypertarget{exponential-smoothing}{%
-\subsection{Exponential Smoothing}\label{exponential-smoothing}}
 
 \hypertarget{capstone-exercise}{%
 \chapter{Capstone Exercise}\label{capstone-exercise}}
@@ -680,8 +646,8 @@ Using \texttt{aggregate()}, create a yearly mean of the data, then plot the data
 
 \newpage
 
-\hypertarget{rolling-window-1}{%
-\section{Rolling Window}\label{rolling-window-1}}
+\hypertarget{rolling-window}{%
+\section{Rolling Window}\label{rolling-window}}
 
 Calculate a 12-month rolling window average of the data, then overlay the results (in blue) on top of the original data. Label the x-axis as ``Time'' and the y-axis as ``CO2 Concentration'', and give your graph the title ``Monthly CO2 Concentration at Mauna Loa Observatory''
 

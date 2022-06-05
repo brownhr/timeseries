@@ -57,7 +57,7 @@ Functions are written in `code text` below each **Learning Objective**
 
 ## Chapter 2: Time Series objects in R {.unnumbered}
 
-### Lesson 2.1: *Time Series Attributes*
+### Lesson 2.1: *Time Series Attributes* {.unnumbered}
 
 -   **Learning Objective:** Learners will be able to retrieve the temporal attributes (start and end points, as well as frequency) of a time series object:
     -   `start()`

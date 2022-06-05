@@ -45,11 +45,7 @@
         <ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome</a></li>
 <li><a class="active" href="course-outline-manipulating-time-series-data-in-r.html">Course Outline: Manipulating Time Series Data in R</a></li>
-<li><a class="" href="introduction-to-time-series-data.html"><span class="header-section-number">1</span> Introduction to time series data</a></li>
-<li><a class="" href="creating-and-manipulating-time-series.html"><span class="header-section-number">2</span> Creating and Manipulating Time Series</a></li>
-<li><a class="" href="rolling-and-expanding-windows.html"><span class="header-section-number">3</span> Rolling and Expanding Windows</a></li>
-<li><a class="" href="introduction-to-forecasting-in-r.html"><span class="header-section-number">4</span> Introduction to Forecasting in R</a></li>
-<li><a class="" href="capstone-exercise.html"><span class="header-section-number">5</span> Capstone Exercise</a></li>
+<li><a class="" href="capstone-exercise.html"><span class="header-section-number">1</span> Capstone Exercise</a></li>
 </ul>
 
         <div class="book-extra">
@@ -67,7 +63,18 @@
 <code>base</code> and <code>stats</code> (default libraries, but I wanted to name them explicitly)</li>
 <li><code>zoo</code></li>
 <li>
-<code>lubridate</code> (so far, only for the <code><a href="https://lubridate.tidyverse.org/reference/year.html">lubridate::year()</a></code> function (Lesson 3.3))</li>
+<code>lubridate</code> (so far, only for the <code><a href="https://lubridate.tidyverse.org/reference/year.html">lubridate::year()</a></code> function (Lesson 3.3). I wanted to keep the package dependencies to just <code>zoo</code>, but <code><a href="https://lubridate.tidyverse.org/reference/year.html">lubridate::year()</a></code> makes the conversion in Lesson 3.3 much easier for the learner).</li>
+</ul>
+<p>Terms Defined:</p>
+<ul>
+<li>
+<em>Temporal Data</em>: Data that describe a measurement of a variable at a specific point in time, such as the chance of rain on June 20, 2009, or the price of a particular stock market at 2:00 p.m. on January 9, 1987.</li>
+<li>
+<em>Temporal Attributes</em>: The characteristics and attributes that define the sampling frequency (<em>monthly</em>, <em>weekly</em>, etc.) and the start- and end-points of <em>Temporal Data</em>.</li>
+<li>
+<em>Core Data</em>: Within R, <em>Core Data</em> is the “measured” data without any temporal information; i.e., the set of values that do not have any temporal attributes.</li>
+<li>
+<em>Imputing</em>: The statistical process of substituting missing values through a certain process, e.g. replacing missing values with 0 or the average of adjacent values.</li>
 </ul>
 <p>Functions are written in <code>code text</code> below each <strong>Learning Objective</strong></p>
 <div id="chapter-1-introduction-to-time-series-data" class="section level2 unnumbered">
@@ -78,42 +85,50 @@
 </h3>
 <ul>
 <li>
-<strong>Learning Objective:</strong> Learner will be able to understand the foundations of time series data: rather than just analyzing a variable at different points in time, time series analysis studies <em>how</em> that variable changes with time.</li>
-</ul>
-</div>
-<div id="lesson-1.2-interpreting-a-time-series" class="section level3 unnumbered">
-<h3>Lesson 1.2: <em>Interpreting a Time Series</em><a class="anchor" aria-label="anchor" href="#lesson-1.2-interpreting-a-time-series"><i class="fas fa-link"></i></a>
-</h3>
+<strong>Learning Objective:</strong> Learner will be able to understand the core principal of time series data: time series analysis studies <em>how</em> a variable changes with time, rather than just analyzing the variable at different points in time.</li>
+<li>
+<strong>Learning Objective:</strong> Learners will be introduced to basic exploratory functions to examine and visualize time series objects in R:
 <ul>
 <li>
-<strong>Learning Objective:</strong> Learner will be able to interpret a time series graph, understanding the x- and y-axes and identifying trends and periods at an introductory level.</li>
+<code><a href="https://rdrr.io/r/base/print.html">print()</a></code> (specifically, <code><a href="https://rdrr.io/r/stats/print.ts.html">print.ts()</a></code>)</li>
+<li>
+<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> (specifically, <code><a href="https://rdrr.io/r/stats/plot.ts.html">plot.ts()</a></code>)</li>
+</ul>
+</li>
 </ul>
 </div>
-<div id="lesson-1.3-temporal-data-classes-in-r" class="section level3 unnumbered">
-<h3>Lesson 1.3: <em>Temporal data classes in R</em><a class="anchor" aria-label="anchor" href="#lesson-1.3-temporal-data-classes-in-r"><i class="fas fa-link"></i></a>
+<div id="lesson-1.2-temporal-data-classes-in-r" class="section level3 unnumbered">
+<h3>Lesson 1.2: <em>Temporal data classes in R</em><a class="anchor" aria-label="anchor" href="#lesson-1.2-temporal-data-classes-in-r"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>
 <strong>Learning Objective:</strong> Learner will be introduced to different formats for temporal data in R, such as the <code>Date</code>, <code>numeric</code>, and <code>character</code> classes:</li>
 <li>e.g.: 2022-01-30, <code>19022</code>, and “2022-01-30” share the same information, but in different formats</li>
 <li>
-<strong>Learning Objective:</strong> Learners will be able to check classes of data stored as vectors or as columns in a dataframe or tibble; as some formats appear identical, it’s important to understand the class of the data you’re working with:
+<strong>Learning Objective:</strong> Learners will be able to coerce objects of different classes to the desired class, and check the classes of objects:
 <ul>
 <li><code><a href="https://rdrr.io/r/base/class.html">class()</a></code></li>
+<li><code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code></li>
+<li><code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code></li>
+<li><code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code></li>
 </ul>
 </li>
 </ul>
 </div>
-<div id="lesson-1.4-converting-between-data-classes" class="section level3 unnumbered">
-<h3>Lesson 1.4: <em>Converting between data classes</em><a class="anchor" aria-label="anchor" href="#lesson-1.4-converting-between-data-classes"><i class="fas fa-link"></i></a>
+<div id="lesson-1.3-formatting-dates-in-r" class="section level3 unnumbered">
+<h3>Lesson 1.3: <em>Formatting <code>Date</code>s in R</em><a class="anchor" aria-label="anchor" href="#lesson-1.3-formatting-dates-in-r"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>
-<strong>Learning Objective:</strong> Learners will be able to convert between classes in R, such as converting a <code>character</code> vector/column to a <code>Date</code> vector/column:
+<strong>Learning Objective:</strong> Learners will be introduced to formatting Dates in R by manipulating character and Date vectors, in order to both improve legibility of and standardize the format of temporal data.
 <ul>
-<li><code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code></li>
-<li><code><a href="https://rdrr.io/r/base/numeric.html">as.numeric()</a></code></li>
-<li><code><a href="https://rdrr.io/r/base/character.html">as.character()</a></code></li>
+<li>
+<code><a href="https://rdrr.io/r/base/format.html">format()</a></code> (specifically, <code><a href="https://rdrr.io/r/base/as.Date.html">format.Date()</a></code>)
+<ul>
+<li>e.g.: <code>format(as.Date("1987-04-12"), "%b %d, %Y")</code> gives <code>"May 12, 1987"</code>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -122,19 +137,10 @@
 <div id="chapter-2-time-series-objects-in-r" class="section level2 unnumbered">
 <h2>Chapter 2: Time Series objects in R<a class="anchor" aria-label="anchor" href="#chapter-2-time-series-objects-in-r"><i class="fas fa-link"></i></a>
 </h2>
-<div id="lesson-2.1-how-does-r-store-time-series-data" class="section level3 unnumbered">
-<h3>Lesson 2.1: <em>How does R store Time Series Data?</em><a class="anchor" aria-label="anchor" href="#lesson-2.1-how-does-r-store-time-series-data"><i class="fas fa-link"></i></a>
+<div id="lesson-2.1-time-series-attributes" class="section level3 unnumbered">
+<h3>Lesson 2.1: <em>Time Series Attributes</em><a class="anchor" aria-label="anchor" href="#lesson-2.1-time-series-attributes"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
-<li>
-<strong>Learning Objective:</strong> Learners will be introduced to <code>ts</code> objects in R, and how they differ from objects like vectors or data frames in how they store data, and in how that data is displayed by R:
-<ul>
-<li>
-<code><a href="https://rdrr.io/r/base/print.html">print()</a></code> (specifically, <code><a href="https://rdrr.io/r/stats/print.ts.html">print.ts()</a></code>)</li>
-<li>
-<code><a href="https://rdrr.io/r/graphics/plot.default.html">plot()</a></code> (specifically, <code><a href="https://rdrr.io/r/stats/plot.ts.html">plot.ts()</a></code>)</li>
-</ul>
-</li>
 <li>
 <strong>Learning Objective:</strong> Learners will be able to retrieve the temporal attributes (start and end points, as well as frequency) of a time series object:
 <ul>
@@ -150,10 +156,12 @@
 </h3>
 <ul>
 <li>
-<strong>Learning Objective:</strong> Learners will convert a vector of observations with a known start time and frequency (e.g., monthly data starting in the year 2004) into a <code>ts</code> object:
+<strong>Learning Objective:</strong> Learners will convert a vector of observations with a known start time and frequency (e.g., monthly data starting in the year 2004) into a <code>ts</code> object. By adding temporal attributes to the data, such as start time, frequency, and end time, learners will be able to properly manipulate data with the methods outlined in the remainder of the course.
 <ul>
 <li><code><a href="https://rdrr.io/r/stats/ts.html">ts()</a></code></li>
 <li><code><a href="https://rdrr.io/r/stats/ts.html">as.ts()</a></code></li>
+<li>e.g.: assume <code>data</code> is a numeric vector of observations; <code>ts(data, start = zoo::as.yearmon("Jan 2004"), frequency = 12)</code>
+</li>
 </ul>
 </li>
 </ul>
@@ -201,32 +209,49 @@
 <li>
 <strong>Learning Objective:</strong> Learners will be able to extract a window of observations between a set of given points in time:
 <ul>
-<li><code><a href="https://rdrr.io/r/stats/window.html">window()</a></code></li>
-<li><code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code></li>
-<li><code><a href="https://rdrr.io/pkg/zoo/man/yearmon.html">zoo::as.yearmon()</a></code></li>
+<li>
+<code><a href="https://rdrr.io/r/stats/window.html">window()</a></code>
+<ul>
+<li>
+<code>window(data, start = "2020-01-01", end = "2020-12-31")</code> retrieves observations between (inclusive) Jan 1, 2020 and Dec 31, 2020.</li>
 </ul>
 </li>
 <li>
-<strong>Learning Objective:</strong> Learners will use the <code>'['</code> operator with <code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code> to extract an observation from a specific time:
+<code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code>
 <ul>
-<li><code>'['</code></li>
-<li><code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code></li>
-<li><code><a href="https://rdrr.io/pkg/zoo/man/yearmon.html">zoo::as.yearmon()</a></code></li>
+<li>The <code>window</code> function can usually coerce the <code>start</code> and <code>end</code> arguments correctly, but it’s good practice to tell the function exactly the date and format we want to use.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
-<div id="lesson-3.2-retrieving-observations-by-index" class="section level3 unnumbered">
-<h3>Lesson 3.2: <em>Retrieving observations by index</em><a class="anchor" aria-label="anchor" href="#lesson-3.2-retrieving-observations-by-index"><i class="fas fa-link"></i></a>
+<div id="lesson-3.2-subsetting-specific-observations" class="section level3 unnumbered">
+<h3>Lesson 3.2: <em>Subsetting specific observations</em><a class="anchor" aria-label="anchor" href="#lesson-3.2-subsetting-specific-observations"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>
-<strong>Learning Objective:</strong> Learners will use the standard R functions to extract one or more observations by numerical index:
+<strong>Learning Objective:</strong> Learners will use the <code>'['</code> operator with <code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code> to extract an observation from a specific time or a specific index:
 <ul>
-<li><code>'['</code></li>
-<li><code><a href="https://rdrr.io/r/utils/head.html">head()</a></code></li>
-<li><code><a href="https://rdrr.io/r/utils/head.html">tail()</a></code></li>
-<li>e.g.: <code>data[1:20]</code> retrieves observations 1 through 20, as does <code>head(data, n = 20)</code>
+<li>
+<code>'['</code>
+<ul>
+<li>
+<code>data[1:20]</code> retrieves observations 1 through 20; <code>data[12]</code> retrieves the 12<sup>th</sup> observation, etc.</li>
+</ul>
+</li>
+<li>
+<code><a href="https://rdrr.io/r/base/as.Date.html">as.Date()</a></code>
+<ul>
+<li>
+<code>data[as.Date("2020-03-01")]</code> retrieves the observation for March 1, 2020.</li>
+</ul>
+</li>
+<li>
+<code><a href="https://rdrr.io/pkg/zoo/man/yearmon.html">zoo::as.yearmon()</a></code>
+<ul>
+<li>If data are stored in year-month format, <code>data[as.yearmon("Jul 2019")]</code> retrieves the observation for the month of July, 2019.</li>
+</ul>
 </li>
 </ul>
 </li>
@@ -243,8 +268,12 @@
 <code><a href="https://rdrr.io/r/stats/aggregate.html">aggregate()</a></code> (specifically, <code>aggregate.zoo()</code> for <code>zoo</code> objects)</li>
 <li><code><a href="https://lubridate.tidyverse.org/reference/year.html">lubridate::year()</a></code></li>
 <li><code><a href="https://rdrr.io/pkg/zoo/man/yearqtr.html">zoo::yearqtr()</a></code></li>
-<li><code><a href="https://rdrr.io/pkg/zoo/man/yearmon.html">zoo::yearmon()</a></code></li>
+<li>
+<code><a href="https://rdrr.io/pkg/zoo/man/yearmon.html">zoo::yearmon()</a></code>
+<ul>
 <li>e.g.: <code>aggregate(data, by = lubridate::year, FUN = sum)</code> finds sums of observations within each year.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -258,6 +287,8 @@
 <ul>
 <li>
 <code><a href="https://rdrr.io/pkg/zoo/man/na.approx.html">zoo::na.approx()</a></code> and <code><a href="https://rdrr.io/pkg/zoo/man/na.approx.html">zoo::na.spline()</a></code>, respectively</li>
+<li>
+<code>zoo::fill()</code> can be used to fill all <code>NA</code> values with a given value, e.g. 0.</li>
 </ul>
 </li>
 </ul>
@@ -272,35 +303,51 @@
 <ul>
 <li>
 <strong>Learning Objective:</strong> Learners will understand the utility of rolling and expanding windows: finding moving averages, cumulative sums, etc.</li>
-</ul>
-</div>
-<div id="lesson-4.2-calculating-a-rolling-window" class="section level3 unnumbered">
-<h3>Lesson 4.2: <em>Calculating a Rolling Window</em><a class="anchor" aria-label="anchor" href="#lesson-4.2-calculating-a-rolling-window"><i class="fas fa-link"></i></a>
-</h3>
-<ul>
 <li>
 <strong>Learning Objective:</strong> Learners will be able to perform a rolling window operation on a time series, creating a moving average (or moving sum) of an arbitrary length:
 <ul>
 <li><code><a href="https://rdrr.io/pkg/zoo/man/rollapply.html">zoo::rollapply()</a></code></li>
 <li>
-<code><a href="https://rdrr.io/pkg/zoo/man/rollapply.html">zoo::rollapplyr()</a></code> (convenience wrapper for <code>zoo::rollapply(align = "right")</code>)</li>
+<code><a href="https://rdrr.io/pkg/zoo/man/rollapply.html">zoo::rollapplyr()</a></code> (convenience wrapper for <code>zoo::rollapply(align = "right")</code>)
+<ul>
 <li>e.g.: <code>zoo::rollapplyr(daily_data, FUN = mean, width = 7)</code> to create a 7-day rolling average from <code>daily_data</code>
 </li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
 </div>
-<div id="lesson-4.3-calculating-an-expanding-window" class="section level3 unnumbered">
-<h3>Lesson 4.3: <em>Calculating an Expanding Window</em><a class="anchor" aria-label="anchor" href="#lesson-4.3-calculating-an-expanding-window"><i class="fas fa-link"></i></a>
+<div id="lesson-4.2-calculating-an-expanding-window" class="section level3 unnumbered">
+<h3>Lesson 4.2: <em>Calculating an Expanding Window</em><a class="anchor" aria-label="anchor" href="#lesson-4.2-calculating-an-expanding-window"><i class="fas fa-link"></i></a>
 </h3>
 <ul>
 <li>
 <strong>Learning Objective:</strong> Learners will be able to create an expanding window – a rolling window where the “start” is fixed and the “end” moves:
 <ul>
 <li><code><a href="https://rdrr.io/r/base/cumsum.html">cumsum()</a></code></li>
-<li><code><a href="https://rdrr.io/r/base/seq.html">seq_along()</a></code></li>
+<li>
+<code><a href="https://rdrr.io/r/base/seq.html">seq_along()</a></code>
+<ul>
 <li>
 <code>cumsum(data) / seq_along(data)</code> gives a rolling mean, which exists in <code><a href="https://dplyr.tidyverse.org/reference/cumall.html">dplyr::cummean()</a></code> but not base R.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="lesson-4.3-zoos-roll-functions" class="section level3 unnumbered">
+<h3>Lesson 4.3: <em>zoo’s roll functions</em><a class="anchor" aria-label="anchor" href="#lesson-4.3-zoos-roll-functions"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>
+<p><strong>Learning Objective:</strong> Learners will be introduced to the other <code>roll*</code> functions within <code>zoo</code>, allowing for more compact and legible code when performing rolling window calculations:</p>
+<ul>
+<li><p><code><a href="https://rdrr.io/pkg/zoo/man/rollmean.html">zoo::rollmean()</a></code></p></li>
+<li><p><code><a href="https://rdrr.io/pkg/zoo/man/rollmean.html">zoo::rollmedian()</a></code></p></li>
+<li><p><code><a href="https://rdrr.io/pkg/zoo/man/rollmean.html">zoo::rollsum()</a></code></p></li>
+<li><p><code><a href="https://rdrr.io/pkg/zoo/man/rollmean.html">zoo::rollmax()</a></code></p></li>
 </ul>
 </li>
 </ul>
@@ -322,7 +369,7 @@
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="index.html">Welcome</a></div>
-<div class="next"><a href="introduction-to-time-series-data.html"><span class="header-section-number">1</span> Introduction to time series data</a></div>
+<div class="next"><a href="capstone-exercise.html"><span class="header-section-number">1</span> Capstone Exercise</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
@@ -330,14 +377,13 @@
 <li>
 <a class="nav-link" href="#chapter-1-introduction-to-time-series-data">Chapter 1: Introduction to Time Series Data</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#lesson-1.1-what-is-time-series-data">Lesson 1.1: What is Time Series Data</a></li>
-<li><a class="nav-link" href="#lesson-1.2-interpreting-a-time-series">Lesson 1.2: Interpreting a Time Series</a></li>
-<li><a class="nav-link" href="#lesson-1.3-temporal-data-classes-in-r">Lesson 1.3: Temporal data classes in R</a></li>
-<li><a class="nav-link" href="#lesson-1.4-converting-between-data-classes">Lesson 1.4: Converting between data classes</a></li>
+<li><a class="nav-link" href="#lesson-1.2-temporal-data-classes-in-r">Lesson 1.2: Temporal data classes in R</a></li>
+<li><a class="nav-link" href="#lesson-1.3-formatting-dates-in-r">Lesson 1.3: Formatting Dates in R</a></li>
 </ul>
 </li>
 <li>
 <a class="nav-link" href="#chapter-2-time-series-objects-in-r">Chapter 2: Time Series objects in R</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#lesson-2.1-how-does-r-store-time-series-data">Lesson 2.1: How does R store Time Series Data?</a></li>
+<li><a class="nav-link" href="#lesson-2.1-time-series-attributes">Lesson 2.1: Time Series Attributes</a></li>
 <li><a class="nav-link" href="#lesson-2.2-create-a-time-series-object-in-base-r">Lesson 2.2: Create a Time Series object in Base R</a></li>
 <li><a class="nav-link" href="#lesson-2.3-using-the-zoo-package-to-store-time-series-data">Lesson 2.3: Using the Zoo Package to store time series data</a></li>
 <li><a class="nav-link" href="#lesson-2.4-using-zoo-to-extract-time-and-data-vectors">Lesson 2.4: Using Zoo to extract time and data vectors</a></li>
@@ -346,7 +392,7 @@
 <li>
 <a class="nav-link" href="#chapter-3-subsetting-extracting-and-resampling">Chapter 3: Subsetting, Extracting, and Resampling</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#lesson-3.1-subsetting-a-window-of-observations">Lesson 3.1: Subsetting a window of observations</a></li>
-<li><a class="nav-link" href="#lesson-3.2-retrieving-observations-by-index">Lesson 3.2: Retrieving observations by index</a></li>
+<li><a class="nav-link" href="#lesson-3.2-subsetting-specific-observations">Lesson 3.2: Subsetting specific observations</a></li>
 <li><a class="nav-link" href="#lesson-3.3-resampling-observations">Lesson 3.3: Resampling observations</a></li>
 <li><a class="nav-link" href="#lesson-3.4-imputing-missing-values">Lesson 3.4: Imputing Missing Values</a></li>
 </ul>
@@ -354,8 +400,8 @@
 <li>
 <a class="nav-link" href="#chapter-4-rolling-and-expanding-windows">Chapter 4: Rolling and Expanding Windows</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#lesson-4.1-what-are-windows">Lesson 4.1: What are windows?</a></li>
-<li><a class="nav-link" href="#lesson-4.2-calculating-a-rolling-window">Lesson 4.2: Calculating a Rolling Window</a></li>
-<li><a class="nav-link" href="#lesson-4.3-calculating-an-expanding-window">Lesson 4.3: Calculating an Expanding Window</a></li>
+<li><a class="nav-link" href="#lesson-4.2-calculating-an-expanding-window">Lesson 4.2: Calculating an Expanding Window</a></li>
+<li><a class="nav-link" href="#lesson-4.3-zoos-roll-functions">Lesson 4.3: zoo’s roll functions</a></li>
 <li><a class="nav-link" href="#lesson-4.4-plotting-windows-alongside-data">Lesson 4.4: Plotting windows alongside Data</a></li>
 </ul>
 </li>
@@ -375,7 +421,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Course Outline: Time Series Data in R</strong>" was written by Harrison Brown. It was last built on 2022-05-23.</p>
+    <p>"<strong>Course Outline: Time Series Data in R</strong>" was written by Harrison Brown. It was last built on 2022-06-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
