@@ -2,11 +2,21 @@
 output: 
   bookdown::word_document2:
     number_sections: false
+knit: (function(input, ...){
+  rmarkdown::render(
+    input,
+    output_format = "bookdown::word_document2",
+    output_options = list(number_sections = FALSE),
+    output_file = "Course_Outline.docx"
+  )
+  })
 ---
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   eval = FALSE
 )
+library(zoo)
+library(tidyverse)
 
 co2_missing <- readRDS("data/missing.Rds")
 ```
@@ -19,12 +29,34 @@ So far, our data has been well-organized, with regularly-spaced time intervals a
 
 As a quick reminder, many of the time series tools in R, such as the base `ts()` function, are only designed to work with so-called "regular" time series: those without missing values or unevenly-spaced intervals.
 
-In this lesson, we'll go over a few methods for filling in, or "imputing", missing values within a dataset. 
+In this lesson, we'll go over a few methods for filling in, or "imputing", missing values within a dataset. For this, we'll be working with a modified version of our Mauna Loa CO$_2$ dataset -- you'll notice some of the values are missing! This dataset is loaded as `co2_missing`.
+
 
 ## Imputation
 
 Imputation refers to the process of replacing missing or erroneous data with substituted values, often by taking the average of neighboring values.
 
+Let's look at what an "irregular" time series looks like:
+
+```{r irreg}
+co2_missing %>% 
+  autoplot() + 
+  theme_light()
+```
+
+Notice that there are "holes" in the dataset -- perhaps the CO$_2$ sensor was out of order on those days. We can zoom in on a section of the graph to get a better idea of how to fix our data.
+
+```{r zoom}
+co2_missing %>% 
+  window(start = as.yearmon("Jan 1985"), end = as.yearmon("Jan 1990")) %>% 
+  autoplot() + 
+  theme_light()
+```
+
+A simple, yet effective method of imputation in this case would be to fill in each missing value with the average of its neighbors.
+
+
+## Imputing with `zoo`
+
 This process is relatively straightforward in R, thanks to the `zoo` package.
 
-In this lesson, we'll be working with a modified version of our Mauna Loa CO$_2$ dataset -- you'll notice some of the values are missing! This dataset is loaded as `co2_missing`.
