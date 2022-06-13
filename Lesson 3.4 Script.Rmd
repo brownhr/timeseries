@@ -1,0 +1,30 @@
+---
+output: 
+  bookdown::word_document2:
+    number_sections: false
+---
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE
+)
+
+co2_missing <- readRDS("data/missing.Rds")
+```
+
+# Lesson 3.4: Imputing Missing Values
+
+## Missing Values
+
+So far, our data has been well-organized, with regularly-spaced time intervals and no missing values. In the real world, however, the quality of data that we work with can sometimes be a little lackluster.
+
+As a quick reminder, many of the time series tools in R, such as the base `ts()` function, are only designed to work with so-called "regular" time series: those without missing values or unevenly-spaced intervals.
+
+In this lesson, we'll go over a few methods for filling in, or "imputing", missing values within a dataset. 
+
+## Imputation
+
+Imputation refers to the process of replacing missing or erroneous data with substituted values, often by taking the average of neighboring values.
+
+This process is relatively straightforward in R, thanks to the `zoo` package.
+
+In this lesson, we'll be working with a modified version of our Mauna Loa CO$_2$ dataset -- you'll notice some of the values are missing! This dataset is loaded as `co2_missing`.
