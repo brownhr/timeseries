@@ -14,15 +14,7 @@ knit: (function(input, ...){
   # html_document:
   #   self_contained: false
 ---
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  eval = TRUE
-)
-library(zoo)
-library(tidyverse)
 
-co2_missing <- readRDS("data/missing.Rds")
-```
 
 # Lesson 3.4: Imputing Missing Values
 
@@ -41,18 +33,24 @@ Imputation refers to the process of replacing missing or erroneous data with sub
 
 Let's look at what an "irregular" time series looks like:
 
-```{r irreg}
+
+```r
 co2_missing %>% 
   plot()
 ```
 
+![](lesson3-4_files/figure-docx/irreg-1.png)<!-- -->
+
 Notice that there are "holes" in the dataset -- perhaps the CO$_2$ sensor was out of order on those days. We can zoom in on a section of the graph to get a better idea of how to fix our data.
 
-```{r zoom-1}
+
+```r
 co2_missing %>% 
   window(start = as.yearmon("Jan 1985"), end = as.yearmon("Jan 1990")) %>% 
   plot()
 ```
+
+![](lesson3-4_files/figure-docx/zoom-1-1.png)<!-- -->
 
 A simple, yet effective method of imputation in this case would be to fill in each missing value with the average of its neighbors.
 
@@ -69,11 +67,14 @@ This process is relatively straightforward in R, thanks to the `zoo` package.
 The first function we'll use is `na.fill()` which replaces any missing value with a given value. Let's see if this is what we're after:
 
 
-```{r na-fill}
+
+```r
 co2_missing %>%
   zoo::na.fill(0) %>%
   plot()
 ```
+
+![](lesson3-4_files/figure-docx/na-fill-1.png)<!-- -->
 
 Ok, clearly it's not; `na.fill` is mostly used on data where there's some sort of "default value" -- maybe number of people living in a certain area or amount of money spent per household on a certain service; the "default" in these cases could probably be zero.
 
@@ -82,20 +83,18 @@ Ok, clearly it's not; `na.fill` is mostly used on data where there's some sort o
 
 Let's look at another `na` function, `na.locf()`, which stands for "Last Observation Carried Forward". This function finds an `na` value and replaces it with the most recent non-`na` value. What does it look like?
 
-```{r na-locf}
+
+```r
 co2_missing %>% 
   zoo::na.locf() %>% 
   plot()
 ```
+
+![](lesson3-4_files/figure-docx/na-locf-1.png)<!-- -->
 
 Looks pretty good, right! Let's zoom in a bit further though:
 
-```{r na-locf-zoom, echo = FALSE}
-co2_missing %>% 
-  zoo::na.locf() %>% 
-  head(30) %>% 
-  plot()
-```
+![](lesson3-4_files/figure-docx/na-locf-zoom-1.png)<!-- -->
 Those horizontal lines show us what the function is doing; these represent how the Last Observation was "Carried Forward", hence the name of the function.
 
 Let's try one last function to find what we need -- a smooth, accurate approximation of the missing values in our dataset.
@@ -105,21 +104,18 @@ Let's try one last function to find what we need -- a smooth, accurate approxima
 The `zoo` function `na.approx()` works by linearly interpolating missing values; it simply takes the average of its neighbors. For reference, we also have `na.spline()` which interpolates values with cubic spline interpolation, but I'm only going to show the first function:
 
 
-```{r na-approx}
+
+```r
 co2_missing %>% 
   zoo::na.approx() %>% 
   plot()
 ```
 
+![](lesson3-4_files/figure-docx/na-approx-1.png)<!-- -->
+
 This looks pretty good! We can zoom in to see how it performed:
 
-```{r na-approx-zoom, echo = FALSE}
-co2_missing %>% 
-  na.approx() %>% 
-  head(30) %>% 
-  plot()
-  
-```
+![](lesson3-4_files/figure-docx/na-approx-zoom-1.png)<!-- -->
 
 That looks like a pretty good approximation; it'd be hard to tell that there were missing values in the first place.
 
