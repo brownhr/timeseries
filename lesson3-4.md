@@ -39,8 +39,6 @@ co2_missing %>%
   plot()
 ```
 
-![](lesson3-4_files/figure-docx/irreg-1.png)<!-- -->
-
 Notice that there are "holes" in the dataset -- perhaps the CO$_2$ sensor was out of order on those days. We can zoom in on a section of the graph to get a better idea of how to fix our data.
 
 
@@ -50,14 +48,12 @@ co2_missing %>%
   plot()
 ```
 
-![](lesson3-4_files/figure-docx/zoom-1-1.png)<!-- -->
-
 A simple, yet effective method of imputation in this case would be to fill in each missing value with the average of its neighbors.
 
 
 ## Imputing with `zoo`
 
-This process is relatively straightforward in R, thanks to the `zoo` package. 
+The imputation process is relatively straightforward in R, thanks to the `zoo` package. 
 
 `zoo` has a number of functions designed to work with missing data; let's try a few of them out. We'll go through some of the `na` functions in `zoo` to find which one works best for our case.
 
@@ -74,8 +70,6 @@ co2_missing %>%
   plot()
 ```
 
-![](lesson3-4_files/figure-docx/na-fill-1.png)<!-- -->
-
 Ok, clearly it's not; `na.fill` is mostly used on data where there's some sort of "default value" -- maybe number of people living in a certain area or amount of money spent per household on a certain service; the "default" in these cases could probably be zero.
 
 
@@ -90,11 +84,9 @@ co2_missing %>%
   plot()
 ```
 
-![](lesson3-4_files/figure-docx/na-locf-1.png)<!-- -->
-
 Looks pretty good, right! Let's zoom in a bit further though:
 
-![](lesson3-4_files/figure-docx/na-locf-zoom-1.png)<!-- -->
+
 Those horizontal lines show us what the function is doing; these represent how the Last Observation was "Carried Forward", hence the name of the function.
 
 Let's try one last function to find what we need -- a smooth, accurate approximation of the missing values in our dataset.
@@ -111,11 +103,9 @@ co2_missing %>%
   plot()
 ```
 
-![](lesson3-4_files/figure-docx/na-approx-1.png)<!-- -->
-
 This looks pretty good! We can zoom in to see how it performed:
 
-![](lesson3-4_files/figure-docx/na-approx-zoom-1.png)<!-- -->
+
 
 That looks like a pretty good approximation; it'd be hard to tell that there were missing values in the first place.
 

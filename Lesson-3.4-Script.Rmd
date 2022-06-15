@@ -16,7 +16,7 @@ knit: (function(input, ...){
 ---
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  eval = TRUE
+  eval = F
 )
 library(zoo)
 library(tidyverse)
@@ -59,7 +59,7 @@ A simple, yet effective method of imputation in this case would be to fill in ea
 
 ## Imputing with `zoo`
 
-This process is relatively straightforward in R, thanks to the `zoo` package. 
+The imputation process is relatively straightforward in R, thanks to the `zoo` package. 
 
 `zoo` has a number of functions designed to work with missing data; let's try a few of them out. We'll go through some of the `na` functions in `zoo` to find which one works best for our case.
 
