@@ -118,7 +118,7 @@ Functions are written in `code text` below each **Learning Objective**
 
 -   **Learning Objective:** Learners will use the `zoo` package to impute missing values with either linear interpolation or cubic spline interpolation:
     -   `zoo::na.approx()` and `zoo::na.spline()`, respectively
-    -   `zoo::fill()` can be used to fill all `NA` values with a given value, e.g. 0.
+    -   `zoo::na.fill()` can be used to fill all `NA` values with a given value, e.g. 0.
 
 ## Chapter 4: Rolling and Expanding Windows {.unnumbered}
 
