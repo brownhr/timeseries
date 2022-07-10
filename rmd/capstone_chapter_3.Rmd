@@ -1,0 +1,13 @@
+---
+title: "Capstone Exercise: Chapter 3"
+---
+
+```{r pec, include = FALSE}
+library(tidyverse)
+library(lubridate)
+library(zoo)
+
+# Change to actual path to EU_DAX.Rds
+dax <- read_csv("data/EU_DAX.Rds")
+```
+
