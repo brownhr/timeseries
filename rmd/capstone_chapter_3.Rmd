@@ -14,7 +14,7 @@ set.seed(42)
 
 dax_missing <- dax
 dax_missing[sample(length(dax_missing), 216)] <- NA
-dax_missing <- as.zooreg(dax_missing)
+dax_missing <- as.zoo(dax_missing)
 ```
 
 ## Step 1: Visualize missing values
