@@ -1,6 +1,4 @@
----
-title: "Capstone Exercise: Chapter 3"
----
+# Chapter 3 Capstone
 
 ```{r pec, include = FALSE}
 library(tidyverse)
@@ -8,11 +6,47 @@ library(lubridate)
 library(zoo)
 
 # Change to actual path to EU_DAX.Rds
-dax <- read_csv("data/EU_DAX.Rds")
+# DAX: Deutscher Aktien Index; tracks 40 large German companies, considered a gauge for Germany's economic health.
+dax <- read_rds("data/EU_DAX.Rds")
 
 set.seed(42)
 
 
-# dax_missing <- 
+dax_missing <- dax
+dax_missing[sample(length(dax_missing), 216)] <- NA
+dax_missing <- as.zooreg(dax_missing)
+```
+
+## Step 1: Visualize missing values
+
+```{r}
+# Calculate the total number of missing values within dax_missing.
+sum(is.na(dax_missing))
+
+
+# Generate an autoplot of the missing data to help visualize where the missing data is.
+autoplot(dax_missing)
+```
+
+## Step 2: Impute Missing Values
+
+```{r}
+# Use linear interpolation to impute the `NA` values: dax_impute
+dax_impute <- na.approx(dax_missing)
+
+# Verify no `NA` values remain
+
+sum(is.na(dax_impute))
+```
+
+## Step 3: Resample to Monthly Averages
+
+```{r}
+# Aggregate the observations to the mean of each month: dax_monthly
+dax_monthly <- aggregate(dax_impute, by = yearmon, FUN = mean)
+
+# Plot your resulting graph and add a title
+
+autoplot(dax_monthly) + labs(title = "Monthly Mean Price (DAX)")
 ```
 
