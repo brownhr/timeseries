@@ -1,0 +1,66 @@
+# Preparing Time Series Data
+
+```{r pec, include=FALSE}
+library(tidyverse)
+library(lubridate)
+
+
+
+dates <- as.character(seq.Date(
+  from = as.Date("2019-01-01"),
+  to = as.Date("2019-12-31"),
+  by = "day"
+))
+
+dates_order <- dates
+
+dates_order[100] <- "Apr 10, 2019"
+dates_order[200] <- "Jul 19, 2019"
+dates_order[300] <- "Oct 27, 2019"
+
+```
+
+## Re-formatting a vector of dates
+
+```{r}
+# Determine the class of the dates object:
+
+class(dates)
+
+# Convert dates to the Date class with lubridate
+dates2 <- as_date(dates)
+
+# Print the first few observations of dates2 with head:
+head(dates2)
+```
+
+## Multiple Choice
+
+Which format correctly describes the date format of `dates2`?
+
+- `"%d/%m/%Y"`
+- `"%Y-%m-%d"`
+- `"%y-%M-%D"`
+- `"%b %d, %Y"`
+
+# Parse Multiple Date Formats
+
+```{r}
+
+# Print dates_order to find discrepancies
+
+print(dates_order)
+
+# Use lubridate to parse dates to a single format
+
+dates_order_format <- 
+  parse_date_time(dates_order, 
+                  orders = c("%Y-%m-%d", "%b %d, %Y")) %>% 
+  as_date()
+
+
+# Print dates_order_format to verify formats
+
+print(dates_order_format)
+
+```

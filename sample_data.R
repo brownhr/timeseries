@@ -32,22 +32,12 @@ sales_data <- data %>%
     Product != "Product"
   ) %>% 
   mutate(
-    date = parse_date_time(`Order Date`, orders = c("mdy HM", "mdY HM")),
+    # date = parse_date_time(`Order Date`, orders = c("mdy HM", "mdY HM")),
     Product = as.factor(Product),
     TotSale = as.numeric(`Quantity Ordered`) * as.numeric(`Price Each`),
-    day = zoo::as.Date(date)
+    # day = zoo::as.Date(date)
   ) %>% 
   select(
-    `Order Date`, date, TotSale, day
+    `Order Date`, TotSale
   )
-
-
-sales_ts <- sales_data %>% 
-  filter(date < as.Date("2020-01-01")) %>% 
-  group_by(day) %>% 
-  summarize(
-    daily_sales = sum(TotSale)
-  ) %>% 
-  na.omit() %>% 
-  tsbox::ts_ts()
   
