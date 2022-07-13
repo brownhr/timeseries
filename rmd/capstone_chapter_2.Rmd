@@ -12,9 +12,9 @@ co2 <- readr::read_rds("data/maunaloa.Rds") %>% zoo::as.zooreg()
 
 # Convert co2 to exercise data.frame: co2_df
 co2_df <- data.frame(
-  date = co2 %>% 
+  date = co2 %>%
     time() %>%
-    lubridate::date_decimal() %>% 
+    lubridate::date_decimal() %>%
     lubridate::as_date(),
   concentration = zoo::coredata(co2)
 )
@@ -30,7 +30,8 @@ head(co2_df)
 # Convert co2_df to a zoo object
 
 co2_zoo <- zooreg(co2_df$concentration,
-           order.by = co2_df$date)
+  order.by = co2_df$date
+)
 
 # Print the structure of co2 to the console
 str(co2_zoo)
@@ -47,3 +48,26 @@ ggplot(co2_df2, aes(x = time, y = concentration)) +
   geom_line()
 ```
 
+
+```{r}
+# Load and attach packages
+library(tidyverse)
+library(zoo)
+library(lubridate)
+
+# Read data as zoo
+co2_zoo <- readr::read_rds(
+  "https://assets.datacamp.com/production/repositories/6083/datasets/ec6e063864080ba3dd9beae78390781afa6551d4/maunaloa.Rds"
+) %>%
+  zoo::as.zooreg()
+
+
+# Convert in_data to exercise data.frame: co2_df
+co2_df <- data.frame(
+  date = co2_zoo %>%
+    time() %>%
+    lubridate::date_decimal() %>%
+    lubridate::as_date(),
+  concentration = zoo::coredata(co2_zoo)
+)
+```

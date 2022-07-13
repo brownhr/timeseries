@@ -1,0 +1,6 @@
+# Calculating a Rolling Window
+
+```{r pec, include = FALSE}
+
+```
+
