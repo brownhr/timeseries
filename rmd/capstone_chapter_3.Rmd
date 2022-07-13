@@ -43,7 +43,7 @@ sum(is.na(dax_impute))
 
 ```{r}
 # Aggregate the observations to the mean of each month: dax_monthly
-dax_monthly <- aggregate(dax_impute, by = yearmon, FUN = mean)
+dax_monthly <- aggregate(dax_impute, by = as.yearmon, FUN = mean)
 
 # Plot your resulting graph and add a title
 

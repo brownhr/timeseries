@@ -1,0 +1,49 @@
+# Building a Time Series with Zoo
+
+```{r pec, include = FALSE}
+# Load and attach packages
+library(tidyverse)
+library(zoo)
+library(lubridate)
+
+# Read data as zoo
+co2 <- readr::read_rds("data/maunaloa.Rds") %>% zoo::as.zooreg()
+
+
+# Convert co2 to exercise data.frame: co2_df
+co2_df <- data.frame(
+  date = co2 %>% 
+    time() %>%
+    lubridate::date_decimal() %>% 
+    lubridate::as_date(),
+  concentration = zoo::coredata(co2)
+)
+
+# Remove temporary co2
+```
+
+
+```{r}
+# Print the head of co2_df to the console
+head(co2_df)
+
+# Convert co2_df to a zoo object
+
+co2_zoo <- zooreg(co2_df$concentration,
+           order.by = co2_df$date)
+
+# Print the structure of co2 to the console
+str(co2_zoo)
+```
+
+
+```{r}
+co2_df2 <- data.frame(
+  concentration = coredata(co2_zoo),
+  time = index(co2_zoo)
+)
+
+ggplot(co2_df2, aes(x = time, y = concentration)) +
+  geom_line()
+```
+
