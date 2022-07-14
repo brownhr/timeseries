@@ -7,7 +7,7 @@ library(zoo)
 
 # Change to actual path to EU_DAX.Rds
 # DAX: Deutscher Aktien Index; tracks 40 large German companies, considered a gauge for Germany's economic health.
-dax <- read_rds("data/EU_DAX.Rds")
+dax <- read_rds("data/EU_DAX.Rds") %>% as.zoo()
 
 set.seed(42)
 

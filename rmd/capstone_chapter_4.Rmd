@@ -1,6 +1,49 @@
 # Calculating a Rolling Window
 
 ```{r pec, include = FALSE}
+# Load and attach packages
+library(tidyverse)
+library(zoo)
+library(lubridate)
 
+# Read DAX data
+dax <-
+  read_rds(
+    "https://assets.datacamp.com/production/repositories/6083/datasets/f4059bd80d4b7e716f8a51ff6e3d974a0ead5b4c/EU_DAX.Rds"
+  )
 ```
 
+
+
+```{r}
+# Calculate a rolling mean of seven days: dax_rollmean
+dax_rollmean <- rollmean(dax,
+                         k = 7,
+                         align = "right")
+
+# Plot dax_rollmean with autoplot
+autoplot(dax_rollmean)
+```
+
+```{r}
+# Calculate the 30-day rolling maximum
+dax_rollmax <- rollmax(dax,
+                       k = 30,
+                       align = "right")
+
+# Plot dax_rollmax with autoplot
+autoplot(dax_rollmax)
+```
+
+```{r}
+# Use rollapply to find the 30-day rolling minimum
+dax_rollmin <- rollapply(
+  dax,
+  align = "right",
+  width = 30,
+  FUN = min
+)
+
+# Plot dax_rollmin with an autoplot
+autoplot(dax_rollmin)
+```

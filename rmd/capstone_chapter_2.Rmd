@@ -7,7 +7,7 @@ library(zoo)
 library(lubridate)
 
 # Read data as zoo
-co2 <- readr::read_rds("data/maunaloa.Rds") %>% zoo::as.zooreg()
+co2_zoo <- readr::read_rds("data/maunaloa.Rds") %>% zoo::as.zooreg()
 
 
 # Convert co2 to exercise data.frame: co2_df
