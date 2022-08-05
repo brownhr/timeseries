@@ -1,0 +1,135 @@
+# What Are Rolling Windows?
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(zoo)
+library(lubridate)
+
+ftse_zoo <- EuStockMarkets[, "FTSE"] %>%
+  as.zoo()
+
+ftse <- data.frame(
+  Date = index(ftse_zoo),
+  Price = coredata(ftse_zoo)
+)
+```
+
+
+Welcome back! In this chapter, we'll cover an important topic in time series analysis: "rolling" and "expanding windows". 
+
+To understand these concepts, let's first examine what we mean when we say "window". A window is simply a subset of observations defined by a start and end point. Think of them like a scrolling screen on a computer monitor: while the website you're reading might be hundreds of lines of text in length, your screen only allows you to see a certain "window" of the full content.
+
+A window in data science is exactly the same; it limits your view to a smaller subset of your data. But why is this useful; isn't it better to have all the data in one place?
+
+Well, especially in time series analysis, sometimes it's advantageous to look at the finer details and temporarily forget the "big picture" -- let me give you an example:
+
+Suppose you're interested in the average performance of a particular stock market. Initially, you might try to find the mean() of the whole dataset. What you'd get, however, is just a single value for all of your data; not very helpful if you're tracking how your data changes over time!
+
+```{r, echo = FALSE}
+ftse %>%
+  ggplot(aes(x = Date, y = Price)) +
+  geom_line() +
+  # geom_hline(yintercept = mean(ftse$Price),
+  #            color = "blue",
+  #            linetype = "dashed") +
+  theme_light() # %>%
+# ggsave(filename = "../fig/rolling-window-2.png")
+```
+
+The solution is to use "rolling windows", which is like the scroll bar on a website. Rolling windows allow you look at only a portion of your data at one time, making it possible to track how stats like averages and maximums change over time in your data.
+
+Let's look at a rolling window; a 30-day rolling average of our stock price:
+
+```{r echo = FALSE}
+ftse_rollmean <- ftse_zoo %>%
+  rollmean(
+    k = 30,
+    align = "right"
+  )
+ftse_rollmean2 <- data.frame(
+  Date = index(ftse_rollmean),
+  Price = coredata(ftse_rollmean)
+)
+
+ftse %>%
+  ggplot(aes(x = Date, y = Price)) +
+  geom_line() +
+  geom_line(
+    data = ftse_rollmean2, aes(x = Date, y = Price),
+    size = 1,
+    color = "red"
+  ) +
+  theme_light()
+```
+
+Notice how our rolling mean, plotted in red, seems to "follow" the data? That's because a rolling window can only "see" a certain range of observations from the data. In this case, we let the window roll along, or "scroll through" the data, if you will, calculating the mean at each step. 
+
+```{r}
+ftse_rollmean <- ftse_zoo %>%
+  rollmean(
+    k = 7,
+    align = "right",
+    fill = NA
+  )
+
+autoplot(ftse_rollmean)
+
+```
+
+
+
+# Right window alignment
+
+```{r}
+ftse_rm_right <-
+  rollmean(ftse_zoo,
+    k = 7,
+    fill = NA,
+    align = "right"
+  )
+
+head(ftse_rm_right, 10)
+```
+
+```{r}
+ftse %>%
+  rollmean(
+    k = 7,
+    align = "right",
+    fill = NA
+  ) %>%
+  autoplot()
+```
+
+
+```{r}
+maunaloa <- read_rds("data/maunaloa.Rds") %>% as.zoo()
+```
+
+
+```{r}
+maunaloa_rollmean <- maunaloa %>% 
+  rollmean(k = 12, align = "right", fill = NA)
+
+
+autoplot(maunaloa_rollmean)
+
+```
+
+```{r}
+maunaloa_rollmin <- rollapply(
+  maunaloa,
+  width = 52,
+  FUN = min,
+  align = "right"
+)
+```
+
+
+```{r}
+dax_rollmean <- read_rds("data/EU_DAX.Rds") %>%
+  as.zoo() %>%
+  rollmean(k = 30,
+           align = "right",
+           fill = NA)
+```
