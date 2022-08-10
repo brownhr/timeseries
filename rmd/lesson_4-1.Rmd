@@ -51,15 +51,18 @@ ftse_rollmean2 <- data.frame(
   Price = coredata(ftse_rollmean)
 )
 
-ftse %>%
+{ftse %>%
   ggplot(aes(x = Date, y = Price)) +
-  geom_line() +
+  geom_line(color = "gray50") +
   geom_line(
     data = ftse_rollmean2, aes(x = Date, y = Price),
-    size = 1,
+    size = 1.25,
     color = "red"
   ) +
-  theme_light()
+  theme_light()} %>% 
+  ggsave(filename = "fig/rollmean_light.png", width = 2284, height = 1762, units = "px")
+
+
 ```
 
 Notice how our rolling mean, plotted in red, seems to "follow" the data? That's because a rolling window can only "see" a certain range of observations from the data. In this case, we let the window roll along, or "scroll through" the data, if you will, calculating the mean at each step. 
