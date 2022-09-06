@@ -1,0 +1,30 @@
+```{r pec}
+library(tidyverse)
+library(zoo)
+library(lubridate)
+
+index <- seq.Date(
+  from = as_date("2016-01-01"),
+  to = as_date("2016-12-31"),
+  by = "day"
+) %>% as.character()
+
+index[240:270] <- format(as_date(index[240:270]), "%B %d, %Y")
+
+data <- runif(366, max = 25) + 1:366
+
+```
+
+
+```{r}
+test_ts <- zoo(data, index)
+```
+
+```{r}
+index_parsed <- parse_date_time(
+  index,
+  orders = c("%Y-%m-%d", "%B %d, %Y")
+)
+index_parsed
+```
+
