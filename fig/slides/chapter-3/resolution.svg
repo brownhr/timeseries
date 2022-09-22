@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="resolution.svg"
+   inkscape:export-filename="ch3_resolution.png"
+   inkscape:export-xdpi="600"
+   inkscape:export-ydpi="600"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="4.9084004"
+     inkscape:cx="298.56978"
+     inkscape:cy="200.88011"
+     inkscape:window-width="1920"
+     inkscape:window-height="1129"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid182"
+       spacingx="1.3229167"
+       spacingy="1.3229167"
+       dotted="true" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g1174"
+       inkscape:export-filename="ch3_resolution_low.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600"
+       transform="translate(5.2916667)">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.440972;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="m 52.916668,56.223962 v -9.921877 h 19.843751 v 19.84375 H 52.916668 Z"
+         id="path966" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         d="M 52.916668,56.223962 H 72.760419"
+         id="path968" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         d="m 62.838543,46.302085 v 19.84375"
+         id="path970" />
+    </g>
+    <g
+       id="g1122"
+       transform="matrix(0.50000009,0,0,0.50000003,42.994785,23.15104)"
+       inkscape:export-filename="ch3_resolution_high.png"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.66145825;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+         d="M 85.989585,66.145835 V 46.302083 H 125.67708 V 85.989585 H 85.989585 Z"
+         id="path972" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.39687495;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="M 85.989585,52.916669 H 125.67708"
+         id="path974" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.39687495;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="M 85.989586,59.531253 H 125.67708"
+         id="path974-7" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.39687495;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="M 85.989586,66.145836 H 125.67708"
+         id="path974-5" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.39687495;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="M 85.989586,72.76042 H 125.67708"
+         id="path974-8" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.39687495;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="M 85.989586,79.375003 H 125.67708"
+         id="path974-76" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.39687495;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="M 92.604169,85.989584 V 46.302086"
+         id="path974-72" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.39687495;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="M 99.218753,85.989584 V 46.302086"
+         id="path974-72-2" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.39687495;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="M 105.83334,85.989584 V 46.302086"
+         id="path974-72-9" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.39687495;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="M 112.44792,85.989584 V 46.302086"
+         id="path974-72-4" />
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.39687495;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+         d="M 119.0625,85.989584 V 46.302086"
+         id="path974-72-42" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-weight:500;font-size:4.23333px;line-height:1.25;font-family:Lato;-inkscape-font-specification:'Lato Medium Italic';letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;stroke-width:0.264583"
+       x="64.317032"
+       y="43.608486"
+       id="text1286"><tspan
+         sodipodi:role="line"
+         id="tspan1284"
+         style="stroke-width:0.264583"
+         x="64.317032"
+         y="43.608486">Low</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-weight:500;font-size:4.23333px;line-height:1.25;font-family:Lato;-inkscape-font-specification:'Lato Medium Italic';letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;stroke-width:0.264583"
+       x="91.681297"
+       y="43.28146"
+       id="text1290"><tspan
+         sodipodi:role="line"
+         id="tspan1288"
+         style="stroke-width:0.264583"
+         x="91.681297"
+         y="43.28146">High</tspan></text>
+  </g>
+</svg>
