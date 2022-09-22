@@ -25,4 +25,3 @@ autoplot(maunaloa_approx) +
     y = "CO2 Concentration",
     title = "Approximated Data Points"
   )
-i
