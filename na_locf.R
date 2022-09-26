@@ -1,6 +1,6 @@
 library(tidyverse)
 library(xts)
-set.seed(1234)
+set.seed(4567)
 
 scores <-
   c((round(100 * runif(
@@ -16,6 +16,9 @@ scores <-
 index <- seq.Date(from = as_date('2005-01-01'), by = 'month', along.with = scores)
 
 monthly_scores <- zoo(scores, index)
+
+write_rds(monthly_scores, 'data/monthly_scores.rds')
+
 autoplot(monthly_scores) + 
   theme_light() +
   labs(y = "Score",
