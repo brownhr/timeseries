@@ -11,11 +11,11 @@ date_index_quarter <-
   date_index_month[seq(1, length(date_index_month), 3)]
 
 
-month_index <- month(date_index)
+month_index <- month(date_index_month)
 
 # autoplot(zoo(monthly_data, month_index))
 
-yearmon_index <- as.yearmon(date_index)
+yearmon_index <- as.yearmon(date_index_month)
 
 yearmon_zoo <- zoo(monthly_data, order.by = yearmon_index)
 
