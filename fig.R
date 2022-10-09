@@ -20,7 +20,7 @@ ftse %>%
     linetype = "dashed"
   ) +
   theme_light()
-ggsave(filename = "fig/rolling-window-3.png")
+# ggsave(filename = "fig/rolling-window-3.png")
 
 
 ftse_rollmean <- ftse_zoo %>%
@@ -33,6 +33,14 @@ ftse_rollmean2 <- data.frame(
   Price = coredata(ftse_rollmean)
 )
 
+
+
+ftse_rm_right <-
+  rollmean(ftse,
+           k = 7,
+           align = "right",
+           fill = NA)
+
 ftse %>%
   ggplot(aes(x = Date, y = Price)) +
   geom_line() +
@@ -41,5 +49,6 @@ ftse %>%
     color = "red",
     size = 1
   ) + 
+  labs(x = 'Index') + 
   theme_light()
-ggsave(filename = "fig/rolling-window-4.png")
+# ggsave(filename = "fig/rolling-window-4.png")
