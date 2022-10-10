@@ -9,10 +9,17 @@ exp_widths = seq_along(daily_temp)
 temp_expand <- 
   rollapply(
     data = daily_temp,
-    FUN = mean,
+    FUN = max,
     width = exp_widths,
     align = 'right'
   )
+
+temp_roll <- rollapply(
+  daily_temp,
+  FUN = mean,
+  width = 30,
+  align = 'right'
+)
 
 ggplot() + 
   # Original data
@@ -26,4 +33,12 @@ ggplot() +
                 y = temp_expand),
             color = 'red') + 
   theme_light() + 
-  labs(y = 'Degrees Celsius')
+  labs(y = 'Degrees Celsius') + 
+  geom_line(data = temp_roll,
+            aes(x = Index,
+                y = temp_roll),
+            color = 'green',
+            linetype = 'dashed') + 
+  geom_hline(yintercept = max(daily_temp), 
+             color = 'blue',
+             linetype = 'dashed')
