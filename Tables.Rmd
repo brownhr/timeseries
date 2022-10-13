@@ -1,0 +1,31 @@
+
+```{r setup, include = F}
+library(tidyverse)
+library(xts)
+
+data <- runif(7)
+
+  
+idx <- seq.Date(from = as.Date("2012-01-01"), by= 'day', along.with = data)
+
+data <- zoo(data, idx)
+```
+
+```{r echo = F}
+# ftse <- read_rds("data/ftse.Rds") %>% head(7)
+data_rm <- rollmean(
+  data,
+  k = 7,
+  fill = NA,
+  align = 'center'
+)
+```
+
+
+```{r eval = F}
+fortify.zoo(data) %>% write.table('clipboard', sep = "\t", row.names = F)
+```
+
+```{r eval = T}
+fortify.zoo(data_rm) %>% write.table('clipboard', sep = "\t", row.names = F)
+```
