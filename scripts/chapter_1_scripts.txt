@@ -1,0 +1,128 @@
+# Video 1 - What is time series data?
+
+Welcome to Manipulating Time Series Data in R! This course is all about the foundations of working with time series datasets and how to best prepare our data for performing time series analysis.
+
+> This chapter covers the conceptual information of what a time series is, what they look like, and how they work in R.
+
+> Let's begin by defining a "time series". A time series is a list of observations ordered successively over time. In a time series, observations are often recorded at evenly-spaced intervals, such as daily, weekly, monthly, and so on.
+
+Time series datasets are ubiquitous in the real world – a time series analysis studies how a variable changes over time, rather than only measuring the variable ad different points in time.
+
+Let's look at some real-world uses of time series!
+
+One field that makes frequent use of time series data is marketing and analytics — for example, the monthly count of passengers in an international airline.
+
+> Another such example is finance — the closing price of a particular stock market each business day.
+
+> There's also scientific research — this last graph shows the concentration of carbon dioxide in the atmosphere over time.
+
+> Let's see what a time series looks like in R.
+
+In R, there are dedicated classes for time series objects: 'ts' in base R and 'zoo' from the zoo package, which we'll explore later in the course.
+
+For example, the time series 'AirPassengers', from the datasets package, tracks the monthly count of international airline passengers. 
+
+Let's print our time series to the console:
+
+In a time series — as shown in the printed output — each observation is comprised of two parts: a point in time and the value of the observation at that time.
+
+Here's a plot of AirPassengers.
+
+> Our dataset tracks monthly passengers from January 1949 to December 1960. The first observation has 112 thousand passengers, the next has 118 thousand, and so on.
+
+Let's get some more information about the dataset.
+
+Calling the summary() function, we get some summary statistics about the dataset, including the median, mean, and quartiles.
+
+> All of this begs the question: what's the point of using dedicated time series objects; why can't we just use normal R vectors and data frame columns?
+
+Well, we'll cover them later in the course, but many of the functions and workflows in R and packages like zoo are designed to work with these objects. In fact, many statistical models used in time series analysis work best when we use time series objects, rather than vectors or data frames. Also, time series objects are made to "tie together" each observation's value and its time, making sure they aren't easily separated during our analysis.
+
+In real-world time series analysis, time series objects in R make workflows much smoother!
+
+> Now, let's take a look at how to generate a plot of a time series object using ggplot2. Although this package is designed to work primarily with data stored in a data frame, there is a very helpful function that allows us to plot time series objects: it's called autoplot().
+
+To use it, we wrap the autoplot() function around our time series, like so:
+
+And it returns a lovely plot made by ggplot2! For clarity, I've omitted the code for adding in axis labels and the title.
+
+You can also use themes from ggplot2 to make your plots stand out, like so!
+
+> Alright, let's dive in to some exercises so we can get a feel for how time series objects work!
+
+---
+
+# Video 2 - Temporal data classes in R
+
+Doing great so far! In this lesson, we'll go over a key aspect of time series analysis in R — the data classes designed to represent dates and times!
+
+> There are many ways to describe the type of variables we're working with — the most common is an attribute of an object called "class". The class of an object tells R what functions to use when manipulating the object.
+
+While we won't dive too deep into classes themselves, it's important to understand the classes used to represent dates and times.
+
+
+First, there's numeric, which stores values as either integers or "doubles" — real numbers. Dates stored as numerics represent the integer number of days since January 1st, 1970 — the start of the Unix Epoch.
+
+Next, there's character, which represents strings of text. When importing data from outside sources, dates in R are often represented with the character class. Dates as characters in R often have the format year, month, day, separated with a hyphen ("-"). Dates stored as characters don't always conform to this standard, though!
+
+
+We then have Date (note the capitalization here), which represents the day of the year. When we print out a Date object in R, it looks identical to a character object; it's therefore important to be able to check the class of objects. The Date class is useful, as it allows us to do math with dates; subtracting two Date objects, for example, returns the difference between them in days. 
+
+
+Finally, there's POSIXct, which represents the number of seconds since the beginning of the Unix Epoch: January 1st, 1970. The POSIXct class includes both the date and the time, as well as the time zone, allowing for accurate calculations when working with time.
+
+> Likewise, we can also perform arithmetic with POSIXct objects. We'll talk more about the format of POSIXct itself in the next lesson, too.
+
+> Let's also talk briefly about lubridate — a package that provides a ton of great functions for working with dates and times. While this course isn't designed to teach you everything about lubridate, we still should look at some of its functionality.
+
+The as-underscore-date function works similar to base R's as-dot-date, but with a few improvements; as_date performs better with time zones, and provides a warning message if the date format used is invalid. There's a few more differences than that; just know that throughout this course, we'll use the as_date function from lubridate.
+
+> Great job getting through all that information on date-time classes! The best class to use depends on the data we have and the analysis we're doing, but Date and POSIXct are usually safe bets.
+
+Now, let's look at some R functions that we can use to determine the data class of objects in R. 
+
+First is the class() function, which returns the class of an R object as a character string, such as "numeric", "character", "Date", and so on.
+
+We also have the so-called "is-dot" functions, like is-dot-numeric, is-dot-character, is-dot-Date, and is-dot-POSIXct. There's an is-dot function for just about every class in R, but let's just stick with the ones for the four classes we've been talking about so far.
+
+These functions take an R object, and return a logical TRUE or FALSE depending on whether that object meets the criteria.
+
+> Alright, let's head over to the exercises and try our hand at determining data classes in our time series!
+
+---
+
+# Video 3 - Formatting dates in R
+
+An important data cleaning step in time series analysis is ensuring that all our dates are represented in consistent, clear formats. In the last chapter, we discussed the data classes in R for working with temporal data; now, we'll build on this by standardizing the formats of our dates, so converting between data classes is smoother.
+
+> In real life, there are countless ways of representing dates and times. Different countries and regions have preferred orders for the day, month, and year; for example, in the U.S. the convention is to write the month first, then the day, and then the year.
+
+However, in places such as the U.K., the typical order is day, month, then year.
+
+This can lead to serious consequences when the date format is ambiguous — does "6/4/2010" refer to June fourth, or to April sixth? People would give different answers based on where they live and their personal preference.
+
+We'll use the term "time elements" to refer to the distinct "parts" of a date format, such as day, month, year, and hours, minutes, and seconds, and so on. When we say "the order of the time elements", we're referring to the order in which the day, month, year, etc. appear in the format.
+
+> The simplest solution to our problem is to use an international, standardized format. The most commonly used and accepted standard is ISO 8601.
+
+In ISO 8601, time elements — year, month, and day, etc. — are arranged in order from largest to smallest; the year comes first, then the month, then the day, and so on. This solves our ambiguity problem: the cases when there are two equally-valid interpretations of a date.
+
+Time elements, as well as the date and time components, are separated by defined characters, namely, a hyphen between the elements in the date.
+
+ISO 8601 ensures that everyone uses the same separators, and also makes dates and times more legible compared to having all the numbers glued together!
+
+There's tons more to ISO 8601 than this, but we won't be covering that in this course.
+
+> We know of a standard format – ISO 8601 – but how can we work with date formats in R? Formatting dates is a breeze, thanks to the function we'll look at in the following slides!
+
+The parse_date_time() function from lubridate takes an input character or Date vector and returns an output of class POSIXct — a class designed for dates and times. By default, POSIXct objects are formatted with ISO 8601.
+
+To use this function, we set the orders argument to a string, which uses characters known as "conversion specifications" – for example "percent d" and "percent capital Y" – to specify the time elements. We can also use characters like commas, hyphens, and spaces, between the elements in the input format.
+
+There's lots of these "conversion specifications", and they can be challenging to remember; their documentation can be viewed with help-strptime(). You'll find it helpful to memorize the most common ones, though.
+
+We can use parse_date_time() to format a Date object with a single date format, but what happens if we have multiple date formats within the same object?
+
+> Great news — the parse_date_time() function is up to the task! To use it, we pass the input object, then set the orders argument to a vector of the different input date formats. As long as we include every date format seen in our input object, parse_date_time() will return everything in ISO 8601!
+
+> Great job following along! Head over to the exercises and practice manipulating date formats!

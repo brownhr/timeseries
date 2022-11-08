@@ -1,0 +1,169 @@
+# Video 1 - Subsetting a window of observations
+
+Welcome back to the course!
+
+> In this chapter, we'll go over methods for extracting ranges of data from a time series, resampling our data to different time intervals, and how to "fill in" missing values in the data.
+
+> A time series window can be thought of as a smaller subset of a larger time series, which inherits many of the parent's properties. For example, a window obtained from a regular time series is also regular, and has the same sampling frequency.
+
+The difference is in the start and end points; when creating a window, we define a new start and end point to extract data from our time series.
+
+We create time series windows for many of the same reasons as when we subset other types of data. For example, we might want to focus in on a particular range of data, or zoom in on an interesting event to see if it affected the values in the data.
+
+We might also wish to exclude a certain range of data; maybe a sensor like a digital thermometer stopped providing accurate readings, so we only want to take a window when the readings were still up to par.
+
+> Let's look at an example! Our trading card time series, card_prices, ranges in time from January 1, 2013 to December 31, 2014. 
+
+To create a time series, we can call the window() function from the Base R stats package. This function has three arguments: x, the time series we want to subset; start, the start point, and end, the end point. When working with a zoo object that has an index of the Date class, we can enter the start and end arguments as a plain character vector. The start and end arguments are inclusive; if there are observations at those indices, they'll be included in the window.
+
+The result is a time series that ranges from the value we assign in start to the value we assign in end; any observations with an index less than start or greater than end are omitted!
+
+> Another method of creating a subset of a time series is to use "relational operators", such as 'greater than' >, 'less than' >, 'is equal to' ==, and so on. By comparing the index to specific values, we can generate complex logical statements, which say "return TRUE if the index is greater than or equal to May 1, 2013 and if the index is less than or equal to July 31, 2013".
+
+This subset is a logical vector (TRUE or FALSE), that we can assign to a variable; let's call it 'subset'. Using the extraction operator — the square brackets — we can extract the observations of our time series from the subset vector.
+
+> If we only want to return an observation from a specific date, we can use the square bracket extraction operator to do so.
+
+Because the index of our zoo object card_price is of the Date class, zoo is able to interpret the value we pass, "2014-02-28" as a date, even though technically it's a character object.
+
+> Alright, let's head over to the exercises and practice extracting windows and subsets from time series datasets!
+
+---
+
+# Video 2 - Monthly and quarterly data
+
+Great job extracting observations from a time series!
+
+> In this lesson, we'll cover some of the ways of handling data that occurs monthly or quarterly. 
+
+Let's look at an example of a Date object in R. Recall that Date and POSIXct objects use the ISO 8601 format, in which the time components are arranged from largest to smallest: year, month, day, and so on. 
+
+In time series analysis, we often look at data that is aggregated at certain levels; the monthly average of the value, or the highest value each week, etc. Doing so allows us to view the 'bigger picture' of a time series, such as the overall trend in the data, or if the data shows similar values at certain times of year.
+
+We'll discuss aggregation later, but consider it a way of 'reducing' our data from a greater sampling frequency to a lower one. 
+
+Data that represents an entire month might not have a particular date associated with it. If we were to assign a single date to monthly data, which date would we use? Should we use, for example, the first of the month? What about the last day of the month, or the midpoint? Why not ignore the day component entirely?
+
+> In R, there are several ways of 'ignoring' the day of the month and only focusing on the year and month components.
+
+We can use the month() function from lubridate to extract the numerical month of a particular date, but there's an issue! If we apply this function to dates of differing years, we return the same month, here it's nine for September – we lose important information about the year!
+
+Fortunately, there's a solution to this problem, thanks to the zoo package. zoo comes with a class of objects called yearmon, which stands for year-month. It combines the year and the month information together, meaning we can ignore the day component without losing any of the other information!
+
+> To convert to year-month data, we can use the as-dot-yearmon() function from the zoo package. 
+
+This function can handle a variety of inputs, like:
+
+A character vector, formatted in ISO 8601,
+
+An object with the Date class,
+
+A POSIXct object,
+
+Or a numeric, decimal date object!
+
+> How about an example of yearmon in action? Let's look at the time series monthly_sales – a series based on the monthly total of sales at a particular company, in hundreds of thousands of US Dollars.
+
+Printing the time series to the console reveals that the index is of class "yearmon". The temporal information combines the year and month components, but ignores the day of the month.
+
+> Likewise, there is also a data class from the zoo package that can interpret and manipulate quarterly data. Quarterly data divides the year into quarters, and is most often seen in marketing and business contexts. To find the year-quarter, we use the as-dot-yearqtr() function from zoo, like so.
+
+This function works similar to as-dot-yearmon(); the input vector can be numeric, Date, etc., and even the yearmon class! Unfortunately, though, this function doesn't work with character data; you have to convert to another class, like Date, first.
+
+> Here's an example of quarterly data; our monthly_sales time series from earlier. It's now been aggregated to the yearqtr class and saved as quarterly_sales (we'll cover how to do this in the next lesson!)
+
+> Alright, let's go to the exercises and practice working with monthly and quarterly data!
+
+---
+
+# Video 3 - Resampling and aggregating observations
+
+Welcome back!
+
+> In the previous chapter, we discussed the attribute of a time series known as sampling frequency; this represents the number of observations per year. The sampling frequency gives us a method to describe the units of time of the interval between observations, such as weekly, daily, and so on. 
+
+Sampling frequency can be considered the "temporal resolution" of the data; the shorter the intervals between observations, the higher our resolution. For example, sampling data every hour, minute, or second would have a relatively high temporal resolution, while data sampled every month, quarter, or year would have a relatively low temporal resolution.
+
+Note that high and low temporal resolution are relative; geological analysis would consider yearly data high resolution, while a particle physicist might consider minutes and seconds as low resolution.
+
+> In time series analysis, a process known as 'aggregation' involves taking data of a higher resolution and resampling it to a lower resolution.
+
+Aggregation works by taking a statistical function, such as the sum, mean, maximum, etc., and applying it to the data at a certain resolution. For example, we can take data sampled daily and aggregate it to determine the monthly total of observations, or the weekly average of values. 
+
+Because aggregation uses summary functions like mean, sum, max, etc., this process only works in a certain direction. If we had a monthly total of sales data, we would not be able to extract the original daily values.
+
+Aggregation, therefore, provides descriptions of the patterns in the data, at the cost of reducing the information available to us!
+
+> The most useful R functions designed to aggregate time series data come from the xts package. xts, or "eXtensible Time Series", is designed to extend the zoo package, and provides many useful functions and workflows for manipulating time series data.
+
+Let's consider the xts functions that aggregate data to different periods of time, or temporal resolutions. These are the apply-dot functions, and they work by taking a time series dataset and a summary function.
+
+For example, apply-dot-yearly() aggregates data to the yearly level. We set the x argument to the time series, here it's maunaloa, and FUN is the function we wish to apply to the values within each year, here, mean().
+
+> For reference, here's the plot of the original, unaggregated data.
+
+And here's the aggregated! Although we lose some information, like how the CO2 concentration changes within each year, we now can visualize the general trend in the data. This kind of aggregation is useful when we wish to keep our visuals from being too cluttered.
+
+> xts has several of these apply-dot functions, such as apply.daily(), apply.weekly() apply.monthly(), and so on! The apply-dot functions make aggregation a breeze!
+
+> Behind the scenes, the apply-dot functions work by using two xts functions: endpoints() and period-dot-apply().
+
+Knowing this, we can aggregate our data to any arbitrary level, such as intervals of four days, or three weeks, or seventeen minutes, and so on! Here's an example:
+
+To use endpoints(), we input a time series, set on to the units we want, and k to the number of those units. Here, we use biweekly to mean every two weeks. The output is a vector of the indexes of the daily_data time series which occur every two weeks. 
+
+Then, we use the period.apply() function, by setting x to our time series, INDEX to the endpoints we created, and set FUN to the summary function we want to use.
+
+> Head over to the exercises and aggregate some data!
+
+---
+
+# Video 4 - Imputing missing values
+
+Welcome back, and great job aggregating data!
+
+> As a reminder, a 'regular' time series is one without missing values or unevenly-spaced intervals.
+
+Many real-world datasets do not conform to this standard; perhaps a sensor was out of order on a certain day, or measurements could only be taken on clear, sunny days. Whatever the case, we should also be prepared to work with 'irregular' time series.
+
+To keep our data tidy and as regular as possible, there are two key approaches; we've already covered one. There's aggregation, which resamples data to a lower resolution by summarizing the values within each unit, like a monthly total of daily observations.
+
+The other, what this lesson focuses on, is 'imputation', which works by filling in missing values based on different methods. Let's dive in!
+
+> Imputation refers to the process of replacing missing or erroneous data with substituted values, often by taking the average of neighboring values.
+
+Let's look at an example:
+
+Visually, the line appears broken and discontinuous; let's zoom in a bit further.
+
+In this case, the best option would be to impute our data: we can try to fill in the missing values based on different criteria.
+
+> The zoo package has a great range of helper functions to facilitate the imputation process — these are the na-dot functions, which we'll look at in this lesson!
+
+The most commonly-used functions are: na-dot-fill(), na-dot-locf(), and na-dot-approx(). Each function is designed for a different purpose; it's crucial to understand which imputation method to use to suit our data.
+
+> To find the count of missing or NA values, we can use the sum-is-na syntax, like so. is-na returns a TRUE for every NA value in the time series, and taking the sum of these values gives us the total number of NAs.
+
+> For data where the missing observations are assumed to be some default value, the best function to use is na-dot-fill. Here, our dataset observations has 23 NA values. Based on the distribution of the values, we can assume those NAs are supposed to be zero.
+
+Let's look at a plot of observations to see if that would make sense:
+
+It appears that the zero values are missing! Let's fill them in with na-dot-fill.
+
+> na-dot-fill requires two arguments; the time series in object, and the value to fill by in fill.
+
+The result is another time series, where all of the NA values have been replaced by the value in fill.
+
+> Let's look at the next na-dot function, na-dot-locf(). LOCF stands for "Last Observation Carried Forward"; the function works by finding the preceding non-NA value at each NA value.
+
+LOCF is often used in surveys and studies, where a participant drops out at a certain point; the most recent non-NA value is used to fill in the missing observations.
+
+> The last function we'll look at is na-dot-approx(), which works by using 'linear interpolation' to fill in missing values.
+
+> By connecting the non-NA values on either side of the missing observation, linear interpolation can approximate the values at the missing points.
+
+> The result is a continuous change between non-NA observations!
+
+> For time series that track a continuous variable, like temperature, precipitation, price, etc., na-dot-approx() is often the best choice; when there are a small number of missing values, linear interpolation can accurately impute the absent observations.
+
+> Head to the exercises and practice imputing missing values!

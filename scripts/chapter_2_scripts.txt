@@ -1,0 +1,159 @@
+# Video 1 - Time series attributes
+
+Welcome back! Great progress working with dates and date formats!
+
+> In this chapter, we'll dive deeper into how time series datasets are stored in R, how to create a time series from  a vector or data frame, and how to access and manipulate the important attributes of a time series object.
+
+In this lesson, we'll discuss the key attributes that describe the temporal information stored in a time series!
+
+> These key attributes are known as the "temporal attributes" of a time series, and they describe the time-based information of the data, such as the beginning and end of the data.
+
+One common use of temporal attributes is to get an idea of the "extent" of our data in time. For example, certain surveys can last for decades; it's important to at least know when they start and finish!
+
+Temporal attributes are also crucial when combining multiple time series. We might encounter difficulties when merging overlapping time series; for example, time series A and B have regions that overlap.
+
+When we try to combine these, there is an issue: in the area that overlaps, what data do we use: A or B? We'll talk about the solution for this later in the chapter!
+
+> The first temporal attribute we'll talk about is the start point, which represents the time of the earliest observation and can be accessed with the start() function from base R.
+
+Our output here can be interpreted as "Year 1949, Month 1" – January 1949.
+
+> The end point of the data – the point in time of the final observation – is found with the end() function, like so:
+
+Here, I've called the end() function on a different time series, hence the different output. But what does "1998 point 646" even mean?
+
+Sometimes, a time series uses a so-called "decimal date" as its index; decimal dates are used to divide a year into even parts. Quarters of a year, for example, could be represented with point 0, point 25, point 5, and point 75.
+
+Thankfully, lubridate has the date_decimal() function that converts numeric decimal dates into more human-legible POSIXct objects, formatted in the ISO 8601 standard.
+
+Decimal dates are useful in creating time series with evenly-spaced intervals; more on that in a bit!
+
+> Finally, there's the frequency of the data; this represents how often our data are sampled within a year. For example, data sampled every month would have a frequency of twelve. We can use the frequency() function on a time series object to determine the sampling frequency.
+
+Here, 260 means that our data was sampled 260 times in a year – this is the standardized number of business days per year.
+
+This "ftse" data was built as a regular time series; because a regular time series needs evenly-spaced intervals, the 260 divisions of a year don't exactly line up with common real-world divisions like days, weeks, or months, so we need to represent the time points with decimal dates.
+
+> In a regular time series, all observations are evenly-spaced, without missing values between observations. This is how base R handles time series, and can be cumbersome with real-world times, like data that only occurs on weekdays!
+
+Irregular time series – supported by the zoo package – do not have to be evenly-spaced. Values for observations can also be missing or NA. Because irregular time series do not require even spacing, we can use any date-time class, like numeric decimal date, Date, or POSIXct.
+
+> Let's practice retrieving the temporal attributes of a time series object!
+
+---
+
+# Video 2 - Time series objects with the zoo package
+
+Alright, it's the moment we've been waiting for – in this lesson, we'll cover how to create a time series object in R, using the zoo package!
+
+> The zoo package provides numerous tools and functions for time series analysis and manipulation: from creating a time series object itself to plotting our objects with ggplot2.
+
+> So why use a standalone package for this? Base R (specifically, the stats package) has the ts class, so what's the reason for using zoo?
+
+To start, the ts class can only accept data when the time intervals between observations are evenly spaced. With zoo, however, the time between samples can be uneven.
+
+zoo objects are also easier to convert to objects like data frames, making them more convenient in other data science applications. We'll cover converting to data frames later in the chapter.
+
+So, what's the process for creating a zoo object?
+
+> To make a time series in zoo, there's two kinds of data we need.
+
+First, we have to have the values of our observations, such as the temperature at each point in time, or the daily number of patrons at the library, and so on.
+
+Then, we also need the temporal data – the time of each observation. In this example, our data was sampled daily, so our "sample_dates" vector is a series of consecutive days.
+
+Once we load the zoo package, we can use the aptly-named zoo() function to create our time series. The zoo function has two required arguments: x, representing our values, and order-dot-by, which we set as our index, sample_dates.
+
+If we print our time series, we see that each row contains a time of observation and the value of the observation at that time.
+
+> Another important consideration is that many datasets were designed to work with base R and the ts class. The zoo package offers functionality to convert these to the zoo class; to do this, we use the as-dot-zoo() function, and pass our ts time series object.
+
+As a reminder – while the actual data stored within a ts or zoo object is quite similar, the methods used to manipulate, explore, and visualize these objects are different depending on the class. Nowadays, the best practice is to use zoo objects over ts, but it's good to know how to convert to zoo from other types of object.
+
+> Another thing to consider – while using the autoplot() function works well in most cases, it's also possible to generate more robust plots with the ggplot2 functions. 
+
+The syntax to do so is similar to that of a data frame (in fact, ggplot2 converts your zoo to a data frame in the background – something we'll cover how to do later in the chapter).
+
+We set the first argument, data, to the time series object. The x and y axis values are set to Index and the name of the variable the time series is mapping, by default, it's the name of the time series. We have to include the "scale_y_continuous()" to make sure ggplot knows how to properly handle our time series data. 
+
+We can use arguments to set the attributes of the plot, such as the plotting color, line size, line type, and so on!
+
+We can also use ggplot2 themes and give our plot a title and labels!
+
+> The zoo package has lots of powerful functions for working with time series data, but for now, let's head over to the exercises and practice creating time series with zoo!
+
+---
+
+# Video 3 - Manipulating zoo objects
+
+We've discussed creating a zoo time series; let's dive into some functions for manipulating and retrieving time series data.
+
+> In the previous lesson, we learned that time series objects created with the zoo package have two defining attributes: the index, representing the time of observation, and the "raw data" stored in the time series.
+
+The index gives us the order of observations in our data; using an index is more robust than relying on the default order of vector elements. If our data comes from multiple sources, our observations might not be in the proper order.
+
+> Using indices ensures that when creating a time series, the value of each observation is mapped correctly to its time.
+
+Creating a zoo object from pairs of unsorted values and times will result in a time series that is automatically sorted, assuming each value matches its index initially.
+
+Note that the dates within "ordered_zoo" aren't evenly-spaced; there are large, uneven gaps between each observation! As mentioned earlier in the chapter, zoo is perfectly capable of working with irregular time series.
+
+> What if we had a zoo object already, and want to only retrieve the index? zoo has a helper function for exactly this: index().
+
+To use it, we pass our time series to index(), and it returns the "index" attribute – the vector of dates.
+
+The index() function is also used to update the index of a zoo object. For this, the call to index(my_zoo) must be on the left-hand side of the assignment operator (the left-facing arrow), and the new index must be to the right.
+
+> The second "attribute" is known as the core data – it isn't a formal R attribute like the class of the object or the index, but it's useful to think of it this way nonetheless.
+
+To retrieve the core data, we can use the coredata() function from zoo. The syntax is the same as that of index(); we pass our time series as the first argument, and coredata() returns the values of our observations, minus the index attribute.
+
+Likewise, we can update the values of our time series with the replacement syntax, like what we used for index(). For example, let's replace the first element of the core data with a value of thirty, like so:
+
+Later in the chapter, we'll cover more about getting the most out of the index() and coredata() functions!
+
+> When we're dealing with more than one time series, or if our time series data comes from several sources, it's possible to have values that occur in more than one dataset. This can be especially frustrating when combining our time series, you'll see why in a second!
+
+I've put an asterisk next to the overlapping elements between the time series.
+
+> We get an error when we try to combine these – let's find which indices overlap.
+
+We can test our indices using the value matching operator, percent-in-percent. This operator works by testing if any values in the left-hand side match any values in the right-hand side. It returns TRUE or FALSE for each index in first_zoo that matches an index in second_zoo.
+
+The next step is to negate our logical statement – we want TRUE for the indices that are NOT matched.
+
+> We now have a logical vector that we can use to subset our time series! Let's assign it to a variable, "subset".
+
+If we subset our first_zoo, we can now correctly combine our two time series!
+
+> Alright, let's practice working with zoo objects!
+
+---
+
+# Video 4 - Converting between zoo and data frame
+
+Great job working with the indexes of zoo objects!
+
+> In this lesson, we'll cover how to move between data frames and zoo objects, allowing us to have more comprehensive data science workflows. Data frames are one of the most widely-used classes of R objects, so it's important to be able to work with them when performing time series analysis!
+
+> Before we dive into it, let's discuss some of the differences between data frames and zoo objects; specifically, how they differ when they're used with time series data.
+
+Both zoo and data frames can store multiple variables; for example, the temperature, precipitation, and atmospheric pressure each day. In a data frame, these would be stored as separate data frame columns, but in a time series, each "core data" variable is stored as a column of a matrix!
+
+In a data frame, the index is stored just like any other data frame column, while in a zoo object, it's stored as an attribute called "index".
+
+While both zoo and data frames are compatible with the geom functions from ggplot2, we can't plot data frames with the autoplot function.
+
+There's more differences than these; data frames and zoo objects are designed for different purposes, after all, and we'd be comparing apples to oranges!
+
+> Suppose we have a data frame, called prices, with the columns date and value.
+
+As a reminder, the columns of a data frame can be extracted as vectors – a list of items that share a type, like numeric, Date, or character – with the dollar-sign operator.
+
+Creating a zoo object based on a data frame is very similar to creating one based on vectors; all that's required is to pass the data frame columns to the necessary arguments in the zoo() function. We set the x argument, the core data of the time series, to the value column, and order-dot-by, the index, to the date column, and there we have it!
+
+> If we wanted to do the reverse — create a data frame from a zoo object — a good starting point is to take the results of the index() and coredata() functions, and assign them to data frame columns.
+
+This would work, but theres a better way. The helper function fortify-dot-zoo() from the zoo package is meant for this purpose! To use it, we pass our zoo object, and that's it! The output is a data frame, with a column called Index, and additional columns based on the core data of the time series.
+
+> Alright, time to practice moving between data frames and zoo objects!

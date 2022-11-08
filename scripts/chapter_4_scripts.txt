@@ -1,0 +1,147 @@
+# Video 1 - What is a rolling window?
+
+Welcome back! In this chapter, we'll cover "rolling" and "expanding" windows.
+
+> In this chapter, we'll cover what a rolling window is, how to calculate statistics using a rolling window, and how to create and manipulate expanding windows.
+
+> Recall that a window is a range of observations defined by a start and end point. A window is like a computer monitor: if we visit a lengthy website, we can only view a limited range of information at once.
+
+> Windows let us zoom in on a range of data, filtering out the 'big picture' and focusing on the specific details.
+
+> Time series analysis often involves determining statistics about data – suppose we wanted to determine the average value of a time series, like our FTSE series. One approach is to take the 'global' mean of the entire dataset. 
+
+However, we end up with only a single value, which is useful but provides little information for how our data changes over time – a global statistic is a single value which stays constant over time.
+
+> Windows, however, provide a way to calculate statistics that 'move' with the data – this concept is called a 'rolling window'.
+
+Let's make an example rolling window; a 30-day rolling average of our FTSE stock price.
+
+At each observation, we create a window of a particular width, 30 days, then find the average of the values within that window. Doing this at each point in the data creates a rolling window; the result is how the average changes across time!
+
+> To calculate a rolling window, we can use the zoo package, which offers 'rolling' versions of summary functions like mean, sum, and maximum. These functions each take a time series, and some additional arguments which control how the window is created at each point; let's check them out.
+
+> The argument k defines the width of the rolling window in terms of number of observations; if we wanted a seven-day rolling average of daily data, we would set k = 7.
+
+align specifies whether the output of the function comes to the left, right, or in the middle of the rolling window; we'll give more detail on this momentarily!
+
+The last argument is fill, which assigns values to observations outside the rolling window; it's usually best practice to set fill to NA.
+
+In the output, the first six elements are NA. This is due to how we set the align and fill arguments; let's look at what the arguments do...
+
+> The align argument defines how the output of the rolling function is placed in relation to the window. Here's an example time series, called data, with seven observations. For a right-aligned window, the mean is placed at the end point of the window; a right-aligned mean would take the average of the past observations.
+
+> Left-alignment does the opposite; the rolling function calculates values in a window after the observation, so the output is to the left of the window at the start point.
+
+> In center-alignment, the output of the rolling function falls in the middle of the window.
+
+The correct alignment to use depends on our data and the patterns we intend to show, but generally, right-alignment is the most common method.
+
+> When we create a rolling window, there will be NA values if there aren't enough observations to make a full window. In a right-aligned window, the first k - 1 values are NA; here, the first six are NA.
+
+> Let's roll on over to the exercises and put things into practice!
+
+---
+
+# Video 2 - Applying functions to rolling windows
+
+Alright, welcome back!
+
+> In the previous exercises, we looked at some of the 'rolling' versions of statistical functions from the zoo package, such as rollmean(), rollmax(), rollsum(), etc. These functions work great, and in most cases, they're the best choice to use.
+
+However, they can be quite limited in what they offer; notice that there isn't a 'rollmin()' function for calculating the minimum of a rolling window!
+
+Rather than create a rolling version of every possible function, the authors of zoo offer a solution. In this lesson, we'll cover how to generate our own 'custom' rolling window function based on whatever summary function we want!
+
+> The solution offered in zoo is a function called rollapply(). Its syntax and arguments are a bit different than in the standard rolling functions, so let's see how it works. 
+
+The first argument we need to pass is our time series; here, it's the ftse dataset. 
+
+Then, we need to set the width of the window in the width argument. Take note that this argument is called 'width', while in the other functions like rollmean(), it's called 'k'.
+
+The FUN argument takes a summary function to apply to the rolling window, like mean, min, sum, and so on.
+
+The align argument specifies the window alignment, described in the previous lesson.
+
+Finally, the optional fill argument specifies how to fill in the values that are 'outside' the window; without a value in fill, the resulting time series drops these elements instead.
+
+> Let's look at a few examples of using different summary functions with the roll apply function from zoo.
+
+Imagine we wanted to calculate the range of values within a 30-day rolling window; this would give us an insight into the extreme values and the approximate 'variability' in our data.
+
+For an example, let's take a time series of daily average temperatures, called daily_temp.
+
+We can create a function – let's call it 'find_range()', that subtracts the maximum of x, a vector of numbers, from the minimum of x. This is just an example of writing your own function in R; we won't dive too deep into that in this course!
+
+Our find_range() function can be called like any other function in R, meaning we can use it within a rolling window.
+
+We'll create a variable, called daily_temp_range, and use the find_range() function in the FUN argument to rollapply. Our window width is 30, and our window alignment is 'right'. We also set the fill argument to NA, so that the first 29 observations (those that can't make a full, 30-day window) have a value of NA.
+
+> Let's plot daily_temp_range.
+
+Our output is a time series that represents the difference between the greatest and smallest values within the previous 30-day window. Again, our custom 'range' function is just an example; we could create a function for any task that we want!
+
+> Let's apply our skills in the exercises!
+
+---
+
+# Video 3 - Expanding windows
+
+Great progress!
+
+> In addition to rolling windows, there are also 'expanding windows' in time series analysis.
+
+An expanding window is similar to a rolling window, but its start point is fixed at the beginning of the data, rather than moving along with the window.
+
+This means that, whereas a rolling window has a fixed width, for example seven days, an expanding window has a dynamic, increasing width. 
+
+Expanding windows let us calculate statistics like the mean, maximum, sum, etc., up to each observation in the data. Let's look at how an expanding window works.
+
+> Here's a conceptual expanding window underneath a time series, with observations one, two, three, and four.
+
+At the first observation, the width of the window is one. At the second observation, the width is two, and so on. Across the time series, an expanding window has a width at each observation equal to the index number of that observation.
+
+Important to note is that the starting point of an expanding window is fixed; all four of our 'windows' in the diagram start at the first observation.
+
+> We have a concept for creating an expanding window, so how do we calculate one in R?
+
+The good news is that we've already been introduced to the function that can calculate expanding windows – rollapply()!
+
+As we've used it, rollapply() takes a single number for the width argument, but we can also assign it a vector of widths that change as it moves across the data.
+
+Recall that the widths of an expanding window increase by one for each element in the time series – we need a function that can output a sequence of numbers, with a total length equal to the length of the time series.
+
+Base R has the function seq_along(), which stands for sequence-along, that returns a vector of numbers increasing by one, for the length of the input object. In other words, it's the perfect function for returning an increasing window width for our expanding windows!
+
+> Let's assign the sequence of widths, made using seq_along on the daily_temp time series, to a variable exp_widths (or, 'expanding widths').
+
+We can use exp_widths within a call to rollapply(), using much the same syntax as when we create a rolling window. When creating an expanding window, we must set the align argument to 'right'.
+
+> Let's plot everything all together. We can plot our original time series, daily_temp, in light gray, with the expanding window overlaid in red, using the geom_line() syntax.
+
+With expanding windows, the further along in the time series we go, the more values there are to calculate. An expanding mean, like this, approaches the overall mean of the dataset – the final calculation of an expanding mean is the same as the global mean, because the window covers the entire dataset.
+
+> There are some properties we can infer about expanding windows that are important to consider when performing a proper time series analysis.
+
+As mentioned in the example of the expanding mean, the statistics from an expanding window approach the global statistics of the time series. The 'further along' in an expanding window, the closer the value is to the overall statistic.
+
+Because an expanding window considers more and more values as it progresses, a single outlier will have less of an effect further along in the expanding window, and more of an effect closer to the beginning. Notice how the graph seems to rapidly 'smooth out' after the first few months?
+
+> Alright, let's expand our time series skills by practicing creating expanding windows in the exercises!
+
+---
+
+# Video 4 - Congratulations!
+
+Congratulations on completing the course!
+
+> In this course, we learned the fundamentals of time series data, such as how to store date-time information in R, how to properly format dates and times, and the kinds of time-based information that describe a time series.
+
+We covered the zoo package and the zoo class of time series objects, and how to convert between zoo objects and data frames. We also practiced plotting time series data with ggplot2 using functions like autoplot.
+
+We discussed how to subset and index a time series, how to manipulate data that is stored monthly or quarterly, how to aggregate data to different units of time, and how to fill-in NA values in a dataset.
+
+Finally, we discussed rolling window functions like rollmean() and rollmax(), and how to generate our own rolling windows with any function we want through rollapply(). We also covered how to create expanding windows.
+
+> What should we look at next? This course is only an introduction to the world of time series data, so check out these courses for a more in-depth look into time series analysis, time series visualization, and introductory statistics.
+
+> Thank you so much for taking the course, and best of luck on your journey through R!
