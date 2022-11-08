@@ -27,5 +27,5 @@ fortify.zoo(data) %>% write.table('clipboard', sep = "\t", row.names = F)
 ```
 
 ```{r eval = T}
-fortify.zoo(data_rm) %>% write.table('clipboard', sep = "\t", row.names = F)
+fortify.zoo(data_rm) %>% pull(data_rm) %>% write.table('clipboard', sep = "\t", row.names = F)
 ```
