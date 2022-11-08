@@ -28,3 +28,5 @@ ordered_zoo <- zoo(ordered_values,
 
 unordered_values <- ordered_values[order(rand_index)]
 unordered_dates <- ordered_dates[order(rand_index)]
+
+autoplot(ordered_zoo)
