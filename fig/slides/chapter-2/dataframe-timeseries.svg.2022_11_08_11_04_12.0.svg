@@ -28,15 +28,15 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="7.36285"
-     inkscape:cx="85.70051"
-     inkscape:cy="33.139342"
+     inkscape:zoom="5.332091"
+     inkscape:cx="59.263805"
+     inkscape:cy="21.37998"
      inkscape:window-width="1920"
      inkscape:window-height="1129"
      inkscape:window-x="1912"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g6146">
+     inkscape:current-layer="g6253">
     <inkscape:grid
        type="xygrid"
        id="grid182"
@@ -78,17 +78,18 @@
        id="RoundedArrow"
        refX="0"
        refY="0"
-       orient="auto"
+       orient="auto-start-reverse"
        inkscape:stockid="RoundedArrow"
-       markerWidth="2.9998808"
-       markerHeight="2.8999996"
-       viewBox="0 0 6.1347524 5.9304953"
+       markerWidth="2.9998813"
+       markerHeight="2.8999999"
+       viewBox="0 0 6.1347524 5.9304951"
        inkscape:isstock="true"
        inkscape:collect="always"
        preserveAspectRatio="xMidYMid">
       <path
-         d="m -0.14780188,-2.873901 4.49560378,2.24780197 a 0.7,0.7 0 0 1 0,1.25219806 L -0.14780188,2.873901 A 0.8652476,0.8652476 0 0 1 -1.4,2.1 v -4.2 a 0.8652476,0.8652476 0 0 1 1.25219812,-0.773901 z"
-         style="fill:context-stroke;fill-rule:evenodd;stroke:none;stroke-width:0.7"
+         transform="scale(0.7)"
+         d="m -0.21114562,-4.1055728 6.42229122,3.21114561 a 1,1 90 0 1 0,1.78885438 L -0.21114562,4.1055728 A 1.236068,1.236068 31.717474 0 1 -2,3 v -6 a 1.236068,1.236068 148.28253 0 1 1.78885438,-1.1055728 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
          id="path1367" />
     </marker>
     <linearGradient
@@ -234,8 +235,7 @@
        y1="85.115532"
        x2="102.1886"
        y2="85.115532"
-       gradientUnits="userSpaceOnUse"
-       spreadMethod="pad" />
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <g
      inkscape:label="Layer 1"
@@ -398,7 +398,7 @@
              id="path2107-2" />
         </g>
         <path
-           style="fill:none;stroke:url(#linearGradient7017);stroke-width:0.265;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#RoundedArrow);marker-start:"
+           style="fill:none;stroke:url(#linearGradient7017);stroke-width:0.264583;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#RoundedArrow)"
            d="m 87.312502,89.958335 1.322916,-2.645833 1.322917,1.322916 1.322916,-2.645833 1.322917,1.322917 1.322917,-2.645834 1.322916,1.322917 1.322917,-2.645833 1.322917,1.322916 1.322916,-2.645833 1.322919,1.322917 1.32291,-2.645834"
            id="path5862" />
         <path

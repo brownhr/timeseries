@@ -25,15 +25,15 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:lockguides="false"
-     inkscape:zoom="4.7824147"
-     inkscape:cx="284.68882"
-     inkscape:cy="412.1349"
-     inkscape:window-width="1920"
-     inkscape:window-height="1129"
-     inkscape:window-x="1672"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="layer1">
+     inkscape:zoom="4.1869627"
+     inkscape:cx="242.658"
+     inkscape:cy="396.34937"
+     inkscape:window-width="1350"
+     inkscape:window-height="1162"
+     inkscape:window-x="562"
+     inkscape:window-y="3"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g1226">
     <inkscape:grid
        type="xygrid"
        id="grid182"
@@ -49,38 +49,38 @@
      id="layer1">
     <g
        id="g1138"
-       inkscape:export-filename="slides\chapter-2\overlap-1.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300">
+       inkscape:export-filename="Ch2Overlap1HD.png"
+       inkscape:export-xdpi="1200"
+       inkscape:export-ydpi="1200">
       <g
          id="g2019"
-         style="stroke:#c00000;stroke-opacity:1">
+         style="stroke:#b2182b;stroke-opacity:1;fill:#b2182b">
         <path
-           style="fill:none;stroke:#c00000;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+           style="fill:#b2182b;stroke:#b2182b;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
            d="M 46.302083,92.604168 H 66.145835"
            id="path247" />
         <path
-           style="fill:none;stroke:#c00000;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+           style="fill:#b2182b;stroke:#b2182b;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
            d="m 46.302083,91.281251 v 2.645834"
            id="path251" />
         <path
-           style="fill:none;stroke:#c00000;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+           style="fill:#b2182b;stroke:#b2182b;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
            d="m 66.145835,91.281251 v 2.645834"
            id="path253" />
       </g>
       <g
          id="g2024"
-         style="stroke:#0000bf;stroke-opacity:1">
+         style="stroke:#2166ac;stroke-opacity:1;fill:#2166ac">
         <path
-           style="fill:none;stroke:#0000bf;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+           style="fill:#2166ac;stroke:#2166ac;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
            d="m 59.531252,99.218751 h 19.84375"
            id="path249" />
         <path
-           style="fill:none;stroke:#0000bf;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+           style="fill:#2166ac;stroke:#2166ac;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
            d="m 59.531252,97.895835 v 2.645835"
            id="path255" />
         <path
-           style="fill:none;stroke:#0000bf;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
+           style="fill:#2166ac;stroke:#2166ac;stroke-width:0.52916667;stroke-linecap:round;stroke-linejoin:miter;stroke-opacity:1;stroke-dasharray:none"
            d="m 79.375002,97.895835 v 2.645835"
            id="path257" />
       </g>
@@ -109,27 +109,27 @@
     </g>
     <g
        id="g1226"
-       inkscape:export-filename="slides\chapter-2\overlap-2.png"
-       inkscape:export-xdpi="300"
-       inkscape:export-ydpi="300">
+       inkscape:export-filename="Ch2Overlap2HD.png"
+       inkscape:export-xdpi="1200"
+       inkscape:export-ydpi="1200">
       <path
-         style="fill:none;stroke:#c00000;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;stroke:#b2182b;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
          d="m 46.302083,117.73958 v 2.64583"
          id="path259" />
       <path
-         style="fill:none;stroke:#c00000;stroke-width:0.502012;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;stroke:#b2182b;stroke-width:0.502012;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
          d="M 46.302083,119.0625 H 58.208335"
          id="path265" />
       <path
-         style="fill:none;stroke:#0001bf;stroke-width:0.502012;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;stroke:#2166ac;stroke-width:0.502012;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
          d="m 67.468752,119.0625 h 11.90625"
          id="path267" />
       <path
-         style="fill:none;stroke:#0001bf;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
+         style="fill:none;stroke:#2166ac;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
          d="m 79.375002,117.73958 v 2.64583"
          id="path269" />
       <path
-         style="fill:none;stroke:#a900c0;stroke-width:0.541107;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.08221, 1.62332;stroke-dashoffset:0;stroke-opacity:1"
+         style="fill:none;stroke:#00c53b;stroke-width:0.541107;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1.08221, 1.62332;stroke-dashoffset:0;stroke-opacity:1"
          d="m 59.493969,119.0625 h 6.916449"
          id="path271" />
       <text

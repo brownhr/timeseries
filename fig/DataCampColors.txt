@@ -1,0 +1,19 @@
+blueGreen1 = 37bbabff
+blueGreen2 = 75c97eff
+darkBlue = 263e63ff
+darkBlue2 = 05192dff
+white = ffffffff
+whiteTrans = ffffff99
+backgroundKhaki = f7f3ebff
+backgroundKhaki2 = efebe4
+
+dataCampBrightGreen = 03ef62ff
+xpYellow = fcce0d
+
+
+interactiveTextWhite = d4d4d4
+interactiveTextGreen = 00c53b
+
+red = b2182b
+
+blue = 2166ac

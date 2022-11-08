@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="calendars.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#999999"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="true"
+     inkscape:zoom="1.0129245"
+     inkscape:cx="205.83962"
+     inkscape:cy="225.58443"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid182"
+       spacingx="1.0583333"
+       spacingy="1.0583333" />
+  </sodipodi:namedview>
+  <defs
+     id="defs2">
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect3334"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1"
+       unit="pt"
+       method="auto"
+       mode="F"
+       radius="2"
+       chamfer_steps="1"
+       flexible="true"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect3219"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1"
+       unit="pt"
+       method="auto"
+       mode="F"
+       radius="2"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient819">
+      <stop
+         style="stop-color:#37bbab;stop-opacity:1;"
+         offset="0"
+         id="stop815" />
+      <stop
+         style="stop-color:#75c97e;stop-opacity:1;"
+         offset="1"
+         id="stop817" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient819"
+       id="linearGradient821"
+       x1="72.760414"
+       y1="51.59375"
+       x2="74.083336"
+       y2="52.916668"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(12.000002,0,0,4.0000007,-800.36472,-160.07296)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient819"
+       id="linearGradient3365"
+       x1="72.635918"
+       y1="48.947914"
+       x2="88.759918"
+       y2="48.947914"
+       gradientUnits="userSpaceOnUse" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect3334-6"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1"
+       unit="pt"
+       method="auto"
+       mode="F"
+       radius="2"
+       chamfer_steps="1"
+       flexible="true"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <inkscape:path-effect
+       effect="fillet_chamfer"
+       id="path-effect3219-3"
+       is_visible="true"
+       lpeversion="1"
+       nodesatellites_param="F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1 @ F,0,0,1,0,0.70555556,0,1"
+       unit="pt"
+       method="auto"
+       mode="F"
+       radius="2"
+       chamfer_steps="1"
+       flexible="false"
+       use_knot_distance="true"
+       apply_no_radius="true"
+       apply_with_radius="true"
+       only_selected="false"
+       hide_knots="false" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient819"
+       id="linearGradient6387"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(12.000002,0,0,4.0000007,-800.36472,-160.07296)"
+       x1="72.760414"
+       y1="51.59375"
+       x2="74.083336"
+       y2="52.916668" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient819"
+       id="linearGradient6389"
+       gradientUnits="userSpaceOnUse"
+       x1="72.635918"
+       y1="48.947914"
+       x2="88.759918"
+       y2="48.947914" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g6301"
+       transform="matrix(3.5839799,0,0,3.5839799,-327.30707,-166.58375)"
+       inkscape:export-filename="ch1CalendarJune.png"
+       inkscape:export-xdpi="900"
+       inkscape:export-ydpi="900">
+      <path
+         style="fill:none;fill-opacity:1;stroke:#263e63;stroke-width:0.176389;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+         id="rect3332"
+         width="15.875"
+         height="14.552083"
+         x="107.69079"
+         y="49.557556"
+         inkscape:path-effect="#path-effect3334"
+         d="m 108.39634,49.557556 h 14.46389 a 0.70555556,0.70555556 45 0 1 0.70556,0.705556 v 13.140972 a 0.70555556,0.70555556 135 0 1 -0.70556,0.705555 h -14.46389 a 0.70555556,0.70555556 45 0 1 -0.70555,-0.705555 l 0,-13.140972 a 0.70555556,0.70555556 135 0 1 0.70555,-0.705556 z"
+         sodipodi:type="rect" />
+      <g
+         id="g3330"
+         transform="translate(34.930371,3.2554758)">
+        <path
+           style="fill:url(#linearGradient821);fill-opacity:1;stroke:url(#linearGradient3365);stroke-width:0.249;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+           id="rect236"
+           width="15.875003"
+           height="5.2916675"
+           x="72.760414"
+           y="46.302082"
+           inkscape:path-effect="#path-effect3219"
+           d="m 73.46597,46.302082 14.463891,0 a 0.70555556,0.70555556 45 0 1 0.705556,0.705556 v 3.880556 A 0.70555556,0.70555556 135 0 1 87.929861,51.59375 H 73.46597 a 0.70555556,0.70555556 45 0 1 -0.705556,-0.705556 v -3.880556 a 0.70555556,0.70555556 135 0 1 0.705556,-0.705556 z"
+           sodipodi:type="rect" />
+        <text
+           xml:space="preserve"
+           style="font-style:italic;font-weight:500;font-size:4.23333px;line-height:1.25;font-family:Lato;-inkscape-font-specification:'Lato Medium Italic';letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;stroke-width:0.264583"
+           x="76.739746"
+           y="50.182991"
+           id="text3275"><tspan
+             sodipodi:role="line"
+             id="tspan3273"
+             style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lato;-inkscape-font-specification:'Lato Italic';fill:#ffffff;stroke-width:0.264583"
+             x="76.739746"
+             y="50.182991">June</tspan></text>
+      </g>
+      <text
+         xml:space="preserve"
+         style="font-style:italic;font-weight:500;font-size:6.35px;line-height:1.25;font-family:Lato;-inkscape-font-specification:'Lato Medium Italic';letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;fill:#263e63;fill-opacity:1;stroke-width:0.264583"
+         x="113.81537"
+         y="61.072224"
+         id="text4821"><tspan
+           sodipodi:role="line"
+           id="tspan4819"
+           style="font-size:6.35px;fill:#263e63;fill-opacity:1;stroke-width:0.264583"
+           x="113.81537"
+           y="61.072224">4</tspan></text>
+    </g>
+    <g
+       id="g6301-7"
+       transform="matrix(3.5839798,0,0,3.5839798,-202.11732,-80.832859)"
+       inkscape:export-filename="ch1CalendarApril.png"
+       inkscape:export-xdpi="900"
+       inkscape:export-ydpi="900">
+      <g
+         id="g329">
+        <path
+           style="fill:none;stroke:#263e63;stroke-width:0.176389;stroke-linecap:round;stroke-linejoin:bevel;stroke-dasharray:none;stroke-opacity:1"
+           id="rect3332-4"
+           width="15.875"
+           height="14.552083"
+           x="72.760414"
+           y="46.302082"
+           inkscape:path-effect="#path-effect3334-6"
+           d="m 73.46597,46.302082 h 14.463889 a 0.70555556,0.70555556 45 0 1 0.705555,0.705556 V 60.14861 a 0.70555556,0.70555556 135 0 1 -0.705555,0.705555 H 73.46597 A 0.70555556,0.70555556 45 0 1 72.760414,60.14861 V 47.007638 a 0.70555556,0.70555556 135 0 1 0.705556,-0.705556 z"
+           sodipodi:type="rect" />
+        <g
+           id="g3330-6">
+          <path
+             style="fill:url(#linearGradient6387);fill-opacity:1;stroke:url(#linearGradient6389);stroke-width:0.249;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+             id="rect236-6"
+             width="15.875003"
+             height="5.2916675"
+             x="72.760414"
+             y="46.302082"
+             inkscape:path-effect="#path-effect3219-3"
+             d="m 73.46597,46.302082 14.463891,0 a 0.70555556,0.70555556 45 0 1 0.705556,0.705556 v 3.880556 A 0.70555556,0.70555556 135 0 1 87.929861,51.59375 H 73.46597 a 0.70555556,0.70555556 45 0 1 -0.705556,-0.705556 v -3.880556 a 0.70555556,0.70555556 135 0 1 0.705556,-0.705556 z"
+             sodipodi:type="rect" />
+          <text
+             xml:space="preserve"
+             style="font-style:italic;font-weight:500;font-size:4.23333px;line-height:1.25;font-family:Lato;-inkscape-font-specification:'Lato Medium Italic';letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;stroke-width:0.264583"
+             x="76.659317"
+             y="50.143829"
+             id="text3275-3"><tspan
+               sodipodi:role="line"
+               id="tspan3273-4"
+               style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Lato;-inkscape-font-specification:'Lato Italic';fill:#ffffff;stroke-width:0.264583"
+               x="76.659317"
+               y="50.143829">April</tspan></text>
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-style:italic;font-weight:500;font-size:6.35px;line-height:1.25;font-family:Lato;-inkscape-font-specification:'Lato Medium Italic';letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;fill:#263e63;fill-opacity:1;stroke-width:0.264583"
+           x="78.943726"
+           y="57.842148"
+           id="text4821-1"><tspan
+             sodipodi:role="line"
+             id="tspan4819-1"
+             style="font-size:6.35px;fill:#263e63;fill-opacity:1;stroke-width:0.264583"
+             x="78.943726"
+             y="57.842148">6</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>
