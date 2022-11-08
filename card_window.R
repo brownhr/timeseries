@@ -7,7 +7,10 @@ card_prices <- read_rds("data/card_prices.Rds")
 card_window <- window(x = card_prices,
                       start = "2013-05-01",
                       end = "2013-07-31")
-
+card_window_year <- window(x = card_prices,
+                           start = 2013,
+                           end= 2014
+                           )
 
 window_start <- "2013-05-01"
 window_end <- "2013-07-31"
