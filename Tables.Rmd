@@ -3,6 +3,7 @@
 library(tidyverse)
 library(xts)
 
+set.seed(1234)
 data <- runif(7)
 
   
@@ -17,9 +18,20 @@ data_rm <- rollmean(
   data,
   k = 7,
   fill = NA,
-  align = 'center'
+  align = 'right'
 )
 ```
+
+```{r, eval = FALSE}
+table_df <- fortify.zoo(data)
+table_df$rollmean <- coredata(data_rm)
+```
+
+```{r, eval = FALSE}
+knitr::kable(table_df) %>% 
+  kableExtra::save_kable(file = "fig/slides/chapter-4/table.pdf")
+```
+
 
 
 ```{r eval = F}
@@ -29,3 +41,12 @@ fortify.zoo(data) %>% write.table('clipboard', sep = "\t", row.names = F)
 ```{r eval = T}
 fortify.zoo(data_rm) %>% pull(data_rm) %>% write.table('clipboard', sep = "\t", row.names = F)
 ```
+
+
+
+```{r}
+autoplot(data) + 
+  theme_light() + 
+  labs(title = "Right-aligned")
+```
+
