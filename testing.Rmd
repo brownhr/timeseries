@@ -1,0 +1,61 @@
+```{r}
+library(testwhat)
+
+
+solutionCode = "# Save the start point of maunaloa: maunaloa_start
+maunaloa_start <- start(maunaloa)
+
+# Assign the formatted date to start_iso
+start_iso <- date_decimal(maunaloa_start)
+
+# Convert to Date class
+as_date(start_iso)"
+
+studentCode = "# Save the start point of maunaloa: maunaloa_start
+maunaloa_start <- start(maunaloa)
+
+# Assign the formatted date to start_iso
+start_iso <- date_decimal(maunaloa_start)
+
+# Convert to Date class
+as_date(start_iso)"
+
+preExerciseCode = 'library(readr)
+library(dplyr)
+library(ggplot2)
+library(zoo)
+library(lubridate)
+
+maunaloa <- read_rds("https://assets.datacamp.com/production/repositories/6083/datasets/ec6e063864080ba3dd9beae78390781afa6551d4/maunaloa.Rds") %>% as.zoo()'
+```
+
+```{r}
+setup_state(sol_code = solutionCode,
+            stu_code = studentCode,
+            pec = preExerciseCode)
+```
+
+
+```{r}
+msg1 <- "Did you call `start()` with `maunaloa` as the first argument? Did you assign this to `maunaloa_start`?"
+msg2 <- "Remember to call `start` with `maunaloa` as the first argument."
+msg3 <- "Did you call `date_decimal()` with `maunaloa_start` as the first argument?"
+msg4 <- "Remember to call `date_decimal` with `maunaloa_start` as the first argument."
+msg5 <- "Remember to call `as_date` with `start_iso` as the first argument."
+
+ex() %>% {
+  check_object(., "maunaloa_start", undefined_msg = msg1) %>% check_equal(incorrect_msg = msg1)
+  check_function(., 'start', not_called_msg = msg2) %>% {
+      check_arg(., 'x', arg_not_specified_msg = msg2) %>% check_equal(incorrect_msg = msg2)
+  }
+  check_object(.,"start_iso", undefined_msg = msg3) %>% check_equal(incorrect_msg = msg3) 
+  check_function(., 'date_decimal', not_called_msg = msg3) %>% {
+      check_arg(., 'decimal', arg_not_specified_msg = msg4) %>% check_equal(incorrect_msg = msg4)
+  }
+  check_function(., 'as_date', not_called_msg = msg5) %>% {
+      check_arg(., 'x', arg_not_specified_msg = msg5) %>% check_equal(incorrect_msg = msg5)
+  }  
+  check_error(.)
+}
+```
+
