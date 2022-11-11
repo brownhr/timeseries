@@ -1,5 +1,6 @@
 library(tidyverse)
 library(xts)
+library(lubridate)
 set.seed(4567)
 
 scores <-
