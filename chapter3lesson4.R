@@ -8,11 +8,11 @@ maunaloa_missing <-
 
 autoplot(maunaloa_missing) +
   theme_light() +
-  coord_cartesian(xlim = c(1980, 1990), ylim = c(330, 360)) +
+  # coord_cartesian(xlim = c(1980, 1990), ylim = c(330, 360)) +
   labs(
     x = "Index",
     y = "CO2 Concentration",
-    title = "Missing Data Points"
+    title = "Mauna Loa, Missing Data Points"
   )
 
 maunaloa_approx <- na.approx(maunaloa_missing)
